@@ -2,9 +2,9 @@
 {
     public class PassengerCar : Vehicle
     {
-        public int DoorsCount { get; set; }
+        public byte DoorsCount { get; set; }
 
-        public PassengerCar (Engine engine, Chassis chassis, Transmission transmission, int doorsCount) 
+        public PassengerCar (Engine engine, Chassis chassis, Transmission transmission, byte doorsCount) 
             : base(engine, chassis, transmission)
         {
             DoorsCount = doorsCount;
