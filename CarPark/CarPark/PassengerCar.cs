@@ -1,6 +1,6 @@
 ﻿namespace CarPark
 {
-    class PassengerCar : Vehicle
+    public class PassengerCar : Vehicle
     {
         public int DoorsCount { get; set; }
 

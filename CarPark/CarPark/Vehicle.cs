@@ -1,6 +1,6 @@
 ﻿namespace CarPark
 {
-    abstract class Vehicle
+    public abstract class Vehicle
     {
         public Engine VehicleEngine { get; set; }
 
