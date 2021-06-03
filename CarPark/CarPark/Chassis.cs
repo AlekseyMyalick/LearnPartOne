@@ -1,14 +1,35 @@
-﻿namespace CarPark
+﻿using System;
+
+namespace CarPark
 {
     public class Chassis
     {
-        public int WheelsCount { get; set; }
+        private double _permissibleLoad;
+
+        public byte WheelsCount { get; set; }
 
         public string SerialNumber { get; set; }
 
-        public double PermissibleLoad { get; set; }
+        public double PermissibleLoad
+        {
+            get
+            {
+                return _permissibleLoad;
+            }
+            set
+            {
+                if (_permissibleLoad < 0)
+                {
+                    throw new ArgumentOutOfRangeException("The permissible load cannot be less than zero.");
+                }
+                else
+                {
+                    _permissibleLoad = value;
+                }
+            }
+        }
 
-        public Chassis (int wheelsCount, string serialNumber, double permissibleLoad)
+        public Chassis (byte wheelsCount, string serialNumber, double permissibleLoad)
         {
             WheelsCount = wheelsCount;
             SerialNumber = serialNumber;

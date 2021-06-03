@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"Engine:\n {VehicleEngine}\n Chassis:\n {VehicleChassis}\n Transmission:\n {VehicleTransmission}\n";
+            return $"Engine:\n{VehicleEngine}\nChassis:\n{VehicleChassis}\nTransmission:\n{VehicleTransmission}\n";
         }
     }
 }

@@ -43,11 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bus.cs" />
     <Compile Include="Chassis.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="EngineTypeEnum.cs" />
+    <Compile Include="PassengerCar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scooter.cs" />
+    <Compile Include="TransmissionManufacturersEnum.cs" />
+    <Compile Include="Transmission.cs" />
+    <Compile Include="TransmissionTypeEnum.cs" />
+    <Compile Include="Truck.cs" />
+    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

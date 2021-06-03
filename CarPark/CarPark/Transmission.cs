@@ -4,11 +4,11 @@
     {
         public TransmissionTypeEnum Type { get; set; }
 
-        public int GearsNumber { get; set; }
+        public byte GearsNumber { get; set; }
 
         public TransmissionManufacturersEnum Manufacturer { get; set; }
 
-        public Transmission (TransmissionTypeEnum type, int gearsNumber, TransmissionManufacturersEnum manufacturer)
+        public Transmission (TransmissionTypeEnum type, byte gearsNumber, TransmissionManufacturersEnum manufacturer)
         {
             Type = type;
             GearsNumber = gearsNumber;
@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"Type: {Type}\n Gears number: {GearsNumber}\n Manufacturer: {Manufacturer} \n";
+            return $"Type: {Type}\nGears number: {GearsNumber}\nManufacturer: {Manufacturer}\n";
         }
     }
 }

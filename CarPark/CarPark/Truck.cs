@@ -1,8 +1,29 @@
-﻿namespace CarPark
+﻿using System;
+
+namespace CarPark
 {
     public class Truck : Vehicle
     {
-        public double MaxSpeed { get; set; }
+        private double _maxSpeed;
+
+        public double MaxSpeed
+        {
+            get
+            {
+                return _maxSpeed;
+            }
+            set
+            {
+                if (_maxSpeed < 0)
+                {
+                    throw new ArgumentOutOfRangeException("The maximum speed cannot be less than zero.");
+                }
+                else
+                {
+                    _maxSpeed = value;
+                }
+            }
+        }
 
         public Truck (Engine engine, Chassis chassis, Transmission transmission, double maxSpeed)
             : base(engine, chassis, transmission)
