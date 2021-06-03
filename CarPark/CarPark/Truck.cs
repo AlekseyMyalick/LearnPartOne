@@ -4,7 +4,7 @@
     {
         public double MaxSpeed { get; set; }
 
-        public Truck(Engine engine, Chassis chassis, Transmission transmission, double maxSpeed)
+        public Truck (Engine engine, Chassis chassis, Transmission transmission, double maxSpeed)
             : base(engine, chassis, transmission)
         {
             MaxSpeed = maxSpeed;
