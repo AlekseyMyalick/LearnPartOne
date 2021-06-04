@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace InterfacesAndAbstractClasses
+﻿namespace InterfacesAndAbstractClasses
 {
     interface IFlyable
     {
         bool FlyTo(Coordinate newCoordinate);
 
-        DateTime GetFlyTime(Coordinate newCoordinate);
+        double GetFlyTime(Coordinate newCoordinate);
     }
 }
