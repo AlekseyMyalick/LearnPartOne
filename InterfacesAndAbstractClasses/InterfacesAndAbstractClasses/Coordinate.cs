@@ -2,7 +2,7 @@
 
 namespace InterfacesAndAbstractClasses
 {
-    struct Coordinate
+    public struct Coordinate
     {
         public double x;
         public double y;
