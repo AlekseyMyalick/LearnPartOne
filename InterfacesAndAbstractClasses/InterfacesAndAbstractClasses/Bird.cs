@@ -1,8 +1,17 @@
-﻿namespace InterfacesAndAbstractClasses
+﻿using System;
+
+namespace InterfacesAndAbstractClasses
 {
     public class Bird : Flying, IFlyable
     {
+        /// <summary>
+        /// Minimum speed, measured in km/h.
+        /// </summary>
         private const int _minSpeed = 0;
+
+        /// <summary>
+        /// Maximum speed, measured in km/h.
+        /// </summary>
         private const int _maxSpeed = 20;
 
         /// <summary>
@@ -15,16 +24,15 @@
         /// </summary>
         public int Speed { get; set; }
 
+        /// <summary>
+        /// Initializing Class Fields.
+        /// </summary>
+        /// <param name="currentPosition">Current position.</param>
         public Bird (Coordinate currentPosition) : base(currentPosition)
         {
             Speed = Randomizer.GeneratesRandomSpeed(_minSpeed, _maxSpeed);
         }
 
-        /// <summary>
-        /// Distance cannot exceed _maxDistance.
-        /// </summary>
-        /// <param name="newCoordinate">Path end coordinates.</param>
-        /// <returns>will it fly</returns>
         public bool FlyTo(Coordinate newCoordinate)
         {
             double distance = CurrentPosition.Distance(newCoordinate);
@@ -32,17 +40,17 @@
             return Speed != 0 && distance < _maxDistance;
         }
 
-        public double GetFlyTime(Coordinate newCoordinate)
+        public TimeSpan GetFlyTime(Coordinate newCoordinate)
         {
             if (FlyTo(newCoordinate))
             {
                 double distance = CurrentPosition.Distance(newCoordinate);
 
-                return distance / Speed;
+                return TimeSpan.FromHours(distance / Speed);
             }
             else
             {
-                return double.PositiveInfinity;
+                return TimeSpan.MaxValue;
             }           
         }
     }

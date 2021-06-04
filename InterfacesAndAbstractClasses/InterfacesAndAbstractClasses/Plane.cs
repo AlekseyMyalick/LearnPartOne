@@ -1,4 +1,6 @@
-﻿namespace InterfacesAndAbstractClasses
+﻿using System;
+
+namespace InterfacesAndAbstractClasses
 {
     public class Plane : Flying, IFlyable
     {
@@ -44,17 +46,17 @@
             return AmountRequiredFuel(distance) < FuelVolume;
         }
 
-        public double GetFlyTime(Coordinate newCoordinate)
+        public TimeSpan GetFlyTime(Coordinate newCoordinate)
         {
             if (FlyTo(newCoordinate))
             {
                 double distance = CurrentPosition.Distance(newCoordinate);
 
-                return TimeCounter(distance);
+                return TimeSpan.FromHours(TimeCounter(distance));
             }
             else
             {
-                return double.PositiveInfinity;
+                return TimeSpan.MaxValue;
             }
         }
 
@@ -92,7 +94,7 @@
                     speed = _maxSpeed;
                 }
 
-                time += way / speed;
+                time += (double)way / speed;
             }
 
             if (way > distance)

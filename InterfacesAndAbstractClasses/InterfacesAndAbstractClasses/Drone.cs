@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterfacesAndAbstractClasses
 {
@@ -28,10 +24,21 @@ namespace InterfacesAndAbstractClasses
         /// </summary>
         private const int _speed = 5;
 
+        /// <summary>
+        /// Drone Engines.
+        /// </summary>
         public int EnginesNumber { get; set; }
 
+        /// <summary>
+        /// Constant speed, measured in km/h.
+        /// </summary>
         public int Speed { get; set; }
 
+        /// <summary>
+        /// Initializing Class Fields.
+        /// </summary>
+        /// <param name="currentPosition">Current position.</param>
+        /// <param name="engineNumber">Number of engines.</param>
         public Drone(Coordinate currentPosition, int engineNumber) : base(currentPosition)
         {
             EnginesNumber = engineNumber;
@@ -45,17 +52,17 @@ namespace InterfacesAndAbstractClasses
             return distance < _maxDistance;
         }
 
-        public double GetFlyTime(Coordinate newCoordinate)
+        public TimeSpan GetFlyTime(Coordinate newCoordinate)
         {
             if (FlyTo(newCoordinate))
             {
                 double distance = CurrentPosition.Distance(newCoordinate);
 
-                return TimeCounter(distance);
+                return TimeSpan.FromHours(TimeCounter(distance));
             }
             else
             {
-                return double.PositiveInfinity;
+                return TimeSpan.MaxValue;
             }
         }
 
