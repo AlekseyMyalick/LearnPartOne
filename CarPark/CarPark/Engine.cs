@@ -6,11 +6,11 @@
 
         public double Volume { get; set; }
 
-        public EngineTypeEnum EngineType { get; set; }
+        public EngineType EngineType { get; set; }
 
         public string SerialNumber { get; set; }
 
-        public Engine(double power, double volume, EngineTypeEnum engineType, string serialNumber)
+        public Engine(double power, double volume, EngineType engineType, string serialNumber)
         {
             Power = power;
             Volume = volume;

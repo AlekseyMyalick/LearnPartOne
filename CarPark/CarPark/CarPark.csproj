@@ -46,14 +46,15 @@
     <Compile Include="Bus.cs" />
     <Compile Include="Chassis.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="EngineTypeEnum.cs" />
+    <Compile Include="EngineType.cs" />
     <Compile Include="PassengerCar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Scooter.cs" />
-    <Compile Include="TransmissionManufacturersEnum.cs" />
+    <Compile Include="TransmissionManufacturers.cs" />
     <Compile Include="Transmission.cs" />
-    <Compile Include="TransmissionTypeEnum.cs" />
+    <Compile Include="TransmissionType.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
   </ItemGroup>

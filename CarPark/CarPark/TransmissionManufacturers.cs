@@ -1,6 +1,6 @@
 ﻿namespace CarPark
 {
-    public enum TransmissionManufacturersEnum
+    public enum TransmissionManufacturers
     {
         ZahnradFabrik,
         Jatco,

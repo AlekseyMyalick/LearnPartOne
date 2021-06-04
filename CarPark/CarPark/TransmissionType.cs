@@ -1,6 +1,6 @@
 ﻿namespace CarPark
 {
-    public enum TransmissionTypeEnum
+    public enum TransmissionType
     {
         Mechanical,
         Automatic

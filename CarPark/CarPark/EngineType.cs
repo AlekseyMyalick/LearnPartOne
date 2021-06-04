@@ -1,6 +1,6 @@
 ﻿namespace CarPark
 {
-    public enum EngineTypeEnum
+    public enum EngineType
     {
         Gasoline,
         Diesel,

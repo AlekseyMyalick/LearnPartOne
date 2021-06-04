@@ -2,13 +2,13 @@
 {
     public class Transmission
     {
-        public TransmissionTypeEnum Type { get; set; }
+        public TransmissionType Type { get; set; }
 
         public byte GearsNumber { get; set; }
 
-        public TransmissionManufacturersEnum Manufacturer { get; set; }
+        public TransmissionManufacturers Manufacturer { get; set; }
 
-        public Transmission (TransmissionTypeEnum type, byte gearsNumber, TransmissionManufacturersEnum manufacturer)
+        public Transmission (TransmissionType type, byte gearsNumber, TransmissionManufacturers manufacturer)
         {
             Type = type;
             GearsNumber = gearsNumber;
