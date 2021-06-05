@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CarPark.Models;
 using System.Collections.Generic;
 
 namespace CarPark
@@ -29,15 +29,9 @@ namespace CarPark
 
             List<Vehicle> vehicles = new List<Vehicle>() { passengerCar, truck, bus, scooter };
 
-            var answer = Query.GroupedByTransmission(vehicles);
-
-            foreach (var g in answer)
-            {
-                Console.WriteLine(g.Key);
-                foreach (var t in g)
-                    Console.WriteLine(t.GetType());
-                Console.WriteLine();
-            }
+            Serializers.Serializer<Vehicle>.Serialize("EngineDisplacementGreaterThan.xml", Query.EngineDisplacementGreaterThan(vehicles, 1.5d));
+            Serializers.Serializer<VehicleModel>.Serialize("BusAndTruckEngines.xml", Query.BusAndTruckEngines(vehicles));
+            Serializers.Serializer<Vehicle>.Serialize("GroupedByTransmission.xml", Query.GroupedByTransmission(vehicles));
         }
     }
 }

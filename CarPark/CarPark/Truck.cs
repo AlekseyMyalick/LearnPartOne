@@ -2,6 +2,7 @@
 
 namespace CarPark
 {
+    [Serializable]
     public class Truck : Vehicle
     {
         private double _maxSpeed;
@@ -24,6 +25,8 @@ namespace CarPark
                 }
             }
         }
+
+        public Truck() { }
 
         public Truck (Engine engine, Chassis chassis, Transmission transmission, double maxSpeed)
             : base(engine, chassis, transmission)

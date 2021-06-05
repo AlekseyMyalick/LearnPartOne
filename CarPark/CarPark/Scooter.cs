@@ -1,8 +1,13 @@
-﻿namespace CarPark
+﻿using System;
+
+namespace CarPark
 {
+    [Serializable]
     public class Scooter : Vehicle 
     {
         public bool IsSidecar { get; set; }
+
+        public Scooter() { }
 
         public Scooter (Engine engine, Chassis chassis, Transmission transmission, bool isSidecar)
             : base(engine, chassis, transmission)

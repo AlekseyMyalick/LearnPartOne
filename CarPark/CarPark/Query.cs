@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CarPark.Models;
 
 namespace CarPark
 {
@@ -10,14 +11,15 @@ namespace CarPark
             return vehicles.Where(v => v.VehicleEngine.Volume.CompareTo(engineVolume) > 0).ToList();
         }
 
-        public static IEnumerable<dynamic> BusAndTruckEngines(List<Vehicle> vehicles)
+        public static List<VehicleModel> BusAndTruckEngines(List<Vehicle> vehicles)
         {
-            return vehicles.Where(v => v is Truck || v is Bus).Select(v => new {v.VehicleEngine.EngineType, v.VehicleEngine.SerialNumber, v.VehicleEngine.Power}).ToList();
+            return vehicles.Where(v => v is Truck || v is Bus)
+                .Select(v => new VehicleModel( v.VehicleEngine.EngineType, v.VehicleEngine.SerialNumber, v.VehicleEngine.Power)).ToList();
         }
 
-        public static IEnumerable<IGrouping<TransmissionType, Vehicle>> GroupedByTransmission(List<Vehicle> vehicles)
+        public static List<Vehicle> GroupedByTransmission(List<Vehicle> vehicles)
         {
-            return vehicles.GroupBy(v => v.VehicleTransmission.Type);
+            return vehicles.GroupBy(v => v.VehicleTransmission.Type).SelectMany(g => g).ToList();
         }
     }
 }

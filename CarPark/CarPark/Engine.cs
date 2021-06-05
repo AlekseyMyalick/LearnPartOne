@@ -1,5 +1,8 @@
-﻿namespace CarPark
+﻿using System;
+
+namespace CarPark
 {
+    [Serializable]
     public class Engine
     {
         public double Power { get; set; }
@@ -9,6 +12,8 @@
         public EngineType EngineType { get; set; }
 
         public string SerialNumber { get; set; }
+
+        public Engine() { }
 
         public Engine(double power, double volume, EngineType engineType, string serialNumber)
         {
