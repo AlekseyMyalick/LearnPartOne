@@ -7,12 +7,9 @@ namespace CarPark
     {
         private double _permissibleLoad;
 
-
         public byte WheelsCount { get; set; }
 
-
         public string SerialNumber { get; set; }
-
 
         public double PermissibleLoad
         {
@@ -33,9 +30,7 @@ namespace CarPark
             }
         }
 
-
         public Chassis () { }
-
 
         public Chassis (byte wheelsCount, string serialNumber, double permissibleLoad)
         {
@@ -43,7 +38,6 @@ namespace CarPark
             SerialNumber = serialNumber;
             PermissibleLoad = permissibleLoad;
         }
-
 
         public override string ToString()
         {
