@@ -6,18 +6,20 @@ namespace DevelopmentAndBuildTools
     {
         static void Main(string[] args)
         {
-            int result = MaximumNumberUnequalConsecutiveCharacters(args[0]);
+            string characterSet = GetFirstArgument(args);
+            int result = MaximumNumberUnequalConsecutiveCharacters(characterSet);
             Console.WriteLine(result);
         }
 
-        static int MaximumNumberUnequalConsecutiveCharacters(string characterSet)
+        static int MaximumNumberUnequalConsecutiveCharacters(string characterSet) 
         {
             if (string.IsNullOrEmpty(characterSet))
             {
                 return 0;
             }
 
-            int result = 1, count = 1;
+            int result = 1;
+            int count = 1;
 
             for (int i = 0; i < characterSet.Length - 1; i++)
             {
@@ -25,15 +27,29 @@ namespace DevelopmentAndBuildTools
                 {
                     count++;
                 }
-
                 else
                 {
-                    result = count > result ? count : result;
+                    result = Maximum(count, result);
                     count = 1;
                 }
             }
 
-            return count > result ? count : result;
+            return Maximum(count, result);
+        }
+
+        static string GetFirstArgument(string[] args)
+        {
+            if (args.Length == 0)
+            {
+                return null;
+            }
+
+            return args[0];
+        }
+
+        static int Maximum(int a, int b)
+        {
+            return a > b ? a : b;
         }
     }
 }
