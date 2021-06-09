@@ -6,9 +6,15 @@ namespace DevelopmentAndBuildTools
     {
         static void Main(string[] args)
         {
-            string characterSet = GetFirstArgument(args);
-            int result = MaximumNumberUnequalConsecutiveCharacters(characterSet);
-            Console.WriteLine(result);
+            try
+            {
+                int result = MaximumNumberUnequalConsecutiveCharacters(args[0]);
+                Console.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         static int MaximumNumberUnequalConsecutiveCharacters(string characterSet) 
@@ -35,16 +41,6 @@ namespace DevelopmentAndBuildTools
             }
 
             return Maximum(count, result);
-        }
-
-        static string GetFirstArgument(string[] args)
-        {
-            if (args.Length == 0)
-            {
-                return null;
-            }
-
-            return args[0];
         }
 
         static int Maximum(int a, int b)
