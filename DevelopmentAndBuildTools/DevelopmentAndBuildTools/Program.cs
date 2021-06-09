@@ -2,7 +2,7 @@
 
 namespace DevelopmentAndBuildTools
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -17,7 +17,7 @@ namespace DevelopmentAndBuildTools
             }
         }
 
-        static int MaximumNumberUnequalConsecutiveCharacters(string characterSet) 
+        public static int MaximumNumberUnequalConsecutiveCharacters(string characterSet) 
         {
             if (string.IsNullOrEmpty(characterSet))
             {
@@ -43,7 +43,7 @@ namespace DevelopmentAndBuildTools
             return Maximum(count, result);
         }
 
-        static int Maximum(int a, int b)
+        public static int Maximum(int a, int b)
         {
             return a > b ? a : b;
         }
