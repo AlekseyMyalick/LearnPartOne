@@ -77,7 +77,7 @@ namespace InterfacesAndAbstractClasses
         /// <returns>Time in hours.</returns>
         private double TimeCounter(double distance)
         {
-            int way = 0;
+            double way = 0;
             int speed = _startSpeed;
             double time = 0;
 
@@ -94,7 +94,7 @@ namespace InterfacesAndAbstractClasses
                     speed = _maxSpeed;
                 }
 
-                time += (double)way / speed;
+                time += way / speed;
             }
 
             if (way > distance)

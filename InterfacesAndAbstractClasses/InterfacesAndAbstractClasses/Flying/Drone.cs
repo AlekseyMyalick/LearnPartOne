@@ -22,7 +22,7 @@ namespace InterfacesAndAbstractClasses
         /// <summary>
         /// Constant speed of one engine, measured in km/h.
         /// </summary>
-        private const int _speed = 5;
+        private const int _oneEngineSpeed = 5;
 
         /// <summary>
         /// Drone Engines.
@@ -42,7 +42,7 @@ namespace InterfacesAndAbstractClasses
         public Drone(Coordinate currentPosition, int engineNumber) : base(currentPosition)
         {
             EnginesNumber = engineNumber;
-            Speed = EnginesNumber * _speed;
+            Speed = EnginesNumber * _oneEngineSpeed;
         }
 
         public bool FlyTo(Coordinate newCoordinate)

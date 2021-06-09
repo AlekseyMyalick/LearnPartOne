@@ -17,9 +17,9 @@ namespace InterfacesAndAbstractClasses
 
         public double Distance(Coordinate coordinate)
         {
-            return Math.Sqrt(Math.Pow((coordinate.x - x), 2)
-                           + Math.Pow((coordinate.y - y), 2)
-                           + Math.Pow((coordinate.z - z), 2));
+            return Math.Sqrt(Math.Pow((coordinate.x - x), 2) + 
+                Math.Pow((coordinate.y - y), 2) +
+                Math.Pow((coordinate.z - z), 2));
         }
     }
 }
