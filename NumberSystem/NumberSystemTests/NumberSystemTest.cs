@@ -8,77 +8,12 @@ namespace NumberSystemTests
     public class NumberSystemTest
     {
         [TestMethod]
-        [DataRow(5, '5')]
-        [DataRow(0, '0')]
-        public void ToChar_ReturnTrue(int value, char expected)
-        {
-            Assert.AreEqual(Converter.ToChar(value), expected);
-        }
-
-        [TestMethod]
-        [DataRow(-5)]
-        [DataRow(10)]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ToChar_ArgumentOutOfRangeException(int value)
-        {
-            char symbol = Converter.ToChar(value);
-        }
-
-        [TestMethod]
-        [DataRow(-1)]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetRemainderSymbol_ArgumentOutOfRangeException(int value)
-        {
-            char symbol = Converter.GetRemainderSymbol(value);
-        }
-
-        [TestMethod]
-        [DataRow(10, 'A')]
-        [DataRow(11, 'B')]
-        [DataRow(12, 'C')]
-        [DataRow(13, 'D')]
-        [DataRow(14, 'E')]
-        [DataRow(15, 'F')]
-        [DataRow(16, 'G')]
-        [DataRow(17, 'H')]
-        [DataRow(18, 'I')]
-        [DataRow(19, 'J')]
-        public void GetRemainderSymbol_Letters_ReturnTrue(int value, char expected)
-        {
-            Assert.AreEqual(Converter.GetRemainderSymbol(value), expected);
-        }
-
-        [TestMethod]
-        [DataRow(0, '0')]
-        [DataRow(9, '9')]
-        public void GetRemainderSymbol_Numbers_ReturnTrue(int value, char expected)
-        {
-            Assert.AreEqual(Converter.GetRemainderSymbol(value), expected);
-        }
-
-        [TestMethod]
-        [DataRow(-4, "-")]
-        public void GetNumberSign_RetutnTrue(int value, string expected)
-        {
-            Assert.AreEqual(Converter.GetNumberSign(value), expected);
-        }
-
-        [TestMethod]
-        [DataRow(-7, 7)]
-        [DataRow(7, 7)]
-        public void ChangeNumberSign_ReturnTrue(int value, int expected)
-        {
-            Converter.ChangeNegativeNumericSign(ref value);
-            Assert.AreEqual(expected, value);
-        }
-
-        [TestMethod]
         [DataRow(1, 1)]
         [DataRow(10, 21)]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Converter_ArgumentOutOfRangeException(int numberValue, int numberSystemValue)
         {
-            string actual = Converter.Convert(numberValue, numberSystemValue);
+            string actual = NumberSystemConvertor.Convert(numberValue, numberSystemValue);
         }
 
         [TestMethod]
@@ -104,7 +39,7 @@ namespace NumberSystemTests
         [DataRow(19, 20, "J")]
         public void Converter_PositiveNumbers_ReturnTrue(int numberValue, int numberSystemValue, string expected)
         {
-            Assert.AreEqual(Converter.Convert(numberValue, numberSystemValue), expected);
+            Assert.AreEqual(NumberSystemConvertor.Convert(numberValue, numberSystemValue), expected);
         }
 
         [TestMethod]
@@ -130,7 +65,7 @@ namespace NumberSystemTests
         [DataRow(-19, 20, "-J")]
         public void Converter_NegativeNumbers_ReturnTrue(int numberValue, int numberSystemValue, string expected)
         {
-            Assert.AreEqual(Converter.Convert(numberValue, numberSystemValue), expected);
+            Assert.AreEqual(NumberSystemConvertor.Convert(numberValue, numberSystemValue), expected);
         }
 
         [TestMethod]
@@ -155,7 +90,23 @@ namespace NumberSystemTests
         [DataRow(20)]
         public void Converter_Zero_ReturnTrue(int numberSystemValue)
         {
-            Assert.AreEqual(Converter.Convert(0, numberSystemValue), "0");
+            Assert.AreEqual(NumberSystemConvertor.Convert(0, numberSystemValue), "0");
+        }
+
+        [TestMethod]
+        [DataRow(10, 11, "A")]
+        [DataRow(11, 12, "B")]
+        [DataRow(12, 13, "C")]
+        [DataRow(13, 14, "D")]
+        [DataRow(14, 15, "E")]
+        [DataRow(15, 16, "F")]
+        [DataRow(16, 17, "G")]
+        [DataRow(17, 18, "H")]
+        [DataRow(18, 19, "I")]
+        [DataRow(19, 20, "J")]
+        public void Converter_CheckingTheAlphabetContent(int numberValue, int numberSystemValue, string expected)
+        {
+            Assert.AreEqual(NumberSystemConvertor.Convert(numberValue, numberSystemValue), expected);
         }
 
         [TestMethod]
@@ -180,32 +131,14 @@ namespace NumberSystemTests
         [DataRow(20, "1DB1F927")]
         public void Converter_MaxValue_ReturnTrue(int numberSystemValue, string expected)
         {
-            Assert.AreEqual(Converter.Convert(int.MaxValue, numberSystemValue), expected);
+            Assert.AreEqual(NumberSystemConvertor.Convert(int.MaxValue, numberSystemValue), expected);
         }
 
         [TestMethod]
-        [DataRow(2, "-10000000000000000000000000000000")]
-        [DataRow(3, "-12112122212110202102")]
-        [DataRow(4, "-2000000000000000")]
-        [DataRow(5, "-13344223434043")]
-        [DataRow(6, "-553032005532")]
-        [DataRow(7, "-104134211162")]
-        [DataRow(8, "-20000000000")]
-        [DataRow(9, "-5478773672")]
-        [DataRow(10, "-2147483648")]
-        [DataRow(11, "-A02220282")]
-        [DataRow(12, "-4BB2308A8")]
-        [DataRow(13, "-282BA4AAB")]
-        [DataRow(14, "-1652CA932")]
-        [DataRow(15, "-C87E66B8")]
-        [DataRow(16, "-80000000")]
-        [DataRow(17, "-53G7F549")]
-        [DataRow(18, "-3928G3H2")]
-        [DataRow(19, "-27C57H33")]
-        [DataRow(20, "-1DB1F928")]
-        public void Converter_MinValue_ReturnTrue(int numberSystemValue, string expected)
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Converter_MinValue_ArgumentOutOfRangeException()
         {
-            Assert.AreEqual(Converter.Convert(int.MinValue, numberSystemValue), expected);
+            string actual = NumberSystemConvertor.Convert(int.MinValue, 2);
         }
     }
 }
