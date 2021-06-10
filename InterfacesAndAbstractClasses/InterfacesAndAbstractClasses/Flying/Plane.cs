@@ -20,6 +20,11 @@ namespace InterfacesAndAbstractClasses
         private const int _acceleration = 10;
 
         /// <summary>
+        /// Distance Accelerate.
+        /// </summary>
+        private const int _distanceAccelerate = 10;
+
+        /// <summary>
         /// Fuel consumption per 1000 km.
         /// </summary>
         private const int _fuelConsumption = 1600;
@@ -30,7 +35,7 @@ namespace InterfacesAndAbstractClasses
         public double FuelVolume { get; set; }
 
         /// <summary>
-        /// Initializing Class Fields.
+        /// Creates an object at the current coordinate.
         /// </summary>
         /// <param name="currentPosition">Current position.</param>
         /// <param name="fuelVolume">Fuel volume.</param>
@@ -39,6 +44,11 @@ namespace InterfacesAndAbstractClasses
             FuelVolume = fuelVolume;
         }
 
+        /// <summary>
+        /// Calculates whether it will reach the end point.
+        /// </summary>
+        /// <param name="newCoordinate">The coordinates of the end point.</param>
+        /// <returns>true if it gets there, otherwise false.</returns>
         public bool FlyTo(Coordinate newCoordinate)
         {
             double distance = CurrentPosition.Distance(newCoordinate);
@@ -46,6 +56,11 @@ namespace InterfacesAndAbstractClasses
             return AmountRequiredFuel(distance) < FuelVolume;
         }
 
+        /// <summary>
+        /// Calculates the time spent on the flight.
+        /// </summary>
+        /// <param name="newCoordinate">The coordinates of the end point.</param>
+        /// <returns>The time span if it reaches, otherwise infinity.</returns>
         public TimeSpan GetFlyTime(Coordinate newCoordinate)
         {
             if (FlyTo(newCoordinate))
@@ -83,7 +98,7 @@ namespace InterfacesAndAbstractClasses
 
             while(way < distance)
             {
-                way += 10;
+                way += _distanceAccelerate;
 
                 if (speed < _maxSpeed)
                 {
