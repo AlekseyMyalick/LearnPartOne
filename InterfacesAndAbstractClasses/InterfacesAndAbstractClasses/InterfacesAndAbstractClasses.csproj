@@ -44,14 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Flying\Bird.cs" />
-    <Compile Include="Coordinate.cs" />
+    <Compile Include="Base\Coordinate.cs" />
     <Compile Include="Flying\Drone.cs" />
     <Compile Include="Flying\Flying.cs" />
-    <Compile Include="IFlyable.cs" />
+    <Compile Include="Interfaces\IFlyable.cs" />
     <Compile Include="Flying\Plane.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="FlyingEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Randomizer.cs" />
+    <Compile Include="Randomizer\Randomizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

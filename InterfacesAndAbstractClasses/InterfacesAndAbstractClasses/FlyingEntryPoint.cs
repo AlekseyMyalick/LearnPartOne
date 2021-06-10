@@ -2,7 +2,7 @@
 
 namespace InterfacesAndAbstractClasses
 {
-    class Program
+    class FlyingEntryPoint
     {
         static void Main(string[] args)
         {
