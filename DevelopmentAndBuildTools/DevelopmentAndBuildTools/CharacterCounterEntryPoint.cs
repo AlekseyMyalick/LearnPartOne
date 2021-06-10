@@ -2,18 +2,18 @@
 
 namespace DevelopmentAndBuildTools
 {
-    public class Program
+    public class CharacterCounterEntryPoint
     {
         static void Main(string[] args)
         {
-            try
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Invalid number of arguments");
+            }
+            else
             {
                 int result = MaximumNumberUnequalConsecutiveCharacters(args[0]);
                 Console.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
             }
         }
 
