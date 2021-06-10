@@ -57,5 +57,14 @@ namespace StringCharacterTests
         {
             Assert.AreEqual(Program.MaximumNumberUnequalConsecutiveCharacters(value), expected);
         }
+
+        [Test]
+        [TestCase(1, 2, 2)]
+        [TestCase(2, 1, 2)]
+        [TestCase(2, 2, 2)]
+        public void Maximum_ReturnTrue(int aValue, int bValue, int expected)
+        {
+            Assert.AreEqual(Program.Maximum(aValue, bValue), expected);
+        }
     }
 }
