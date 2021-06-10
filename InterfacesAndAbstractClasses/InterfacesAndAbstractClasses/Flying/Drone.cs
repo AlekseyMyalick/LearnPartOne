@@ -35,7 +35,7 @@ namespace InterfacesAndAbstractClasses
         public int Speed { get; set; }
 
         /// <summary>
-        /// Initializing Class Fields.
+        /// Creates an object at the current coordinate.
         /// </summary>
         /// <param name="currentPosition">Current position.</param>
         /// <param name="engineNumber">Number of engines.</param>
@@ -45,6 +45,11 @@ namespace InterfacesAndAbstractClasses
             Speed = EnginesNumber * _oneEngineSpeed;
         }
 
+        /// <summary>
+        /// Calculates whether it will reach the end point.
+        /// </summary>
+        /// <param name="newCoordinate">The coordinates of the end point.</param>
+        /// <returns>true if it gets there, otherwise false.</returns>
         public bool FlyTo(Coordinate newCoordinate)
         {
             double distance = CurrentPosition.Distance(newCoordinate);
@@ -52,6 +57,11 @@ namespace InterfacesAndAbstractClasses
             return distance < _maxDistance;
         }
 
+        /// <summary>
+        /// Calculates the time spent on the flight.
+        /// </summary>
+        /// <param name="newCoordinate">The coordinates of the end point.</param>
+        /// <returns>The time span if it reaches, otherwise infinity.</returns>
         public TimeSpan GetFlyTime(Coordinate newCoordinate)
         {
             if (FlyTo(newCoordinate))
