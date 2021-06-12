@@ -44,7 +44,7 @@ namespace FlyingTests
         }
 
         [TestMethod]
-        public void GetFlyTime_CorrectDistance_ReturnZero()
+        public void GetFlyTime_CorrectDistance_ReturnTrue()
         {
             _plane.FuelVolume = 2000;
             Assert.AreEqual(_plane.GetFlyTime(new Coordinate(100, 100, 100)), TimeSpan.Parse("05:22:43.9374379"));
