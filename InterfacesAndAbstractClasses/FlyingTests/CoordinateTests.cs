@@ -6,30 +6,30 @@ namespace FlyingTests
     [TestClass]
     public class CoordinateTests
     {
-        private Coordinate startCoordinate;
+        private Coordinate _startCoordinate;
 
         [TestInitialize]
         public void CoordinateInitialize()
         {
-            startCoordinate = new Coordinate(0, 0, 0);
+            _startCoordinate = new Coordinate(0, 0, 0);
         }
 
         [TestMethod]
         public void Distance_IdenticalCoordinate_ReturnZero()
         {
-            Assert.AreEqual(startCoordinate.Distance(new Coordinate(0, 0, 0)), 0);
+            Assert.AreEqual(_startCoordinate.Distance(new Coordinate(0, 0, 0)), 0);
         }
 
         [TestMethod]
         public void Distance_EndCoordinateGreaterThanStart_ReruenTrue()
         {
-            Assert.AreEqual(startCoordinate.Distance(new Coordinate(10, 10, 10)), 17.320508075688775d);
+            Assert.AreEqual(_startCoordinate.Distance(new Coordinate(10, 10, 10)), 17.320508075688775d);
         }
 
         [TestMethod]
         public void Distance_EndCoordinateLessThanStart_ReruenTrue()
         {
-            Assert.AreEqual(startCoordinate.Distance(new Coordinate(-10, -10, -10)), 17.320508075688775d);
+            Assert.AreEqual(_startCoordinate.Distance(new Coordinate(-10, -10, -10)), 17.320508075688775d);
         }
 
         [TestMethod]

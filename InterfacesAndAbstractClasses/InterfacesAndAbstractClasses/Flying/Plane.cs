@@ -35,6 +35,11 @@ namespace InterfacesAndAbstractClasses
         public double FuelVolume { get; set; }
 
         /// <summary>
+        /// Measured in km/h.
+        /// </summary>
+        public int Speed { get; set; }
+
+        /// <summary>
         /// Creates an object at the current coordinate.
         /// </summary>
         /// <param name="currentPosition">Current position.</param>
@@ -93,28 +98,28 @@ namespace InterfacesAndAbstractClasses
         private double TimeCounter(double distance)
         {
             double way = 0;
-            int speed = _startSpeed;
+            Speed = _startSpeed;
             double time = 0;
 
             while(way < distance)
             {
                 way += _distanceAccelerate;
 
-                if (speed < _maxSpeed)
+                if (Speed < _maxSpeed)
                 {
-                    speed += _acceleration;
+                    Speed += _acceleration;
                 }
                 else
                 {
-                    speed = _maxSpeed;
+                    Speed = _maxSpeed;
                 }
 
-                time += way / speed;
+                time += way / Speed;
             }
 
             if (way > distance)
             {
-                time -= (way - distance) / speed;
+                time -= (way - distance) / Speed;
             }
 
             return time;
