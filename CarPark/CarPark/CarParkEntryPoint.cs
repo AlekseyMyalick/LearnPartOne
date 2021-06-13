@@ -1,9 +1,11 @@
-﻿using CarPark.Models;
+﻿using CarPark.Managers;
+using CarPark.Models;
+using CarPark.Serializers;
 using System.Collections.Generic;
 
 namespace CarPark
 {
-    class Program
+    class CarParkEntryPoint
     {
         static void Main(string[] args)
         {
@@ -29,9 +31,11 @@ namespace CarPark
 
             List<Vehicle> vehicles = new List<Vehicle>() { passengerCar, truck, bus, scooter };
 
-            Serializers.Serializer<Vehicle>.Serialize("EngineDisplacementGreaterThan.xml", Query.EngineDisplacementGreaterThan(vehicles, 1.5d));
-            Serializers.Serializer<VehicleModel>.Serialize("BusAndTruckEngines.xml", Query.BusAndTruckEngines(vehicles));
-            Serializers.Serializer<Vehicle>.Serialize("GroupedByTransmission.xml", Query.GroupedByTransmission(vehicles));
+            CarManager carManager = new CarManager(vehicles);
+
+            Serializer<Vehicle>.Serialize("EngineDisplacementGreaterThan.xml", carManager.EngineDisplacementGreaterThan(1.5d));
+            Serializer<VehicleModel>.Serialize("BusAndTruckEngines.xml", carManager.BusAndTruckEngines());
+            Serializer<Vehicle>.Serialize("GroupedByTransmission.xml", carManager.GroupedByTransmission());
         }
     }
 }

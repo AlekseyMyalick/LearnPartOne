@@ -43,15 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\CarManager.cs" />
     <Compile Include="Vehicles\Bus.cs" />
     <Compile Include="SpareParts\Chassis.cs" />
     <Compile Include="SpareParts\Engine.cs" />
     <Compile Include="Enums\EngineType.cs" />
     <Compile Include="Models\VehicleModel.cs" />
     <Compile Include="Vehicles\PassengerCar.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="CarParkEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query.cs" />
     <Compile Include="Vehicles\Scooter.cs" />
     <Compile Include="Serializers\Serializer.cs" />
     <Compile Include="Enums\TransmissionManufacturers.cs" />
