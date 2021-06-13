@@ -40,7 +40,7 @@ namespace CarPark.Managers
         public List<VehicleModel> BusAndTruckEngines()
         {
             return Vehicles.Where(v => v is Truck || v is Bus)
-                .Select(v => new VehicleModel(v.VehicleEngine.EngineType, v.VehicleEngine.SerialNumber, v.VehicleEngine.Power)).ToList();
+                .Select(v => new VehicleModel(v.VehicleEngine.Type, v.VehicleEngine.SerialNumber, v.VehicleEngine.Power)).ToList();
         }
 
         /// <summary>

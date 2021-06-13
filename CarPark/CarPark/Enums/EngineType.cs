@@ -5,8 +5,8 @@
     /// </summary>
     public enum EngineType
     {
-        Gasoline,
         Diesel,
+        Gasoline,
         Gas,
         Electrical
     }

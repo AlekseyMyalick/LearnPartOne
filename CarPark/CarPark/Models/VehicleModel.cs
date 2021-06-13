@@ -11,7 +11,7 @@ namespace CarPark.Models
         /// <summary>
         /// Engine's type.
         /// </summary>
-        public EngineType EngineType { get; set; }
+        public EngineType Type { get; set; }
 
         /// <summary>
         /// Serial number.
@@ -31,14 +31,23 @@ namespace CarPark.Models
         /// <summary>
         /// Initializes fields.
         /// </summary>
-        /// <param name="engineType">The engine type of the class object.</param>
+        /// <param name="type">The engine type of the class object.</param>
         /// <param name="serialNumber">The serial number of the class object.</param>
         /// <param name="power">The power of the class object.</param>
-        public VehicleModel (EngineType engineType, string serialNumber, double power)
+        public VehicleModel (EngineType type, string serialNumber, double power)
         {
-            EngineType = engineType;
+            Type = type;
             SerialNumber = serialNumber;
             Power = power;
+        }
+
+        /// <summary>
+        /// Returns a string describing the current object.
+        /// </summary>
+        /// <returns>A string describing the current object.</returns>
+        public override string ToString()
+        {
+            return $"Engine type: {Type} \nSerial number: {SerialNumber} \nPower: {Power} hp \n";
         }
     }
 }

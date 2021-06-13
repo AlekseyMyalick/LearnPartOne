@@ -29,7 +29,12 @@ namespace CarPark
                 new Chassis(8, "39LK55VH2656R", 0.6),
                 new Transmission(TransmissionType.Automatic, 3, TransmissionManufacturers.Aisin), false);
 
-            List<Vehicle> vehicles = new List<Vehicle>() { passengerCar, truck, bus, scooter };
+            Truck truck1 = new Truck(
+              new Engine(180d, 5.1d, EngineType.Electrical, "DS558SRT73DF8"),
+              new Chassis(10, "ER97G5H5T25Q9", 50),
+              new Transmission(TransmissionType.Mechanical, 7, TransmissionManufacturers.Aisin), 150);
+
+            List<Vehicle> vehicles = new List<Vehicle>() { passengerCar, truck, bus, scooter, truck1 };
 
             CarManager carManager = new CarManager(vehicles);
 

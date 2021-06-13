@@ -21,7 +21,7 @@ namespace CarPark
         /// <summary>
         /// Represents the type of engine.
         /// </summary>
-        public EngineType EngineType { get; set; }
+        public EngineType Type { get; set; }
 
         /// <summary>
         /// Represents the serial number.
@@ -44,7 +44,7 @@ namespace CarPark
         {
             Power = power;
             Volume = volume;
-            EngineType = EngineType;
+            Type = engineType;
             SerialNumber = serialNumber;
         }
 
@@ -54,7 +54,7 @@ namespace CarPark
         /// <returns>A string describing the current object.</returns>
         public override string ToString()
         {
-            return $"Power: {Power} hp \nVolume: {Volume} l \nEngine type: {EngineType} \nSerial number: {SerialNumber}\n";
+            return $"Power: {Power} hp \nVolume: {Volume} l \nEngine type: {Type} \nSerial number: {SerialNumber}\n";
         }
     }
 }
