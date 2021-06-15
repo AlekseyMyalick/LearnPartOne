@@ -3,7 +3,7 @@ using CarGarage.Basic;
 
 namespace CarGarage.Commands
 {
-    class CountTypesCommand : ICommand
+    public class CountTypesCommand : ICommand
     {
         public void Execute()
         {

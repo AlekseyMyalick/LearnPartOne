@@ -3,7 +3,7 @@
     /// <summary>
     /// Declares a method for executing commands.
     /// </summary>
-    interface ICommand
+    public interface ICommand
     {
         void Execute();
     }

@@ -3,7 +3,7 @@ using CarGarage.Basic;
 
 namespace CarGarage.Commands
 {
-    class AveragePriceCommand : ICommand
+    public class AveragePriceCommand : ICommand
     {
         public void Execute()
         {

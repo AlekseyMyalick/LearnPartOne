@@ -3,7 +3,7 @@ using CarGarage.Interfaces;
 
 namespace CarGarage.Commands
 {
-    class ExitCommand : ICommand
+    public class ExitCommand : ICommand
     {
         public void Execute()
         {
