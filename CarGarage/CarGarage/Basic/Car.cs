@@ -1,4 +1,4 @@
-﻿namespace CarGarage.Car
+﻿namespace CarGarage.Basic
 {
     /// <summary>
     /// Represents the Car entity.
