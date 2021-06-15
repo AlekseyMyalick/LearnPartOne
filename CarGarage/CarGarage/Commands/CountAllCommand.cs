@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarGarage.Interfaces;
+using CarGarage.Basic;
 
 namespace CarGarage.Commands
 {
-    class CountAllCommand
+    public class CountAllCommand : ICommand
     {
+        public void Execute()
+        {
+            Garage.CountAll();
+        }
     }
 }
