@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarGarage
 {
-    class Program
+    class CarGarageEntryPoint
     {
         static void Main(string[] args)
         {
