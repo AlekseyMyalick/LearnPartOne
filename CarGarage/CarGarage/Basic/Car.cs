@@ -18,7 +18,7 @@
         /// <summary>
         /// Represents the number of cars with the specified brand and model.
         /// </summary>
-        public uint Number { get; set; }
+        public int Number { get; set; }
 
         /// <summary>
         /// Represents the cost of one car with the specified brand and model.
@@ -32,7 +32,7 @@
         /// <param name="model">The instance model of the class.</param>
         /// <param name="number">The number of cars with the specified brand and model.</param>
         /// <param name="oneCost">The cost of one car with the specified brand and model.</param>
-        public Car(string brand, string model, uint number, decimal oneCost)
+        public Car(string brand, string model, int number, decimal oneCost)
         {
             Brand = brand;
             Model = model;

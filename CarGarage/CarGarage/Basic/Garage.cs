@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CarGarage.Basic
 {
@@ -12,7 +13,7 @@ namespace CarGarage.Basic
         /// </summary>
         private static Garage _garage;
 
-        private List<Car> _carGarage;
+        private static List<Car> _carGarage;
 
         /// <summary>
         /// Parameterless constructor.
@@ -36,6 +37,44 @@ namespace CarGarage.Basic
             }
 
             return _garage;
+        }
+
+        /// <summary>
+        /// Counts the number of all cars in the garage.
+        /// </summary>
+        /// <returns>The number of all cars.</returns>
+        public static int CountAll()
+        {
+            return _carGarage.Select(c => c.Number).Sum();
+        }
+
+        /// <summary>
+        /// Counts the number of car brands in the garage.
+        /// </summary>
+        /// <returns>Number of car brands.</returns>
+        public static int CountTypes()
+        {
+            return _carGarage.GroupBy(c => c.Brand).Count();
+        }
+
+        /// <summary>
+        /// Calculates the average cost of a car in the garage.
+        /// </summary>
+        /// <returns>The average cost of the car.</returns>
+        public static decimal AveragePrice()
+        {
+            return _carGarage.Select(c => c.OnesCost).Sum() / CountAll();
+        }
+
+        /// <summary>
+        /// Calculates the average cost of each brand of cars in the garage.
+        /// </summary>
+        /// <param name="brand">Car brand.</param>
+        /// <returns>Average cost of cars of each brand.</returns>
+        public static decimal AveragePriceType(string brand)
+        {
+            return _carGarage.Where(c => c.Brand == brand).Select(c => c.OnesCost).Sum()
+                / _carGarage.Where(c => c.Brand == brand).Select(c => c.Number).Sum();
         }
     }
 }
