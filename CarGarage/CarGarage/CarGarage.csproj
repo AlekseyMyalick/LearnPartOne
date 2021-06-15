@@ -50,6 +50,7 @@
     <Compile Include="Commands\CountAllCommand.cs" />
     <Compile Include="Commands\CountTypesCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Helpers\CommandsParser.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="CarGarageEntryPoint.cs" />
     <Compile Include="Invokers\Invoker.cs" />

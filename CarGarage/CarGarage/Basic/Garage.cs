@@ -72,7 +72,7 @@ namespace CarGarage.Basic
         /// <returns>The average cost of the car.</returns>
         public static decimal AveragePrice()
         {
-            return _carGarage.Select(c => c.OnesCost).Sum() / CountAll();
+            return _carGarage.Select(c => c.OnesCost * c.Number).Sum() / CountAll();
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace CarGarage.Basic
         /// <returns>Average cost of cars of each brand.</returns>
         public static decimal AveragePriceType(string brand)
         {
-            return _carGarage.Where(c => c.Brand == brand).Select(c => c.OnesCost).Sum()
+            return _carGarage.Where(c => c.Brand == brand).Select(c => c.OnesCost * c.Number).Sum()
                 / _carGarage.Where(c => c.Brand == brand).Select(c => c.Number).Sum();
         }
     }
