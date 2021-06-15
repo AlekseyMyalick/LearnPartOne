@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CarGarage.Basic;
+using CarGarage.Invokers;
+using CarGarage.Helpers;
 
 namespace CarGarage
 {
@@ -10,6 +9,18 @@ namespace CarGarage
     {
         static void Main(string[] args)
         {
+            Garage garage = Garage.GetGarage();
+
+            Invoker invoker = new Invoker();
+
+            CommandsParser commandsParser = new CommandsParser(invoker);
+            string commandLine;
+
+            while (true)
+            {
+                commandLine =  Console.ReadLine();
+                commandsParser.CommandExecute(commandLine.Split(' '));
+            }
         }
     }
 }
