@@ -40,6 +40,15 @@ namespace CarGarage.Basic
         }
 
         /// <summary>
+        /// Adds an instance of the Car class.
+        /// </summary>
+        /// <param name="car">An instance of the Car class.</param>
+        public static void Add(Car car)
+        {
+            _carGarage.Add(car);
+        }
+
+        /// <summary>
         /// Counts the number of all cars in the garage.
         /// </summary>
         /// <returns>The number of all cars.</returns>
