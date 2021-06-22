@@ -13,6 +13,8 @@ namespace CarPark
     [Serializable]
     public abstract class Vehicle
     {
+        private static int _id = 1;
+
         /// <summary>
         /// Represents the engine.
         /// </summary>
@@ -27,6 +29,11 @@ namespace CarPark
         /// Represents the transmission.
         /// </summary>
         public Transmission VehicleTransmission { get; set; }
+
+        /// <summary>
+        /// Represents ID.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Parameterless constructor.
@@ -44,6 +51,7 @@ namespace CarPark
             VehicleEngine = engine;
             VehicleChassis = chassis;
             VehicleTransmission = transmission;
+            Id = _id++;
         }
 
         /// <summary>
