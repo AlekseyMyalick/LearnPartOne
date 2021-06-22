@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using CarPark.Models;
 using CarPark.Exceptions;
+using System;
 
 namespace CarPark.Managers
 {
@@ -106,12 +107,26 @@ namespace CarPark.Managers
             return vehicle.GetType().GetProperty(propertyName);
         }
 
-        public void UpdateAuto(int id)
+        public void UpdateAuto(int id, string propertyName, object obj)
         {
             if (!IsIdExist(id))
             {
                 throw new UpdateAutoException("The car with the given ID does not exist.");
             }
+
+            if (obj is null)
+            {
+                throw new UpdateAutoException();
+            }
+
+            PropertyInfo property = GetPropertyByName(Vehicles.First(v => v.Id == id), propertyName);
+
+            if (property is null)
+            {
+                throw new UpdateAutoException($"There is no {propertyName} property in a car with id = {id}.");
+            }
+
+            property.SetValue(Vehicles.First(v => v.Id == id), obj);
         }
 
         /// <summary>
