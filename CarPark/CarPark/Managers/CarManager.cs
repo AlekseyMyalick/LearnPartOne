@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CarPark.Models;
 using CarPark.Exceptions;
 
@@ -46,6 +47,17 @@ namespace CarPark.Managers
         public bool IsContains(Vehicle vehicle)
         {
             return Vehicles.Select(v => v.Equals(vehicle)).Contains(true);
+        }
+
+        /// <summary>
+        /// Returns a property of the class object.
+        /// </summary>
+        /// <param name="vehicle">The object in which to look for the property.</param>
+        /// <param name="propertyName">The name of the property to look for.</param>
+        /// <returns>Object of class PropertyInfo if property exists, otherwise Null.</returns>
+        private PropertyInfo GetPropertyByName(Vehicle vehicle, string propertyName)
+        {
+            return vehicle.GetType().GetProperty(propertyName);
         }
 
         /// <summary>
