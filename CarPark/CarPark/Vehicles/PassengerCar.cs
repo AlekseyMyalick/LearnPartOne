@@ -12,12 +12,12 @@ namespace CarPark
         /// <summary>
         /// Maximum number of doors.
         /// </summary>
-        private byte _maxDoorsNumber = 4;
+        private const byte _maxDoorsNumber = 4;
 
         /// <summary>
         /// The minimum number of doors.
         /// </summary>
-        private byte _minDoorsNumber = 2;
+        private const byte _minDoorsNumber = 2;
 
         /// <summary>
         /// Represents the number of doors.
