@@ -11,29 +11,17 @@ namespace CarPark
         /// <summary>
         /// Maximum speed, measured in kilohm meters per hour.
         /// </summary>
-        private double _maxSpeed;
+        private const double _maxSpeed = 200;
+
+        /// <summary>
+        /// Minimum speed, measured in kilohm meters per hour.
+        /// </summary>
+        private const double _minSpeed = 0;
 
         /// <summary>
         /// Represents the maximum speed, measured in kilometers per hour.
         /// </summary>
-        public double MaxSpeed
-        {
-            get
-            {
-                return _maxSpeed;
-            }
-            set
-            {
-                if (_maxSpeed < 0)
-                {
-                    throw new ArgumentOutOfRangeException("The maximum speed cannot be less than zero.");
-                }
-                else
-                {
-                    _maxSpeed = value;
-                }
-            }
-        }
+        public double MaxSpeed { get; set; }
 
         /// <summary>
         /// Parameterless constructor.
