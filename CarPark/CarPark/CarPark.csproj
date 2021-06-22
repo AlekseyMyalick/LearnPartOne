@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\AddException.cs" />
+    <Compile Include="Exceptions\GetAutoByParameterException.cs" />
+    <Compile Include="Exceptions\InitializationException.cs" />
+    <Compile Include="Exceptions\RemoveAutoException.cs" />
+    <Compile Include="Exceptions\UpdateAutoException.cs" />
     <Compile Include="Managers\CarManager.cs" />
     <Compile Include="Vehicles\Bus.cs" />
     <Compile Include="SpareParts\Chassis.cs" />

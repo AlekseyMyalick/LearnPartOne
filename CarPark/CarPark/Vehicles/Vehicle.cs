@@ -61,7 +61,7 @@ namespace CarPark
         /// <returns>True if the values are valid, otherwise false.</returns>
         protected bool IsValidVehicle()
         {
-            return !(VehicleEngine is null || VehicleChassis is null || VehicleTransmission is null); 
+            return !(VehicleEngine is null && VehicleChassis is null && VehicleTransmission is null); 
         }
     }
 }
