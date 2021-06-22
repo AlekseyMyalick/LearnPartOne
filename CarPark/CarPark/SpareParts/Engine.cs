@@ -56,5 +56,26 @@ namespace CarPark
         {
             return $"Power: {Power} hp \nVolume: {Volume} l \nEngine type: {Type} \nSerial number: {SerialNumber}\n";
         }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Engine and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            var engine = obj as Engine;
+
+            return Power.CompareTo(engine.Power) == 0 &&
+                Volume.CompareTo(engine.Volume) == 0 &&
+                Type == engine.Type &&
+                SerialNumber == engine.SerialNumber;
+        }
     }
 }
