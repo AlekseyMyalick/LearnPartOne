@@ -57,7 +57,7 @@ namespace CarPark
         /// <returns>True if the values are valid, otherwise false.</returns>
         private bool IsValidBus()
         {
-            return IsValidVehicle() && _maxSeatsNumber <= SeatsCount;
+            return IsValidVehicle() && SeatsCount <= _maxSeatsNumber;
         }
     }
 }
