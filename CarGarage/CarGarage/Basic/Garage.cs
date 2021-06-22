@@ -52,7 +52,7 @@ namespace CarGarage.Basic
         /// Counts the number of all cars in the garage.
         /// </summary>
         /// <returns>The number of all cars.</returns>
-        public static int CountAll()
+        public static int GetCountAll()
         {
             return _carGarage.Select(c => c.Number).Sum();
         }
@@ -61,7 +61,7 @@ namespace CarGarage.Basic
         /// Counts the number of car brands in the garage.
         /// </summary>
         /// <returns>Number of car brands.</returns>
-        public static int CountTypes()
+        public static int GetCountTypes()
         {
             return _carGarage.GroupBy(c => c.Brand).Count();
         }
@@ -70,9 +70,9 @@ namespace CarGarage.Basic
         /// Calculates the average cost of a car in the garage.
         /// </summary>
         /// <returns>The average cost of the car.</returns>
-        public static decimal AveragePrice()
+        public static decimal GetAveragePrice()
         {
-            return _carGarage.Select(c => c.OnesCost * c.Number).Sum() / CountAll();
+            return _carGarage.Select(c => c.OnesCost * c.Number).Sum() / GetCountAll();
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace CarGarage.Basic
         /// </summary>
         /// <param name="brand">Car brand.</param>
         /// <returns>Average cost of cars of each brand.</returns>
-        public static decimal AveragePriceType(string brand)
+        public static decimal GetAveragePriceType(string brand)
         {
             return _carGarage.Where(c => c.Brand == brand).Select(c => c.OnesCost * c.Number).Sum()
                 / _carGarage.Where(c => c.Brand == brand).Select(c => c.Number).Sum();

@@ -14,7 +14,7 @@ namespace CarGarage.Commands
 
         public void Execute()
         {
-            System.Console.WriteLine(Garage.AveragePriceType(_brand));
+            System.Console.WriteLine(Garage.GetAveragePriceType(_brand));
         }
     }
 }
