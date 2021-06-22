@@ -52,6 +52,25 @@ namespace CarPark
         }
 
         /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Bus and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            var bus = obj as Bus;
+
+            return base.Equals(bus) &&
+                SeatsCount == bus.SeatsCount;
+        }
+
+        /// <summary>
         /// Whether the field values of the class object are valid.
         /// </summary>
         /// <returns>True if the values are valid, otherwise false.</returns>
