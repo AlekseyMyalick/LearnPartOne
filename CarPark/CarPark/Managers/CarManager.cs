@@ -106,6 +106,38 @@ namespace CarPark.Managers
             return vehicle.GetType().GetProperty(propertyName);
         }
 
+        public void UpdateAuto(int id)
+        {
+            if (!IsIdExist(id))
+            {
+                throw new UpdateAutoException("The car with the given ID does not exist.");
+            }
+        }
+
+        /// <summary>
+        /// Removes a car from the collection.
+        /// </summary>
+        /// <param name="id">Car id to be deleted.</param>
+        public void RemoveAuto(int id)
+        {
+            if (!IsIdExist(id))
+            {
+                throw new RemoveAutoException("The car with the given ID does not exist.");
+            }
+
+            Vehicles.Remove(Vehicles.First(v => v.Id == id));
+        }
+
+        /// <summary>
+        /// Checks if a car with the given ID exists.
+        /// </summary>
+        /// <param name="id">ID that is searched for.</param>
+        /// <returns>True if an auto with this id exists, otherwise false.</returns>
+        private bool IsIdExist(int id)
+        {
+            return Vehicles.Select(v => v.Id).Contains(id);
+        }
+
         /// <summary>
         /// Provides complete information about all vehicles with an engine capacity of more than engineVolume.
         /// </summary>
