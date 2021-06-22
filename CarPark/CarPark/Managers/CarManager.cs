@@ -1,6 +1,7 @@
-﻿using CarPark.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using CarPark.Models;
+using CarPark.Exceptions;
 
 namespace CarPark.Managers
 {
@@ -29,6 +30,11 @@ namespace CarPark.Managers
         /// <param name="vehicle">Vehicle to add.</param>
         public void Add(Vehicle vehicle)
         {
+            if (!IsContains(vehicle))
+            {
+                throw new AddException("Unable to add car model.");
+            }
+
             Vehicles.Add(vehicle);
         }
 
