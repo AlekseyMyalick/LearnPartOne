@@ -106,7 +106,6 @@ namespace CarPark.Managers
             return vehicle.GetType().GetProperty(propertyName);
         }
 
-
         /// <summary>
         /// Provides complete information about all vehicles with an engine capacity of more than engineVolume.
         /// </summary>
