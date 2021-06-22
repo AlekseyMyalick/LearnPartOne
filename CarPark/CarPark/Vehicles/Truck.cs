@@ -1,4 +1,5 @@
 ﻿using System;
+using CarPark.Exceptions;
 
 namespace CarPark
 {
@@ -39,6 +40,11 @@ namespace CarPark
             : base(engine, chassis, transmission)
         {
             MaxSpeed = maxSpeed;
+
+            if (!IsValidTruck())
+            {
+                throw new InitializationException("Unable to initialize the Truck.");
+            }
         }
 
         /// <summary>
@@ -48,6 +54,15 @@ namespace CarPark
         public override string ToString()
         {
             return base.ToString() + $"Max speed: {MaxSpeed}\n";
+        }
+
+        /// <summary>
+        /// Whether the field values of the class object are valid.
+        /// </summary>
+        /// <returns>True if the values are valid, otherwise false.</returns>
+        private bool IsValidTruck()
+        {
+            return IsValidVehicle() && MaxSpeed > _minSpeed && MaxSpeed <= _maxSpeed;
         }
     }
 }
