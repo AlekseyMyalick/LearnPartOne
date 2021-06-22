@@ -24,6 +24,15 @@ namespace CarPark.Managers
         }
 
         /// <summary>
+        /// Add vehicle to the collection of an object of the CarManager class.
+        /// </summary>
+        /// <param name="vehicle">Vehicle to add.</param>
+        public void Add(Vehicle vehicle)
+        {
+            Vehicles.Add(vehicle);
+        }
+
+        /// <summary>
         /// Provides complete information about all vehicles with an engine capacity of more than engineVolume.
         /// </summary>
         /// <param name="engineVolume">Engine volume for comparison.</param>
