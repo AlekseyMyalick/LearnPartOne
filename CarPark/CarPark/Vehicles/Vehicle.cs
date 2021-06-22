@@ -59,7 +59,7 @@ namespace CarPark
         /// Whether the field values of the class object are valid.
         /// </summary>
         /// <returns>True if the values are valid, otherwise false.</returns>
-        private bool IsValidVehicle()
+        protected bool IsValidVehicle()
         {
             return !(VehicleEngine is null || VehicleChassis is null || VehicleTransmission is null); 
         }
