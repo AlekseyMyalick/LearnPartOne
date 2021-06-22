@@ -49,5 +49,25 @@ namespace CarPark
         {
             return $"Type: {Type}\nGears number: {GearsNumber}\nManufacturer: {Manufacturer}\n";
         }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Transmission and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            var transmission = obj as Transmission;
+
+            return Type == transmission.Type &&
+                GearsNumber == transmission.GearsNumber &&
+                Manufacturer == transmission.Manufacturer;
+        }
     }
 }
