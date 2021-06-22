@@ -50,6 +50,34 @@ namespace CarPark.Managers
         }
 
         /// <summary>
+        /// Returns a collection of cars with the specified parameter and value.
+        /// </summary>
+        /// <param name="parameter">The name of the property to look for.</param>
+        /// <param name="value">The value of the object property to search for.</param>
+        /// <returns>List of cars if their number is greater than zero,
+        /// otherwise throws GetAutoByParameterException.</returns>
+        public List<Vehicle> GetAutoByParameter(string parameter, string value)
+        {
+            if (GetNumberOfAutoWithParameter(parameter) == 0)
+            {
+                throw new GetAutoByParameterException("Inability to find a model by a given parameter");
+            }
+
+            return Vehicles.Where(v => GetPropertyValue(v, parameter) == value).ToList();
+        }
+
+        /// <summary>
+        /// The number of objects that have this property.
+        /// </summary>
+        /// <param name="parameter">The name of the property to look for.</param>
+        /// <returns>The number of objects that have this property.</returns>
+        private int GetNumberOfAutoWithParameter(string parameter)
+        {
+            return Vehicles.Select(v => GetPropertyByName(v, parameter)).
+                Where(p => !(p is null)).Count();
+        }
+
+        /// <summary>
         /// Returns the value of a property of an object.
         /// </summary>
         /// <param name="vehicle">The object which property is being examined.</param>
@@ -77,6 +105,7 @@ namespace CarPark.Managers
         {
             return vehicle.GetType().GetProperty(propertyName);
         }
+
 
         /// <summary>
         /// Provides complete information about all vehicles with an engine capacity of more than engineVolume.
