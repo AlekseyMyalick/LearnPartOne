@@ -33,6 +33,16 @@ namespace CarPark.Managers
         }
 
         /// <summary>
+        /// Determines if the collection contains an object.
+        /// </summary>
+        /// <param name="vehicle">A search object in the collection.</param>
+        /// <returns>True if the object is in a collection, false otherwise.</returns>
+        public bool IsContains(Vehicle vehicle)
+        {
+            return Vehicles.Select(v => v.Equals(vehicle)).Contains(true);
+        }
+
+        /// <summary>
         /// Provides complete information about all vehicles with an engine capacity of more than engineVolume.
         /// </summary>
         /// <param name="engineVolume">Engine volume for comparison.</param>
