@@ -3,12 +3,12 @@
 namespace CarPark.Exceptions
 {
     [Serializable]
-    public class RemoveAutoExceptionException : Exception
+    public class RemoveAutoException : Exception
     {
-        public RemoveAutoExceptionException() { }
-        public RemoveAutoExceptionException(string message) : base(message) { }
-        public RemoveAutoExceptionException(string message, Exception inner) : base(message, inner) { }
-        protected RemoveAutoExceptionException(
+        public RemoveAutoException() { }
+        public RemoveAutoException(string message) : base(message) { }
+        public RemoveAutoException(string message, Exception inner) : base(message, inner) { }
+        protected RemoveAutoException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }

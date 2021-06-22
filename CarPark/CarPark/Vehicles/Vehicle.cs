@@ -33,7 +33,7 @@ namespace CarPark
         /// <summary>
         /// Represents ID.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         /// <summary>
         /// Parameterless constructor.

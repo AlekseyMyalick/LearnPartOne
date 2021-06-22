@@ -107,6 +107,12 @@ namespace CarPark.Managers
             return vehicle.GetType().GetProperty(propertyName);
         }
 
+        /// <summary>
+        /// Update the auto property.
+        /// </summary>
+        /// <param name="id">ID of the car to update.</param>
+        /// <param name="propertyName">Auto property to update.</param>
+        /// <param name="obj">The object on which the property is being updated.</param>
         public void UpdateAuto(int id, string propertyName, object obj)
         {
             if (!IsIdExist(id))
