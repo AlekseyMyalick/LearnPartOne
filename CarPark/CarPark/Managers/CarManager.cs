@@ -50,6 +50,24 @@ namespace CarPark.Managers
         }
 
         /// <summary>
+        /// Returns the value of a property of an object.
+        /// </summary>
+        /// <param name="vehicle">The object which property is being examined.</param>
+        /// <param name="propertyName">The name of the property to look for.</param>
+        /// <returns>The string representation of the property value.</returns>
+        private string GetPropertyValue(Vehicle vehicle, string propertyName)
+        {
+            PropertyInfo property = GetPropertyByName(vehicle, propertyName);
+
+            if (property is null)
+            {
+                return null;
+            }
+
+            return property.GetValue(vehicle).ToString();
+        }
+
+        /// <summary>
         /// Returns a property of the class object.
         /// </summary>
         /// <param name="vehicle">The object in which to look for the property.</param>
