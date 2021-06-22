@@ -1,4 +1,5 @@
 ﻿using System;
+using CarPark.Exceptions;
 
 namespace CarPark
 {
@@ -29,6 +30,11 @@ namespace CarPark
             : base(engine, chassis, transmission)
         {
             IsSidecar = isSidecar;
+
+            if (!IsValidScooter())
+            {
+                throw new InitializationException("Unable to initialize the Scooter.");
+            }
         }
 
         /// <summary>
@@ -38,6 +44,15 @@ namespace CarPark
         public override string ToString()
         {
             return base.ToString() + $"Is sidecar: {IsSidecar}\n";
+        }
+
+        /// <summary>
+        /// Whether the field values of the class object are valid.
+        /// </summary>
+        /// <returns>True if the values are valid, otherwise false.</returns>
+        private bool IsValidScooter()
+        {
+            return IsValidVehicle();
         }
     }
 }
