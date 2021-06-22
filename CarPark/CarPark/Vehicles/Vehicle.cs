@@ -54,5 +54,14 @@ namespace CarPark
         {
             return $"Engine:\n{VehicleEngine}\nChassis:\n{VehicleChassis}\nTransmission:\n{VehicleTransmission}\n";
         }
+
+        /// <summary>
+        /// Whether the field values of the class object are valid.
+        /// </summary>
+        /// <returns>True if the values are valid, otherwise false.</returns>
+        private bool IsValidVehicle()
+        {
+            return !(VehicleEngine is null || VehicleChassis is null || VehicleTransmission is null); 
+        }
     }
 }
