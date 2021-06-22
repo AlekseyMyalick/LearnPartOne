@@ -1,0 +1,75 @@
+﻿using System;
+
+namespace CarPark
+{
+    /// <summary>
+    /// Represents the entity defining the chassis.
+    /// </summary>
+    [Serializable]
+    public class Chassis
+    {
+        /// <summary>
+        /// Potential load, measured in tonnes.
+        /// </summary>
+        private double _permissibleLoad;
+
+        /// <summary>
+        /// Represents the number of wheels.
+        /// </summary>
+        public byte WheelsCount { get; set; }
+
+        /// <summary>
+        /// Represents the serial number.
+        /// </summary>
+        public string SerialNumber { get; set; }
+
+        /// <summary>
+        /// Represents the permissible load, cannot be less than zero, measured in tons.
+        /// </summary>
+        public double PermissibleLoad
+        {
+            get
+            {
+                return _permissibleLoad;
+            }
+            set
+            {
+                if (_permissibleLoad < 0)
+                {
+                    throw new ArgumentOutOfRangeException("The permissible load cannot be less than zero.");
+                }
+                else
+                {
+                    _permissibleLoad = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Parameterless constructor.
+        /// </summary>
+        public Chassis () { }
+
+        /// <summary>
+        /// Initializes the fields of the class object.
+        /// </summary>
+        /// <param name="wheelsCount">Number of wheels of an object of the Chassis type.</param>
+        /// <param name="serialNumber">Serial number of the object type Chassis.</param>
+        /// <param name="permissibleLoad">Permissible load of an object of the Chassis type.</param>
+        public Chassis (byte wheelsCount, string serialNumber, double permissibleLoad)
+        {
+            WheelsCount = wheelsCount;
+            SerialNumber = serialNumber;
+            PermissibleLoad = permissibleLoad;
+        }
+
+        /// <summary>
+        /// Returns a string describing the current object.
+        /// </summary>
+        /// <returns>A string describing the current object.</returns>
+        public override string ToString()
+        {
+            return $"Wheels count: {WheelsCount} \nSerial number: {SerialNumber} \nPermissible load: {PermissibleLoad} tons \n";
+        }
+    }
+}
