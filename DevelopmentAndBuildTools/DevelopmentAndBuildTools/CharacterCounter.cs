@@ -74,6 +74,43 @@ namespace DevelopmentAndBuildTools
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="characterSet"></param>
+        /// <returns></returns>
+        public int GetMaximumNumberConsecutiveIdenticalNumbers(string characterSet)
+        {
+            if (string.IsNullOrEmpty(characterSet))
+            {
+                return 0;
+            }
+
+            int result = 0;
+            int count = 0;
+
+            for (int i = 0; i < characterSet.Length - 1; i++)
+            {
+                if (char.IsDigit(characterSet[i]) && count == 0)
+                {
+                    count = 1;
+                }
+
+                if (char.IsDigit(characterSet[i]) &&
+                    characterSet[i].CompareTo(characterSet[i + 1]) == 0)
+                {
+                    count++;
+                }
+                else
+                {
+                    result = GetMaximum(count, result);
+                    count = 0;
+                }
+            }
+
+            return GetMaximum(count, result);
+        }
+
+        /// <summary>
         /// Checks if a character is a Latin letter.
         /// </summary>
         /// <param name="symbol">Check symbol.</param>
