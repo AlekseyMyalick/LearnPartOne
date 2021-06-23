@@ -39,6 +39,16 @@ namespace DevelopmentAndBuildTools.Tests
         }
 
         [TestMethod()]
+        public void GetMaximumNumberUnequalConsecutiveCharacters_WhiteSpaces_ReturnsOne()
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters("     ");
+
+            Assert.AreEqual(1, actual);
+        }
+
+        [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_Null_ReturnsZero()
         {
             CharacterCounter characterCounter = new CharacterCounter();
