@@ -26,6 +26,19 @@ namespace DevelopmentAndBuildTools.Tests
         }
 
         [TestMethod()]
+        [DataRow("aaaabcedrf", 4)]
+        [DataRow("bcedrfaaaa", 4)]
+        [DataRow("bceaaaadrf", 4)]
+        public void GetMaximumNumberUnequalConsecutiveCharacters_EdgeValues_ReturnsCorrectResults(string value, int expected)
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(value);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_Null_ReturnsZero()
         {
             CharacterCounter characterCounter = new CharacterCounter();
