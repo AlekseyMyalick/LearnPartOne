@@ -45,6 +45,16 @@ namespace DevelopmentAndBuildTools.Tests
             Assert.AreEqual(0, actual);
         }
 
+        [TestMethod()]
+        public void GetMaximumNumberConsecutiveIdenticalNumbers_Null_ReturnsZero()
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalNumbers(null);
+
+            Assert.AreEqual(0, actual);
+        }
+
         
     }
 }
