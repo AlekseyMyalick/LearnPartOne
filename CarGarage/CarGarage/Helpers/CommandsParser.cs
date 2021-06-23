@@ -34,17 +34,20 @@ namespace CarGarage.Helpers
         {
             switch (args[0])
             {
+                case "add":
+                    AddCommandExecute(args);
+                    break;
                 case "count":
-                    CountCommandsParser(args);
+                    CountCommandsExecute(args);
                     break;
                 case "average":
-                    AverageCommandsParser(args);
+                    AverageCommandsExecute(args);
                     break;
                 case "exit":
                     _invoker.ExecuteCommand(new ExitCommand());
                     break;
                 default:
-                    DefaultCommandParser(args);
+                    Console.WriteLine(messageMissingCommand);
                     break;
             }
         }
@@ -53,7 +56,7 @@ namespace CarGarage.Helpers
         /// Calls commands wich first word is "count".
         /// </summary>
         /// <param name="args">Command.</param>
-        private void CountCommandsParser(string[] args)
+        private void CountCommandsExecute(string[] args)
         {
             switch (args[1])
             {
@@ -73,12 +76,12 @@ namespace CarGarage.Helpers
         /// Calls commands which first word is "average".
         /// </summary>
         /// <param name="args">Command.</param>
-        private void AverageCommandsParser(string[] args)
+        private void AverageCommandsExecute(string[] args)
         {
             switch (args[1])
             {
                 case "price":
-                    AveragePriceCommandsParser(args);
+                    AveragePriceCommandsExecute(args);
                     break;
                 default:
                     Console.WriteLine(messageMissingCommand);
@@ -90,7 +93,7 @@ namespace CarGarage.Helpers
         /// Calls commands whose first word is "average", depending on the arguments passed.
         /// </summary>
         /// <param name="args">Command.</param>
-        private void AveragePriceCommandsParser(string[] args)
+        private void AveragePriceCommandsExecute(string[] args)
         {
             if (args.Length > 2)
             {
@@ -103,20 +106,12 @@ namespace CarGarage.Helpers
         }
 
         /// <summary>
-        /// Adds an instance of the Car class 
-        /// or displays a message about the absence of the command entered.
+        /// Calls the command the first word of which is "add".
         /// </summary>
         /// <param name="args">Command.</param>
-        private void DefaultCommandParser(string[] args)
+        private void AddCommandExecute(string[] args)
         {
-            if (args.Length == 4)
-            {
-                Garage.Add(new Car(args[0], args[1], int.Parse(args[2]), decimal.Parse(args[3])));
-            }
-            else
-            {
-                Console.WriteLine(messageMissingCommand);
-            }
+            Garage.Add(new Car(args[1], args[2], int.Parse(args[3]), decimal.Parse(args[4])));
         }
     }
 }
