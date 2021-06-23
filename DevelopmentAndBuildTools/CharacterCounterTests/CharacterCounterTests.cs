@@ -25,6 +25,16 @@ namespace DevelopmentAndBuildTools.Tests
             Assert.AreEqual(0, actual);
         }
 
-       
+        [TestMethod()]
+        public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_Null_ReturnsZero()
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters(null);
+
+            Assert.AreEqual(0, actual);
+        }
+
+        
     }
 }
