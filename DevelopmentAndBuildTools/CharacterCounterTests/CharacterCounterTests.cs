@@ -1,10 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CharacterCounterTests
+namespace DevelopmentAndBuildTools.Tests
 {
-    class CharacterCounterTests
+    [TestClass()]
+    public class CharacterCounterTests
     {
+        [TestMethod()]
+        public void GetMaximumNumberUnequalConsecutiveCharacters_Null_ReturnsZero()
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(null);
+
+            Assert.AreEqual(0, actual);
+        }
+
+        [TestMethod()]
+        public void GetMaximumNumberUnequalConsecutiveCharacters_EmptyString_ReturnsZero()
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(string.Empty);
+
+            Assert.AreEqual(0, actual);
+        }
+
+       
     }
 }
