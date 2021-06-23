@@ -26,8 +26,8 @@ namespace DevelopmentAndBuildTools.Tests
         }
 
         [TestMethod()]
-        [DataRow("aaaabcedrf", 4)]
-        [DataRow("bcedrfaaaa", 4)]
+        [DataRow("aaaabcedrf", 7)]
+        [DataRow("bcedrfaaaa", 7)]
         [DataRow("bceaaaadrf", 4)]
         public void GetMaximumNumberUnequalConsecutiveCharacters_EdgeValues_ReturnsCorrectResults(string value, int expected)
         {
@@ -49,10 +49,25 @@ namespace DevelopmentAndBuildTools.Tests
         }
 
         [TestMethod()]
-        [DataRow("aaaabcedrrrf", 4)]
-        [DataRow("bcccedrfaaaa", 4)]
-        [DataRow("bccceaaaadrrf", 4)]
+        [DataRow("aaaabcedrrrf", 6)]
+        [DataRow("bcccedrfaaaa", 6)]
+        [DataRow("bccceaaaadrrf", 3)]
         public void GetMaximumNumberUnequalConsecutiveCharacters_Maximum_ReturnsCorrectResults(string value, int expected)
+        {
+            CharacterCounter characterCounter = new CharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(value);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        [DataRow("kjnvbgkwjlskjcoislh646vjkdfndfl64864kvnmvmmdfsmv64mdmvkxcnskdcsdkjvmc mxcskjs  slknc " +
+            "sdfnlsjcvnlsdvnlskdjvlksdnk lsms efs46ef4sfef4sfseslfksefe  sefsef5s6f3se s sf43 sfes fs s" +
+            "sdfsdlnslkdfl sfseesfesf6f5sfsefsef8ggd6gs  sgrd8gd4f   sesfe6fsesefffffdf sef fggggrsg g " +
+            "klmlkliounsnnnnnnnn nnnnnnn eeeee   e484844r8 684 68r468468fsgsd gdrg agaagagdfghjfgykamlk" +
+            "gsdfgsrg srgsr gsrgsg4sr6g4 6s4rg84 s684rg684r68g46s84g68 es68rg4684rgsrg argajlknfanafjef", 107)]
+        public void GetMaximumNumberUnequalConsecutiveCharacters_LongString_ReturnsOne(string value, int expected)
         {
             CharacterCounter characterCounter = new CharacterCounter();
 
