@@ -25,6 +25,16 @@ namespace DevelopmentAndBuildTools.Tests
             Assert.AreEqual(0, actual);
         }
 
+        [TestMethod()]
+        public void GetMaximumNumberConsecutiveIdenticalNumbers_WhiteSpaces_ReturnsZero()
+        {
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalNumbers("     ");
+
+            Assert.AreEqual(0, actual);
+        }
+
         private CharacterCounter CreateDefaultCharacterCounter()
         {
             return new CharacterCounter();
