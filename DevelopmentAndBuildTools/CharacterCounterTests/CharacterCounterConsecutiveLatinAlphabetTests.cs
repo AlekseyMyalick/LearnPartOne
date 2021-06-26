@@ -26,6 +26,16 @@ namespace DevelopmentAndBuildTools.Tests
         }
 
         [TestMethod()]
+        public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_WhiteSpaces_ReturnsZero()
+        {
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters("      ");
+
+            Assert.AreEqual(0, actual);
+        }
+
+        [TestMethod()]
         [DataRow("aaaa[bc5ed/rrrf", 4)]
         [DataRow("b8ccce@drf9AAAA.", 4)]
         [DataRow("..bccc]eaaaadr*rf", 4)]
