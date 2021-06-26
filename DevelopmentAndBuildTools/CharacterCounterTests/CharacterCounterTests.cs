@@ -97,6 +97,19 @@ namespace DevelopmentAndBuildTools.Tests
         }
 
         [TestMethod()]
+        [DataRow("aaaa[bc5ed/rrrf", 4)]
+        [DataRow("b8ccce@drf9aaaa.", 4)]
+        [DataRow("..bccc]eaaaadr*rf", 4)]
+        public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_EdgeValues_ReturnsCorrectResults(string value, int expected)
+        {
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
+
+            int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters(value);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalNumbers_Null_ReturnsZero()
         {
             CharacterCounter characterCounter = CreateDefaultCharacterCounter();
