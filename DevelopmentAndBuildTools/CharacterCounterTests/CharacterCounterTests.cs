@@ -8,7 +8,7 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberUnequalConsecutiveCharacters_Null_ReturnsZero()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(null);
 
@@ -18,7 +18,7 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberUnequalConsecutiveCharacters_EmptyString_ReturnsZero()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(string.Empty);
 
@@ -31,7 +31,7 @@ namespace DevelopmentAndBuildTools.Tests
         [DataRow("bceaaaadrf", 4)]
         public void GetMaximumNumberUnequalConsecutiveCharacters_EdgeValues_ReturnsCorrectResults(string value, int expected)
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(value);
 
@@ -41,7 +41,7 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberUnequalConsecutiveCharacters_WhiteSpaces_ReturnsOne()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters("     ");
 
@@ -54,7 +54,7 @@ namespace DevelopmentAndBuildTools.Tests
         [DataRow("bccceaaaadrrf", 3)]
         public void GetMaximumNumberUnequalConsecutiveCharacters_Maximum_ReturnsCorrectResults(string value, int expected)
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(value);
 
@@ -69,7 +69,7 @@ namespace DevelopmentAndBuildTools.Tests
             "gsdfgsrg srgsr gsrgsg4sr6g4 6s4rg84 s684rg684r68g46s84g68 es68rg4684rgsrg argajlknfanafjef", 107)]
         public void GetMaximumNumberUnequalConsecutiveCharacters_LongString_ReturnsOne(string value, int expected)
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberUnequalConsecutiveCharacters(value);
 
@@ -79,7 +79,7 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_Null_ReturnsZero()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters(null);
 
@@ -89,7 +89,7 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters_EmptyString_ReturnsZero()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalLatinAlphabetLetters(string.Empty);
 
@@ -99,7 +99,7 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalNumbers_Null_ReturnsZero()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalNumbers(null);
 
@@ -109,11 +109,16 @@ namespace DevelopmentAndBuildTools.Tests
         [TestMethod()]
         public void GetMaximumNumberConsecutiveIdenticalNumbers_EmptyString_ReturnsZero()
         {
-            CharacterCounter characterCounter = new CharacterCounter();
+            CharacterCounter characterCounter = CreateDefaultCharacterCounter();
 
             int actual = characterCounter.GetMaximumNumberConsecutiveIdenticalNumbers(null);
 
             Assert.AreEqual(0, actual);
+        }
+
+        private CharacterCounter CreateDefaultCharacterCounter()
+        {
+            return new CharacterCounter();
         }
     }
 }
