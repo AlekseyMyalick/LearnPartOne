@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DevelopmentAndBuildTools
+﻿namespace DevelopmentAndBuildTools
 {
     public class CharacterCounter
     {
@@ -74,10 +72,11 @@ namespace DevelopmentAndBuildTools
         }
 
         /// <summary>
-        /// 
+        /// Returns the maximum number of consecutive 
+        /// identical digits in a string.
         /// </summary>
-        /// <param name="characterSet"></param>
-        /// <returns></returns>
+        /// <param name="characterSet">The string to count.</param>
+        /// <returns>0 if the string is empty, otherwise the maximum number.</returns>
         public int GetMaximumNumberConsecutiveIdenticalNumbers(string characterSet)
         {
             if (string.IsNullOrEmpty(characterSet))
