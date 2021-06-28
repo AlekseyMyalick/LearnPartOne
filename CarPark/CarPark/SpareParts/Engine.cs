@@ -77,5 +77,14 @@ namespace CarPark
                 Type == engine.Type &&
                 SerialNumber == engine.SerialNumber;
         }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return (int)Power + (int)Volume + (int)Type + SerialNumber.Length;
+        }
     }
 }
