@@ -69,10 +69,24 @@ namespace CarPark
                 return false;
             }
 
-            var passengerCar = obj as PassengerCar;
+            PassengerCar passengerCar = obj as PassengerCar;
+
+            if (passengerCar == null)
+            {
+                return false;
+            }
 
             return base.Equals(passengerCar) &&
                 DoorsCount == passengerCar.DoorsCount;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + DoorsCount;
         }
 
         /// <summary>
