@@ -98,25 +98,12 @@ namespace CarPark
         }
 
         /// <summary>
-        /// Determines whether the specified object instances are considered equal.
+        /// Returns the hash code for this instance.
         /// </summary>
-        /// <param name="objA">The first of the compared objects.</param>
-        /// <param name="objB">The second of the compared objects.</param>
-        /// <returns>true if the specified objects are equal; otherwise, false,
-        /// if both objA and objB are null, the method returns true.</returns>
-        public static bool Equals(object objA, object objB)
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
         {
-            if (objA == objB)
-            {
-                return true;
-            }
-
-            if (objA == null || objB == null)
-            {
-                return false;
-            }
-
-            return objA.Equals(objB);
+            return WheelsCount + (int)PermissibleLoad + SerialNumber.Length;
         }
     }
 }
