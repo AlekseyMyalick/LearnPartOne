@@ -164,7 +164,7 @@ namespace CarPark.Managers
         /// </summary>
         /// <param name="engineVolume">Engine volume for comparison.</param>
         /// <returns>List of vehicle.</returns>
-        public List<Vehicle> EngineDisplacementGreaterThan(double engineVolume)
+        public List<Vehicle> GetEngineDisplacementGreaterThan(double engineVolume)
         {
             return Vehicles.Where(v => v.VehicleEngine.Volume.CompareTo(engineVolume) > 0).ToList();
         }
@@ -173,7 +173,7 @@ namespace CarPark.Managers
         /// Provides engine type, serial number and power rating for all buses and trucks.
         /// </summary>
         /// <returns>List of VehicleModel.</returns>
-        public List<VehicleModel> BusAndTruckEngines()
+        public List<VehicleModel> GetBusAndTruckEngines()
         {
             return Vehicles.Where(v => v is Truck || v is Bus)
                 .Select(v => new VehicleModel(v.VehicleEngine.Type, v.VehicleEngine.SerialNumber, v.VehicleEngine.Power)).ToList();
@@ -183,7 +183,7 @@ namespace CarPark.Managers
         /// Provides complete information about all vehicles, grouped by transmission type.
         /// </summary>
         /// <returns>List of vehicle.</returns>
-        public List<Vehicle> GroupedByTransmission()
+        public List<Vehicle> GetGroupedByTransmission()
         {
             return Vehicles.GroupBy(v => v.VehicleTransmission.Type).SelectMany(g => g).ToList();
         }
