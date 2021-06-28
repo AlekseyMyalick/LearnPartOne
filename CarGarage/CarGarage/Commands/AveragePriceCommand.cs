@@ -7,7 +7,7 @@ namespace CarGarage.Commands
     {
         public void Execute()
         {
-            System.Console.WriteLine(Garage.GetAveragePrice());
+            System.Console.WriteLine(Garage.GetGarage().GetAveragePrice());
         }
     }
 }

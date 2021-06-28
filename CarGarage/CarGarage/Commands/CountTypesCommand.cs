@@ -7,7 +7,7 @@ namespace CarGarage.Commands
     {
         public void Execute()
         {
-            System.Console.WriteLine(Garage.GetCountTypes());
+            System.Console.WriteLine(Garage.GetGarage().GetCountTypes());
         }
     }
 }

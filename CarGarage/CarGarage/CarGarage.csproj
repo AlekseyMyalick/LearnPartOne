@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Basic\Car.cs" />
     <Compile Include="Basic\Garage.cs" />
+    <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\AveragePriceCommand.cs" />
     <Compile Include="Commands\AveragePriceTypeCommand.cs" />
     <Compile Include="Commands\CountAllCommand.cs" />

@@ -7,7 +7,7 @@ namespace CarGarage.Commands
     {
         public void Execute()
         {
-            System.Console.WriteLine(Garage.GetCountAll());
+            System.Console.WriteLine(Garage.GetGarage().GetCountAll());
         }
     }
 }
