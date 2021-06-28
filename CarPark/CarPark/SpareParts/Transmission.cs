@@ -63,11 +63,25 @@ namespace CarPark
                 return false;
             }
 
-            var transmission = obj as Transmission;
+            Transmission transmission = obj as Transmission;
+
+            if (transmission == null)
+            {
+                return false;
+            }
 
             return Type == transmission.Type &&
                 GearsNumber == transmission.GearsNumber &&
                 Manufacturer == transmission.Manufacturer;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return (int)Type + GearsNumber + (int)Manufacturer;
         }
     }
 }

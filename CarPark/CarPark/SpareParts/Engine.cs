@@ -70,7 +70,12 @@ namespace CarPark
                 return false;
             }
 
-            var engine = obj as Engine;
+            Engine engine = obj as Engine;
+
+            if (engine == null)
+            {
+                return false;
+            }
 
             return Power.CompareTo(engine.Power) == 0 &&
                 Volume.CompareTo(engine.Volume) == 0 &&
