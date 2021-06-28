@@ -76,11 +76,26 @@ namespace CarPark
                 return false;
             }
 
-            var vehicle = obj as Vehicle;
+            Vehicle vehicle = obj as Vehicle;
+
+            if (vehicle == null)
+            {
+                return false;
+            }
 
             return VehicleEngine.Equals(vehicle.VehicleEngine) &&
                 VehicleChassis.Equals(vehicle.VehicleChassis) &&
                 VehicleTransmission.Equals(vehicle.VehicleTransmission);
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return VehicleEngine.GetHashCode() + VehicleChassis.GetHashCode() +
+                VehicleTransmission.GetHashCode();
         }
 
         /// <summary>
@@ -90,16 +105,6 @@ namespace CarPark
         protected bool IsValidVehicle()
         {
             return !(VehicleEngine is null || VehicleChassis is null || VehicleTransmission is null); 
-        }
-
-        /// <summary>
-        /// Returns the hash code for this instance.
-        /// </summary>
-        /// <returns>The hash code as a 32-bit signed integer.</returns>
-        public override int GetHashCode()
-        {
-            return VehicleEngine.GetHashCode() + VehicleChassis.GetHashCode() + 
-                VehicleTransmission.GetHashCode();
         }
     }
 }

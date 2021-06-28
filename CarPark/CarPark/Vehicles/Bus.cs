@@ -64,10 +64,24 @@ namespace CarPark
                 return false;
             }
 
-            var bus = obj as Bus;
+            Bus bus = obj as Bus;
+
+            if (bus == null)
+            {
+                return false;
+            }
 
             return base.Equals(bus) &&
                 SeatsCount == bus.SeatsCount;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + SeatsCount;
         }
 
         /// <summary>
