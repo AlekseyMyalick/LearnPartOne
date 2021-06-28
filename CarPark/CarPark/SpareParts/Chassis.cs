@@ -85,11 +85,38 @@ namespace CarPark
                 return false;
             }
 
-            var chassis = obj as Chassis;
+            Chassis chassis = obj as Chassis;
+
+            if (chassis == null)
+            {
+                return false;
+            }
 
             return WheelsCount == chassis.WheelsCount &&
                 SerialNumber == chassis.SerialNumber &&
                 PermissibleLoad.CompareTo(chassis.PermissibleLoad) == 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified object instances are considered equal.
+        /// </summary>
+        /// <param name="objA">The first of the compared objects.</param>
+        /// <param name="objB">The second of the compared objects.</param>
+        /// <returns>true if the specified objects are equal; otherwise, false,
+        /// if both objA and objB are null, the method returns true.</returns>
+        public static bool Equals(object objA, object objB)
+        {
+            if (objA == objB)
+            {
+                return true;
+            }
+
+            if (objA == null || objB == null)
+            {
+                return false;
+            }
+
+            return objA.Equals(objB);
         }
     }
 }
