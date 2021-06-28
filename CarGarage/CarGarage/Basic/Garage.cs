@@ -43,7 +43,7 @@ namespace CarGarage.Basic
         /// Adds an instance of the Car class.
         /// </summary>
         /// <param name="car">An instance of the Car class.</param>
-        public static void Add(Car car)
+        public void Add(Car car)
         {
             _carGarage.Add(car);
         }
@@ -52,16 +52,16 @@ namespace CarGarage.Basic
         /// Counts the number of all cars in the garage.
         /// </summary>
         /// <returns>The number of all cars.</returns>
-        public static int GetCountAll()
+        public int GetCountAll()
         {
-            return _carGarage.Select(c => c.Number).Sum();
+            return _carGarage.Sum(c => c.Number);
         }
 
         /// <summary>
         /// Counts the number of car brands in the garage.
         /// </summary>
         /// <returns>Number of car brands.</returns>
-        public static int GetCountTypes()
+        public int GetCountTypes()
         {
             return _carGarage.GroupBy(c => c.Brand).Count();
         }
@@ -70,9 +70,9 @@ namespace CarGarage.Basic
         /// Calculates the average cost of a car in the garage.
         /// </summary>
         /// <returns>The average cost of the car.</returns>
-        public static decimal GetAveragePrice()
+        public decimal GetAveragePrice()
         {
-            return _carGarage.Select(c => c.OnesCost * c.Number).Sum() / GetCountAll();
+            return _carGarage.Sum(c => c.OnesCost * c.Number) / GetCountAll();
         }
 
         /// <summary>
@@ -80,10 +80,11 @@ namespace CarGarage.Basic
         /// </summary>
         /// <param name="brand">Car brand.</param>
         /// <returns>Average cost of cars of each brand.</returns>
-        public static decimal GetAveragePriceType(string brand)
+        public decimal GetAveragePriceType(string brand)
         {
-            return _carGarage.Where(c => c.Brand == brand).Select(c => c.OnesCost * c.Number).Sum()
-                / _carGarage.Where(c => c.Brand == brand).Select(c => c.Number).Sum();
+            var brendCars = _carGarage.GroupBy(c => c.Brand).Where(g => g.Key == brand).SelectMany(g => g);
+
+            return brendCars.Sum(c => c.OnesCost * c.Number) / brendCars.Sum(c => c.Number);
         }
     }
 }
