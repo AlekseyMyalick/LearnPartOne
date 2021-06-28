@@ -59,10 +59,24 @@ namespace CarPark
                 return false;
             }
 
-            var scooter = obj as Scooter;
+            Scooter scooter = obj as Scooter;
+
+            if (scooter == null)
+            {
+                return false;
+            }
 
             return base.Equals(scooter) &&
                 IsSidecar == scooter.IsSidecar;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + (IsSidecar ? 1 : 0);
         }
 
         /// <summary>
