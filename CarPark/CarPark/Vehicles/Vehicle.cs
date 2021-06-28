@@ -91,5 +91,15 @@ namespace CarPark
         {
             return !(VehicleEngine is null || VehicleChassis is null || VehicleTransmission is null); 
         }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return VehicleEngine.GetHashCode() + VehicleChassis.GetHashCode() + 
+                VehicleTransmission.GetHashCode();
+        }
     }
 }
