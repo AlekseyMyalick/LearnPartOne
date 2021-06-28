@@ -46,7 +46,7 @@ namespace CarPark
                 
                 CarManager carManager = new CarManager(vehicles);
 
-                Serializer<Vehicle>.Serialize("EngineDisplacementGreaterThan.xml", carManager.EngineDisplacementGreaterThan(1.5d));
+                Serializer<Vehicle>.Serialize("EngineDisplacementGreaterThan.xml", carManager.GetEngineDisplacementGreaterThan(1.5d));
                 Serializer<VehicleModel>.Serialize("BusAndTruckEngines.xml", carManager.GetBusAndTruckEngines());
                 Serializer<Vehicle>.Serialize("GroupedByTransmission.xml", carManager.GetGroupedByTransmission());
             }
