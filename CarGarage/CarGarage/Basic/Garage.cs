@@ -82,6 +82,11 @@ namespace CarGarage.Basic
         /// <returns>Average cost of cars of each brand.</returns>
         public decimal GetAveragePriceType(string brand)
         {
+            if (_carGarage.Count(c => c.Brand == brand) == 0)
+            {
+                return 0;
+            }
+
             var brendCars = _carGarage.GroupBy(c => c.Brand).Where(g => g.Key == brand).SelectMany(g => g);
 
             return brendCars.Sum(c => c.OnesCost * c.Number) / brendCars.Sum(c => c.Number);

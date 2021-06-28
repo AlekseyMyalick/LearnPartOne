@@ -8,6 +8,11 @@ namespace CarGarage.Invokers
 
         public void ExecuteCommand(ICommand command)
         {
+            if (command == null)
+            {
+                return;
+            }
+
             _command = command;
 
             this._command.Execute();

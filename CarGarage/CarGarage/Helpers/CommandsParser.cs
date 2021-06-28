@@ -1,5 +1,5 @@
 ﻿using System;
-using CarGarage.Invokers;
+using CarGarage.Interfaces;
 using CarGarage.Basic;
 using CarGarage.Commands;
 
@@ -15,103 +15,137 @@ namespace CarGarage.Helpers
         /// </summary>
         private static readonly string messageMissingCommand = "There is no such command.";
 
-        private Invoker _invoker;
-
         /// <summary>
-        /// Initializes the fields of an instance of the class.
-        /// </summary>
-        /// <param name="invoker">Invoker.</param>
-        public CommandsParser(Invoker invoker)
-        {
-            _invoker = invoker;
-        }
-
-        /// <summary>
-        /// Call the method depending on the entered request.
+        /// Returns the command depending on the entered request.
         /// </summary>
         /// <param name="args">Command.</param>
-        public void CommandExecute(string[] args)
+        /// <returns>An object of type ICommand.</returns>
+        public ICommand GetCommand(string[] args)
         {
+            ICommand command;
+
             switch (args[0])
             {
                 case "add":
-                    AddCommandExecute(args);
+                    command = GetAddCommand(args);
                     break;
                 case "count":
-                    CountCommandsExecute(args);
+                    command = GetCountCommand(args);
                     break;
                 case "average":
-                    AverageCommandsExecute(args);
+                    command = GetAverageCommand(args);
                     break;
                 case "exit":
-                    _invoker.ExecuteCommand(new ExitCommand());
+                    command = new ExitCommand();
                     break;
                 default:
-                    Console.WriteLine(messageMissingCommand);
+                    command = null;
                     break;
             }
+
+            if (command == null)
+            {
+                PrintMessageMissingCommand();
+            }
+
+            return command;
         }
 
         /// <summary>
-        /// Calls commands wich first word is "count".
+        /// Returns the command wich first word is "count".
         /// </summary>
         /// <param name="args">Command.</param>
-        private void CountCommandsExecute(string[] args)
+        /// <returns>An object of type ICommand.</returns>
+        private ICommand GetCountCommand(string[] args)
         {
+            if (args.Length != 2)
+            {
+                return null;
+            }
+
             switch (args[1])
             {
                 case "types":
-                    _invoker.ExecuteCommand(new CountTypesCommand());
-                    break;
+                    return new CountTypesCommand();
                 case "all":
-                    _invoker.ExecuteCommand(new CountAllCommand());
-                    break;
+                    return new CountAllCommand();
                 default:
-                    Console.WriteLine(messageMissingCommand);
-                    break;
+                    return null;
             }
         }
 
         /// <summary>
-        /// Calls commands which first word is "average".
+        /// Returns the command which first word is "average".
         /// </summary>
         /// <param name="args">Command.</param>
-        private void AverageCommandsExecute(string[] args)
+        /// <returns>An object of type ICommand.</returns>
+        private ICommand GetAverageCommand(string[] args)
         {
+            if (args.Length == 1)
+            {
+                return null;
+            }
+
             switch (args[1])
             {
                 case "price":
-                    AveragePriceCommandsExecute(args);
-                    break;
+                    return GetAveragePriceCommand(args);
                 default:
-                    Console.WriteLine(messageMissingCommand);
-                    break;
+                    return null;
             }
         }
 
         /// <summary>
-        /// Calls commands whose first word is "average", depending on the arguments passed.
+        /// Returns the command which first word is "average", depending on the arguments passed.
         /// </summary>
         /// <param name="args">Command.</param>
-        private void AveragePriceCommandsExecute(string[] args)
+        /// <returns>An object of type ICommand.</returns>
+        private ICommand GetAveragePriceCommand(string[] args)
         {
-            if (args.Length > 2)
+            switch (args.Length)
             {
-                _invoker.ExecuteCommand(new AveragePriceTypeCommand(args[2]));
-            }
-            else
-            {
-                _invoker.ExecuteCommand(new AveragePriceCommand());
+                case 2:
+                    return new AveragePriceCommand();
+                case 3:
+                    return new AveragePriceTypeCommand(args[2]);
+                default:
+                    return null;
             }
         }
 
         /// <summary>
-        /// Calls the command the first word of which is "add".
+        /// Returns the command the first word of which is "add".
         /// </summary>
         /// <param name="args">Command.</param>
-        private void AddCommandExecute(string[] args)
+        /// <returns>An object of type ICommand.</returns>
+        private ICommand GetAddCommand(string[] args)
         {
-            Garage.Add(new Car(args[1], args[2], int.Parse(args[3]), decimal.Parse(args[4])));
+            if (args.Length != 5)
+            {
+                return null;
+            }
+
+            if (!int.TryParse(args[3], out int number))
+            {
+                return null;
+            }
+
+            if (!decimal.TryParse(args[4], out decimal oneCost))
+            {
+                return null;
+            }
+
+            Car car = new Car(args[1], args[2], number, oneCost);
+
+            return new AddCommand(car);
+        }
+
+        /// <summary>
+        /// Prints a message about the absence of a command.
+        /// </summary>
+        private void PrintMessageMissingCommand()
+        {
+            Console.WriteLine(messageMissingCommand);
         }
     }
 }

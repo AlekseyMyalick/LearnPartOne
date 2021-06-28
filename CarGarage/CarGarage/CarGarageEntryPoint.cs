@@ -1,5 +1,5 @@
 ﻿using System;
-using CarGarage.Basic;
+using CarGarage.Interfaces;
 using CarGarage.Invokers;
 using CarGarage.Helpers;
 
@@ -9,17 +9,16 @@ namespace CarGarage
     {
         static void Main(string[] args)
         {
-            Garage garage = Garage.GetGarage();
-
             Invoker invoker = new Invoker();
 
-            CommandsParser commandsParser = new CommandsParser(invoker);
+            CommandsParser commandsParser = new CommandsParser();
             string commandLine;
 
             while (true)
             {
                 commandLine =  Console.ReadLine();
-                commandsParser.CommandExecute(commandLine.Split(' '));
+                ICommand command = commandsParser.GetCommand(commandLine.Split(' '));
+                invoker.ExecuteCommand(command);
             }
         }
     }
