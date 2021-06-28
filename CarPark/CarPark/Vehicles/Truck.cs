@@ -69,10 +69,24 @@ namespace CarPark
                 return false;
             }
 
-            var truck = obj as Truck;
+            Truck truck = obj as Truck;
+
+            if (truck == null)
+            {
+                return false;
+            }
 
             return base.Equals(truck) &&
                 MaxSpeed == truck.MaxSpeed;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + (int)MaxSpeed;
         }
 
         /// <summary>
