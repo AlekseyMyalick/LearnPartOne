@@ -66,5 +66,18 @@ namespace MailRuModel.Pages
 
             return this;
         }
+
+        /// <summary>
+        /// Presses the button sending the password.
+        /// </summary>
+        /// <returns>Home page.</returns>
+        public HomePage SubmitPassword()
+        {
+            Waiter.WaitElementExists(By.XPath(_loginButtonXpath));
+
+            Driver.FindElement(By.XPath(_loginButtonXpath)).Submit();
+
+            return new HomePage(Driver);
+        }
     }
 }
