@@ -8,6 +8,7 @@ namespace MailRuModel.Pages
     /// </summary>
     public class HomePage : BasePage
     {
+        private readonly string _writeLetterButton = "//span[text()='Написать письмо']";
         private readonly string _driverTitle = "Входящие";
 
         /// <summary>
@@ -20,6 +21,19 @@ namespace MailRuModel.Pages
             {
                 throw new InvalidElementStateException("This is not the login page");
             }
-        } 
+        }
+
+        /// <summary>
+        /// Opens the page for writing a letter.
+        /// </summary>
+        /// <returns>Write letter page.</returns>
+        public WriteLetterPage OpenWriteLetterPage()
+        {
+            Waiter.WaitElementExists(By.XPath(_writeLetterButton));
+
+            Driver.FindElement(By.XPath(_writeLetterButton)).Submit();
+
+            return new WriteLetterPage(Driver);
+        }
     }
 }
