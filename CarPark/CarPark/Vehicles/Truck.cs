@@ -1,4 +1,5 @@
 ﻿using System;
+using CarPark.Exceptions;
 
 namespace CarPark
 {
@@ -11,29 +12,17 @@ namespace CarPark
         /// <summary>
         /// Maximum speed, measured in kilohm meters per hour.
         /// </summary>
-        private double _maxSpeed;
+        private const double _maxSpeed = 200;
+
+        /// <summary>
+        /// Minimum speed, measured in kilohm meters per hour.
+        /// </summary>
+        private const double _minSpeed = 0;
 
         /// <summary>
         /// Represents the maximum speed, measured in kilometers per hour.
         /// </summary>
-        public double MaxSpeed
-        {
-            get
-            {
-                return _maxSpeed;
-            }
-            set
-            {
-                if (_maxSpeed < 0)
-                {
-                    throw new ArgumentOutOfRangeException("The maximum speed cannot be less than zero.");
-                }
-                else
-                {
-                    _maxSpeed = value;
-                }
-            }
-        }
+        public double MaxSpeed { get; set; }
 
         /// <summary>
         /// Parameterless constructor.
@@ -51,6 +40,11 @@ namespace CarPark
             : base(engine, chassis, transmission)
         {
             MaxSpeed = maxSpeed;
+
+            if (!IsValidTruck())
+            {
+                throw new InitializationException("Unable to initialize the Truck.");
+            }
         }
 
         /// <summary>
@@ -60,6 +54,48 @@ namespace CarPark
         public override string ToString()
         {
             return base.ToString() + $"Max speed: {MaxSpeed}\n";
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Truck and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Truck truck = obj as Truck;
+
+            if (truck == null)
+            {
+                return false;
+            }
+
+            return base.Equals(truck) &&
+                MaxSpeed == truck.MaxSpeed;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + (int)MaxSpeed;
+        }
+
+        /// <summary>
+        /// Whether the field values of the class object are valid.
+        /// </summary>
+        /// <returns>True if the values are valid, otherwise false.</returns>
+        private bool IsValidTruck()
+        {
+            return IsValidVehicle() && MaxSpeed > _minSpeed && MaxSpeed <= _maxSpeed;
         }
     }
 }

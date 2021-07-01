@@ -59,7 +59,7 @@ namespace CarParkTests
         public void EngineDisplacementGreaterThan_ReturnTrue()
         {
             List<Vehicle> expected = new List<Vehicle>() {_passengerCar, _truck, _bus, _truck1 };
-            Assert.IsTrue(_carManager.EngineDisplacementGreaterThan(1.5d).Except(expected).Count() == 0);
+            Assert.IsTrue(_carManager.GetEngineDisplacementGreaterThan(1.5d).Except(expected).Count() == 0);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace CarParkTests
                 new VehicleModel(_truck1.VehicleEngine.Type, _truck1.VehicleEngine.SerialNumber, _truck1.VehicleEngine.Power)
             };
 
-            Assert.IsTrue(_carManager.BusAndTruckEngines().Except(expected).Count() == 0);
+            Assert.IsTrue(_carManager.GetBusAndTruckEngines().Except(expected).Count() == 0);
         }
     }
 }

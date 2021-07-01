@@ -1,4 +1,5 @@
 ﻿using System;
+using CarPark.Exceptions;
 
 namespace CarPark
 {
@@ -29,6 +30,11 @@ namespace CarPark
             : base(engine, chassis, transmission)
         {
             IsSidecar = isSidecar;
+
+            if (!IsValidScooter())
+            {
+                throw new InitializationException("Unable to initialize the Scooter.");
+            }
         }
 
         /// <summary>
@@ -38,6 +44,48 @@ namespace CarPark
         public override string ToString()
         {
             return base.ToString() + $"Is sidecar: {IsSidecar}\n";
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Scooter and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Scooter scooter = obj as Scooter;
+
+            if (scooter == null)
+            {
+                return false;
+            }
+
+            return base.Equals(scooter) &&
+                IsSidecar == scooter.IsSidecar;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + (IsSidecar ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Whether the field values of the class object are valid.
+        /// </summary>
+        /// <returns>True if the values are valid, otherwise false.</returns>
+        private bool IsValidScooter()
+        {
+            return IsValidVehicle();
         }
     }
 }

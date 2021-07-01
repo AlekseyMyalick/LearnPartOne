@@ -13,6 +13,8 @@ namespace CarPark
     [Serializable]
     public abstract class Vehicle
     {
+        private static int _id = 1;
+
         /// <summary>
         /// Represents the engine.
         /// </summary>
@@ -27,6 +29,11 @@ namespace CarPark
         /// Represents the transmission.
         /// </summary>
         public Transmission VehicleTransmission { get; set; }
+
+        /// <summary>
+        /// Represents ID.
+        /// </summary>
+        public int Id { get; protected set; }
 
         /// <summary>
         /// Parameterless constructor.
@@ -44,6 +51,7 @@ namespace CarPark
             VehicleEngine = engine;
             VehicleChassis = chassis;
             VehicleTransmission = transmission;
+            Id = _id++;
         }
 
         /// <summary>
@@ -53,6 +61,50 @@ namespace CarPark
         public override string ToString()
         {
             return $"Engine:\n{VehicleEngine}\nChassis:\n{VehicleChassis}\nTransmission:\n{VehicleTransmission}\n";
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Vehicle and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Vehicle vehicle = obj as Vehicle;
+
+            if (vehicle == null)
+            {
+                return false;
+            }
+
+            return VehicleEngine.Equals(vehicle.VehicleEngine) &&
+                VehicleChassis.Equals(vehicle.VehicleChassis) &&
+                VehicleTransmission.Equals(vehicle.VehicleTransmission);
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return VehicleEngine.GetHashCode() + VehicleChassis.GetHashCode() +
+                VehicleTransmission.GetHashCode();
+        }
+
+        /// <summary>
+        /// Whether the field values of the class object are valid.
+        /// </summary>
+        /// <returns>True if the values are valid, otherwise false.</returns>
+        protected bool IsValidVehicle()
+        {
+            return !(VehicleEngine is null || VehicleChassis is null || VehicleTransmission is null); 
         }
     }
 }

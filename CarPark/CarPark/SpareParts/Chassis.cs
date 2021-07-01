@@ -71,5 +71,39 @@ namespace CarPark
         {
             return $"Wheels count: {WheelsCount} \nSerial number: {SerialNumber} \nPermissible load: {PermissibleLoad} tons \n";
         }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the given instance.</param>
+        /// <returns>True if obj is an instance of type Chassis and is equal 
+        /// to the value of this instance; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Chassis chassis = obj as Chassis;
+
+            if (chassis == null)
+            {
+                return false;
+            }
+
+            return WheelsCount == chassis.WheelsCount &&
+                SerialNumber == chassis.SerialNumber &&
+                PermissibleLoad.CompareTo(chassis.PermissibleLoad) == 0;
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code as a 32-bit signed integer.</returns>
+        public override int GetHashCode()
+        {
+            return WheelsCount + (int)PermissibleLoad + SerialNumber.Length;
+        }
     }
 }
