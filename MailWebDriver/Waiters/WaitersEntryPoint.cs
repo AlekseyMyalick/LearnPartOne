@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Waiters
 {
-    class Program
+    class WaitersEntryPoint
     {
         static void Main(string[] args)
         {
