@@ -52,5 +52,19 @@ namespace MailRuModel.Pages
 
             return this;
         }
+
+        /// <summary>
+        /// Enters password.
+        /// </summary>
+        /// <param name="password">Password for input.</param>
+        /// <returns>The same page with the entered password.</returns>
+        public LoginPage TypePassword(string password)
+        {
+            Waiter.WaitElementExists(By.XPath(_passwordXpath));
+
+            Driver.FindElement(By.XPath(_passwordXpath)).SendKeys(password);
+
+            return this;
+        }
     }
 }
