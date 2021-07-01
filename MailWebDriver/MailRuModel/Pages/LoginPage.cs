@@ -39,5 +39,18 @@ namespace MailRuModel.Pages
 
             return this;
         }
+
+        /// <summary>
+        /// Presses the button sending the login.
+        /// </summary>
+        /// <returns>The same page with an empty password field.</returns>
+        public LoginPage SubmitLogin()
+        {
+            Waiter.WaitElementExists(By.XPath(_enterPasswordButtonXpath));
+
+            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+
+            return this;
+        }
     }
 }
