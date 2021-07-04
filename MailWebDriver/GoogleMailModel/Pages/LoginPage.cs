@@ -76,5 +76,18 @@ namespace GoogleMailModel.Pages
 
             return new HomePage(Driver);
         }
+
+        /// <summary>
+        /// Presses the button sending the password.
+        /// </summary>
+        /// <returns>Invalid username or password expected.</returns>
+        public LoginPage SubmitPasswordExpectingFailure()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
+
+            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+
+            return new LoginPage(Driver);
+        }
     }
 }
