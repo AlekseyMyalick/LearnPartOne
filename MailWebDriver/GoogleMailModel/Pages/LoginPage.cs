@@ -20,6 +20,18 @@ namespace GoogleMailModel.Pages
             Waiter.WaitTitleContains(_driverTitle);
         }
 
-        
+        /// <summary>
+        /// Enters username.
+        /// </summary>
+        /// <param name="username">Username for input.</param>
+        /// <returns>The same page with the entered login.</returns>
+        public LoginPage TypeUsername(string username)
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_usernameXpath));
+
+            Driver.FindElement(By.XPath(_usernameXpath)).SendKeys(username);
+
+            return this;
+        }
     }
 }
