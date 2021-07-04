@@ -24,10 +24,20 @@ namespace Waiters
         /// Waits for the element to appear.
         /// </summary>
         /// <param name="webElementLocator">Web element locator.</param>
-        public static void WaitElementExists(By webElementLocator)
+        public static void WaitElementIsVisible(By webElementLocator)
         {
             new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
-                Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(webElementLocator));
+                Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(webElementLocator));
+        }
+
+        /// <summary>
+        /// An expectation for checking the title of a page.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        public static void WaitTitleContains(string title)
+        {
+            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
+                Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TitleContains(title));
         }
     }
 }
