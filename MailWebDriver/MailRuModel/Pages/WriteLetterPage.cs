@@ -79,5 +79,20 @@ namespace MailRuModel.Pages
 
             return new HomePage(Driver);
         }
+
+        /// <summary>
+        /// Sends a letter to the specified sender with the specified content.
+        /// </summary>
+        /// <param name="receiver">Receiver.</param>
+        /// <param name="letterText">Text of the letter.</param>
+        /// <returns>Home page.</returns>
+        public HomePage WriteLetter(string receiver, string letterText)
+        {
+            TypeReceiver(receiver);
+            TypeLetter(letterText);
+            SubmitLetter();
+
+            return CloseLayerWindow();
+        }
     }
 }
