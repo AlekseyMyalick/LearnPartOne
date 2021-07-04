@@ -89,5 +89,20 @@ namespace GoogleMailModel.Pages
 
             return new LoginPage(Driver);
         }
+
+        /// <summary>
+        /// Performs authorization.
+        /// </summary>
+        /// <param name="username">Username for input.</param>
+        /// <param name="password">Password for input.</param>
+        /// <returns>Home page.</returns>
+        public HomePage LoginAs(string username, string password)
+        {
+            TypeUsername(username);
+            SubmitLogin();
+            TypePassword(password);
+
+            return SubmitPassword();
+        }
     }
 }
