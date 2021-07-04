@@ -13,6 +13,8 @@ namespace MailRuModel.Pages
         private readonly string _receiverXpath = "//div[text()='Кому']/ancestor::div[contains(@class, 'head_container')]//input";
         private readonly string _sendLetterButton = "//span[text()='Отправить']";
         private readonly string _letterXpath = "//br/parent::div";
+        private readonly string _layerWindowXpath = "//div[contains(@class, 'layer-window__container')]";
+        private readonly string _closeLayerWindowButtonXpath = "//div[@class='layer__controls']/span";
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -54,7 +56,7 @@ namespace MailRuModel.Pages
         /// <summary>
         /// Presses the send letter button.
         /// </summary>
-        /// <returns>Home page.</returns>
+        /// <returns>The same page with a layered window.</returns>
         public WriteLetterPage SubmitLetter()
         {
             Waiter.WaitElementIsVisible(By.XPath(_sendLetterButton));
@@ -62,6 +64,20 @@ namespace MailRuModel.Pages
             Driver.FindElement(By.XPath(_sendLetterButton)).Click();
 
             return this;
+        }
+
+        /// <summary>
+        /// Presses the close layer window button.
+        /// </summary>
+        /// <returns>Home page.</returns>
+        public HomePage CloseLayerWindow()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_layerWindowXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_closeLayerWindowButtonXpath));
+
+            Driver.FindElement(By.XPath(_closeLayerWindowButtonXpath)).Click();
+
+            return new HomePage(Driver);
         }
     }
 }
