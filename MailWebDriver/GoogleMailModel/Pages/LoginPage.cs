@@ -9,6 +9,7 @@ namespace GoogleMailModel.Pages
     public class LoginPage : BasePage
     {
         private readonly string _usernameXpath = "//input[@type='email']";
+        private readonly string _enterPasswordButtonXpath = "//span[text()='Далее']";
         private readonly string _loginButtonXpath = "//span[text()='Далее']";
         private readonly string _passwordXpath = "//input[@type='password']";
         private readonly string _driverTitle = "Вход";
@@ -61,6 +62,19 @@ namespace GoogleMailModel.Pages
             Driver.FindElement(By.XPath(_passwordXpath)).SendKeys(password);
 
             return this;
+        }
+
+        /// <summary>
+        /// Presses the button sending the password.
+        /// </summary>
+        /// <returns>Home page.</returns>
+        public HomePage SubmitPassword()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
+
+            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+
+            return new HomePage(Driver);
         }
     }
 }
