@@ -16,6 +16,7 @@ namespace MailRuModel.Pages
         private readonly string _emptyUsernameErrorText = "Поле «Имя аккаунта» должно быть заполнено";
         private readonly string _emptyPasswordErrorText = "Поле «Пароль» должно быть заполнено";
         private readonly string _accountNotExistErrorText = "Такой аккаунт не зарегистрирован";
+        private readonly string _invalidPasswordErrorText = "Неверный пароль, попробуйте ещё раз";
         private readonly string _driverTitle = "Авторизация";
 
         /// <summary>
@@ -136,6 +137,17 @@ namespace MailRuModel.Pages
         {
             return IsErrorMessageDisplayed()
                 || IsExpectedErrorMessage(_accountNotExistErrorText);
+        }
+
+        /// <summary>
+        /// Checks if an error is displayed when you enter a
+        /// invalid password and if the error text is the same.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsInvalidPasswordError()
+        {
+            return IsErrorMessageDisplayed()
+                || IsExpectedErrorMessage(_invalidPasswordErrorText);
         }
 
         /// <summary>
