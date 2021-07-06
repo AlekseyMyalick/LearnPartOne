@@ -17,6 +17,14 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public HomePage(IWebDriver driver) : base(driver)
         {
+            WaitPageLoading();
+        }
+
+        /// <summary>
+        /// Waiting for the home page to load.
+        /// </summary>
+        public override void WaitPageLoading()
+        {
             Waiter.WaitTitleContains(_driverTitle);
         }
 
