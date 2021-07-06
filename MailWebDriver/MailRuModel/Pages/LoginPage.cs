@@ -13,6 +13,7 @@ namespace MailRuModel.Pages
         private readonly string _passwordXpath = "//input[@name='password']";
         private readonly string _loginButtonXpath = "//span[text()='Войти']";
         private readonly string _errorMessageXpath = "//div[contains(@data-test-id,'error')]/small";
+        private readonly string _emptyUsernameErrorText = "Поле «Имя аккаунта» должно быть заполнено";
         private readonly string _driverTitle = "Авторизация";
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace MailRuModel.Pages
         /// an invalid username or password is entered.
         /// </summary>
         /// <returns>True if the element is displayed, false otherwise.</returns>
-        public bool IsErrorMessageDisplayed()
+        private bool IsErrorMessageDisplayed()
         {
             Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
 
@@ -80,7 +81,7 @@ namespace MailRuModel.Pages
         /// Returns the text of the error message.
         /// </summary>
         /// <returns>Error message text.</returns>
-        public string GetActualErrorMessageText()
+        private string GetActualErrorMessageText()
         {
             Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
 
@@ -94,9 +95,21 @@ namespace MailRuModel.Pages
         /// of the error message.</param>
         /// <returns>true if the expected value is equal 
         /// to the actual value, otherwise false.</returns>
-        public bool IsExpectedErrorMessage(string expectedErrorMessageText)
+        private bool IsExpectedErrorMessage(string expectedErrorMessageText)
         {
             return expectedErrorMessageText == GetActualErrorMessageText();
+        }
+
+        /// <summary>
+        /// Checks if an error is displayed when you enter an empty 
+        /// username and if the error text is the same.
+        /// </summary>
+        /// <returns>true if the error message is displayed 
+        /// and the error text matches, otherwise false.</returns>
+        public bool IsEmptyUsernameError()
+        {
+            return IsErrorMessageDisplayed() 
+                || IsExpectedErrorMessage(_emptyUsernameErrorText);
         }
 
         /// <summary>
