@@ -5,6 +5,7 @@ using MailRuModel.Pages;
 
 namespace MailWebDriverTests
 {
+    [TestFixture]
     public class LoginMailRuTests
     {
         private readonly string _driverPath = @"D:\ChromDriver";
@@ -22,7 +23,13 @@ namespace MailWebDriverTests
         [Test]
         public void SubmitLoginExpectingFailure_EmptyUsername_ReturnNewLoginPage()
         {
-            Assert.Pass();
+            LoginPage loginPage = CreateDefaultLoginPge();
+            loginPage.TypeUsername(string.Empty);
+            loginPage.SubmitLoginExpectingFailure();
+
+            string actual = _driver.Title;
+
+            Assert.AreEqual("Авторизация", actual);
         }
 
         private LoginPage CreateDefaultLoginPge()
