@@ -80,11 +80,23 @@ namespace MailRuModel.Pages
         /// Returns the text of the error message.
         /// </summary>
         /// <returns>Error message text.</returns>
-        public string GetErrorMessageText()
+        public string GetActualErrorMessageText()
         {
             Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
 
             return Driver.FindElement(By.XPath(_errorMessageXpath)).Text;
+        }
+
+        /// <summary>
+        /// Compares the expected and actual error message text.
+        /// </summary>
+        /// <param name="expectedErrorMessageText">The expected text 
+        /// of the error message.</param>
+        /// <returns>true if the expected value is equal 
+        /// to the actual value, otherwise false.</returns>
+        public bool IsExpectedErrorMessage(string expectedErrorMessageText)
+        {
+            return expectedErrorMessageText == GetActualErrorMessageText();
         }
 
         /// <summary>
