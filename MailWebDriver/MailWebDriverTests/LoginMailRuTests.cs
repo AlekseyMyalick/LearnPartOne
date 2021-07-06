@@ -8,6 +8,7 @@ namespace MailWebDriverTests
     [TestFixture]
     public class LoginMailRuTests
     {
+        private readonly string _loginPageTitle = "Авторизация";
         private readonly string _driverPath = @"D:\ChromDriver";
         private readonly string _loginPagePath = "https://account.mail.ru/login?page=https%3A%2F%2Fe.mail.ru%2Fmessages%2Finbox%3Futm_source%3Dportal%26utm_medium%3Dportal_navigation%26utm_campaign%3De.mail.ru&allow_external=1&from=octavius";
         private IWebDriver _driver;
@@ -29,7 +30,21 @@ namespace MailWebDriverTests
 
             string actual = _driver.Title;
 
-            Assert.AreEqual("Авторизация", actual);
+            Assert.AreEqual(_loginPageTitle, actual);
+        }
+
+        [Test]
+        public void SubmitPasswordExpectingFailure_EmptyPassword_ReturnNewLoginPage()
+        {
+            LoginPage loginPage = CreateDefaultLoginPge();
+            loginPage.TypeUsername("test_username@mail.ru");
+            loginPage.SubmitLogin();
+            loginPage.TypePassword(string.Empty);
+            loginPage.SubmitPasswordExpectingFailure();
+
+            string actual = _driver.Title;
+
+            Assert.AreEqual(_loginPageTitle, actual);
         }
 
         [TearDown]
