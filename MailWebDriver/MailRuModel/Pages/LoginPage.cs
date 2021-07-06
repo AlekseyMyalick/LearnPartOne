@@ -13,6 +13,7 @@ namespace MailRuModel.Pages
         private readonly string _emptyUsernameErrorXpath = "//div[contains(@data-test-id,'error')]/small";
         private readonly string _passwordXpath = "//input[@name='password']";
         private readonly string _loginButtonXpath = "//span[text()='Войти']";
+        private readonly string _emptyPasswordErrorXpath = "//div[contains(@data-test-id,'error')]/small";
         private readonly string _driverTitle = "Авторизация";
 
         /// <summary>
@@ -113,6 +114,17 @@ namespace MailRuModel.Pages
             Driver.FindElement(By.XPath(_loginButtonXpath)).Submit();
 
             return new LoginPage(Driver);
+        }
+
+        /// <summary>
+        /// Checks the appearance of an element when an empty password is entered.
+        /// </summary>
+        /// <returns>True if the element is displayed, false otherwise.</returns>
+        public bool IsEmptyPasswordErrorDisplayed()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_emptyPasswordErrorXpath));
+
+            return Driver.FindElement(By.XPath(_emptyPasswordErrorXpath)).Displayed;
         }
 
         /// <summary>
