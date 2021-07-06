@@ -9,10 +9,13 @@ namespace CarGarage.Basic
     public class Garage
     {
         /// <summary>
-        /// Instance of the class.
+        /// Instance of the Garage class.
         /// </summary>
         private static Garage _garage;
 
+        /// <summary>
+        /// A list of instances of the Car class.
+        /// </summary>
         private static List<Car> _carGarage;
 
         /// <summary>

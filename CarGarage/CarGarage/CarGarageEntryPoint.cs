@@ -2,6 +2,7 @@
 using CarGarage.Interfaces;
 using CarGarage.Invokers;
 using CarGarage.Helpers;
+using CarGarage.Basic;
 
 namespace CarGarage
 {
@@ -18,7 +19,7 @@ namespace CarGarage
             {
                 commandLine =  Console.ReadLine();
                 ICommand command = commandsParser.GetCommand(commandLine.Split(' '));
-                invoker.ExecuteCommand(command);
+                invoker.ExecuteCommand(command, Garage.GetGarage());
             }
         }
     }

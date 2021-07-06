@@ -1,13 +1,21 @@
-﻿using CarGarage.Interfaces;
+﻿using System;
+using CarGarage.Interfaces;
 using CarGarage.Basic;
 
 namespace CarGarage.Commands
 {
+    /// <summary>
+    /// Represents the method that executes the CountTypes command.
+    /// </summary>
     public class CountTypesCommand : ICommand
     {
-        public void Execute()
+        /// <summary>
+        /// Executes the CountTypes command.
+        /// </summary>
+        /// <param name="garage">Database for command execution.</param>
+        public void Execute(Garage garage)
         {
-            System.Console.WriteLine(Garage.GetGarage().GetCountTypes());
+            Console.WriteLine(garage.GetCountTypes());
         }
     }
 }
