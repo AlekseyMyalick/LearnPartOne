@@ -45,7 +45,7 @@ namespace GoogleMailModel.Pages
         {
             Waiter.WaitElementIsVisible(By.XPath(_loginButtonXpath));
 
-            Driver.FindElement(By.XPath(_loginButtonXpath)).Submit();
+            Driver.FindElement(By.XPath(_loginButtonXpath)).Click();
 
             return this;
         }
@@ -72,7 +72,7 @@ namespace GoogleMailModel.Pages
         {
             Waiter.WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
 
-            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Click();
 
             return new HomePage(Driver);
         }
@@ -85,7 +85,7 @@ namespace GoogleMailModel.Pages
         {
             Waiter.WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
 
-            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Click();
 
             return new LoginPage(Driver);
         }

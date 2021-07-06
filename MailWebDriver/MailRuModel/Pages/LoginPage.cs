@@ -20,10 +20,7 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
-            if (!_driverTitle.Equals(driver.Title))
-            {
-                throw new InvalidElementStateException("This is not the login page");
-            }
+            Waiter.WaitTitleContains(_driverTitle);
         }
 
         /// <summary>
@@ -33,7 +30,7 @@ namespace MailRuModel.Pages
         /// <returns>The same page with the entered login.</returns>
         public LoginPage TypeUsername(string username)
         {
-            Waiter.WaitElementExists(By.XPath(_usernameXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_usernameXpath));
 
             Driver.FindElement(By.XPath(_usernameXpath)).SendKeys(username);
 
@@ -46,7 +43,7 @@ namespace MailRuModel.Pages
         /// <returns>The same page with an empty password field.</returns>
         public LoginPage SubmitLogin()
         {
-            Waiter.WaitElementExists(By.XPath(_enterPasswordButtonXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
 
             Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
 
@@ -60,7 +57,7 @@ namespace MailRuModel.Pages
         /// <returns>The same page with the entered password.</returns>
         public LoginPage TypePassword(string password)
         {
-            Waiter.WaitElementExists(By.XPath(_passwordXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_passwordXpath));
 
             Driver.FindElement(By.XPath(_passwordXpath)).SendKeys(password);
 
@@ -73,7 +70,7 @@ namespace MailRuModel.Pages
         /// <returns>Home page.</returns>
         public HomePage SubmitPassword()
         {
-            Waiter.WaitElementExists(By.XPath(_loginButtonXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_loginButtonXpath));
 
             Driver.FindElement(By.XPath(_loginButtonXpath)).Submit();
 
@@ -86,7 +83,7 @@ namespace MailRuModel.Pages
         /// <returns>Invalid username or password expected.</returns>
         public LoginPage SubmitPasswordExpectingFailure()
         {
-            Waiter.WaitElementExists(By.XPath(_loginButtonXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_loginButtonXpath));
 
             Driver.FindElement(By.XPath(_loginButtonXpath)).Submit();
 
@@ -104,7 +101,6 @@ namespace MailRuModel.Pages
             TypeUsername(username);
             SubmitLogin();
             TypePassword(password);
-            SubmitPassword();
 
             return SubmitPassword();
         }

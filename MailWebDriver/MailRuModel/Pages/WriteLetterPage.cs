@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Threading;
 using Waiters;
 
 namespace MailRuModel.Pages

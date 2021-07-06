@@ -6,7 +6,7 @@ namespace MailRuModel.Pages
     /// <summary>
     /// Represents a class whose methods are common to all web pages.
     /// </summary>
-    public class BasePage
+    abstract public class BasePage
     {
         /// <summary>
         /// Get or Set driver.
@@ -17,12 +17,12 @@ namespace MailRuModel.Pages
         /// Initializes the fields of the class 
         /// and sets the time to wait for events.
         /// </summary>
-        /// <param name="driver"></param>
+        /// <param name="driver">Driver.</param>
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
             Waiter.Driver = Driver;
-            Waiter.WaitTime = 5000;
+            Waiter.WaitTime = 10000;
         }
     }
 }
