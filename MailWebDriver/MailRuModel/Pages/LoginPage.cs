@@ -14,6 +14,7 @@ namespace MailRuModel.Pages
         private readonly string _loginButtonXpath = "//span[text()='Войти']";
         private readonly string _errorMessageXpath = "//div[contains(@data-test-id,'error')]/small";
         private readonly string _emptyUsernameErrorText = "Поле «Имя аккаунта» должно быть заполнено";
+        private readonly string _emptyPasswordErrorText = "Поле «Пароль» должно быть заполнено";
         private readonly string _driverTitle = "Авторизация";
 
         /// <summary>
@@ -110,6 +111,18 @@ namespace MailRuModel.Pages
         {
             return IsErrorMessageDisplayed() 
                 || IsExpectedErrorMessage(_emptyUsernameErrorText);
+        }
+
+        /// <summary>
+        /// Checks if an error is displayed when you enter an empty 
+        /// password and if the error text is the same.
+        /// </summary>
+        /// <returns>true if the error message is displayed 
+        /// and the error text matches, otherwise false.</returns>
+        public bool IsEmptyPasswordError()
+        {
+            return IsErrorMessageDisplayed()
+                || IsExpectedErrorMessage(_emptyPasswordErrorText);
         }
 
         /// <summary>
