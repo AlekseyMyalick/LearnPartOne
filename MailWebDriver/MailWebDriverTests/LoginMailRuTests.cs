@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
+using MailRuModel.Pages;
 
 namespace MailWebDriverTests
 {
@@ -22,6 +23,11 @@ namespace MailWebDriverTests
         public void SubmitLoginExpectingFailure_EmptyUsername_ReturnNewLoginPage()
         {
             Assert.Pass();
+        }
+
+        private LoginPage CreateDefaultLoginPge()
+        {
+            return new LoginPage(_driver);
         }
     }
 }
