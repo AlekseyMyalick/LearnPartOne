@@ -10,10 +10,9 @@ namespace MailRuModel.Pages
     {
         private readonly string _usernameXpath = "//input[@name='username']";
         private readonly string _enterPasswordButtonXpath = "//span[text()='Ввести пароль']";
-        private readonly string _emptyUsernameErrorXpath = "//div[contains(@data-test-id,'error')]/small";
         private readonly string _passwordXpath = "//input[@name='password']";
         private readonly string _loginButtonXpath = "//span[text()='Войти']";
-        private readonly string _emptyPasswordErrorXpath = "//div[contains(@data-test-id,'error')]/small";
+        private readonly string _errorMessageXpath = "//div[contains(@data-test-id,'error')]/small";
         private readonly string _driverTitle = "Авторизация";
 
         /// <summary>
@@ -66,14 +65,26 @@ namespace MailRuModel.Pages
         }
 
         /// <summary>
-        /// Checks the appearance of an element when an empty username is entered.
+        /// Checks the appearance of an element when
+        /// an invalid username or password is entered.
         /// </summary>
         /// <returns>True if the element is displayed, false otherwise.</returns>
-        public bool IsEmptyUsernameErrorDisplayed()
+        public bool IsErrorMessageDisplayed()
         {
-            Waiter.WaitElementIsVisible(By.XPath(_emptyUsernameErrorXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
 
-            return Driver.FindElement(By.XPath(_emptyUsernameErrorXpath)).Displayed;
+            return Driver.FindElement(By.XPath(_errorMessageXpath)).Displayed;
+        }
+
+        /// <summary>
+        /// Returns the text of the error message.
+        /// </summary>
+        /// <returns>Error message text.</returns>
+        public string GetErrorMessageText()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
+
+            return Driver.FindElement(By.XPath(_errorMessageXpath)).Text;
         }
 
         /// <summary>
@@ -114,17 +125,6 @@ namespace MailRuModel.Pages
             Driver.FindElement(By.XPath(_loginButtonXpath)).Submit();
 
             return new LoginPage(Driver);
-        }
-
-        /// <summary>
-        /// Checks the appearance of an element when an empty password is entered.
-        /// </summary>
-        /// <returns>True if the element is displayed, false otherwise.</returns>
-        public bool IsEmptyPasswordErrorDisplayed()
-        {
-            Waiter.WaitElementIsVisible(By.XPath(_emptyPasswordErrorXpath));
-
-            return Driver.FindElement(By.XPath(_emptyPasswordErrorXpath)).Displayed;
         }
 
         /// <summary>
