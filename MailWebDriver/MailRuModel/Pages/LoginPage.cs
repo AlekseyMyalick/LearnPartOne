@@ -51,6 +51,19 @@ namespace MailRuModel.Pages
         }
 
         /// <summary>
+        /// Presses the button sending the login.
+        /// </summary>
+        /// <returns>New LoginPage.</returns>
+        public LoginPage SubmitLoginExpectingFailure()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
+
+            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+
+            return new LoginPage(Driver);
+        }
+
+        /// <summary>
         /// Enters password.
         /// </summary>
         /// <param name="password">Password for input.</param>
@@ -80,7 +93,7 @@ namespace MailRuModel.Pages
         /// <summary>
         /// Presses the button sending the password.
         /// </summary>
-        /// <returns>Invalid username or password expected.</returns>
+        /// <returns>New LoginPage.</returns>
         public LoginPage SubmitPasswordExpectingFailure()
         {
             Waiter.WaitElementIsVisible(By.XPath(_loginButtonXpath));
