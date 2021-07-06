@@ -58,6 +58,20 @@ namespace MailWebDriverTests
             Assert.IsTrue(condition);
         }
 
+        [Test]
+        public void SubmitPassword_InvalidPassword_ReturnNewLoginPage()
+        {
+            LoginPage loginPage = CreateDefaultLoginPge();
+            loginPage.TypeUsername("mail_ru.test@mail.ru");
+            loginPage.SubmitLogin();
+            loginPage.TypePassword("invalid password");
+            loginPage.SubmitPasswordExpectingFailure();
+
+            bool condition = loginPage.IsInvalidPasswordError();
+
+            Assert.IsTrue(condition);
+        }
+
         [TearDown]
         public void DriverQuit()
         {
