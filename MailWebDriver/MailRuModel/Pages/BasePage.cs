@@ -24,5 +24,12 @@ namespace MailRuModel.Pages
             Waiter.Driver = Driver;
             Waiter.WaitTime = 10000;
         }
+
+        /// <summary>
+        /// Checks if the current page matches the expected one.
+        /// </summary>
+        /// <returns>True if the open page is as expected,
+        /// false otherwise.</returns>
+        public abstract bool IsOpened();
     }
 }
