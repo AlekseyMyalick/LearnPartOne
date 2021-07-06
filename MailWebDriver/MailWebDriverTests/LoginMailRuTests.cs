@@ -8,7 +8,6 @@ namespace MailWebDriverTests
     [TestFixture]
     public class LoginMailRuTests
     {
-        private readonly string _loginPageTitle = "Авторизация";
         private readonly string _driverPath = @"D:\ChromDriver";
         private readonly string _loginPagePath = "https://account.mail.ru/login?page=https%3A%2F%2Fe.mail.ru%2Fmessages%2Finbox%3Futm_source%3Dportal%26utm_medium%3Dportal_navigation%26utm_campaign%3De.mail.ru&allow_external=1&from=octavius";
         private IWebDriver _driver;
@@ -22,29 +21,41 @@ namespace MailWebDriverTests
         }
 
         [Test]
-        public void SubmitLoginExpectingFailure_EmptyUsername_ReturnNewLoginPage()
+        public void SubmitLogin_EmptyUsername_ReturnNewLoginPage()
         {
             LoginPage loginPage = CreateDefaultLoginPge();
             loginPage.TypeUsername(string.Empty);
             loginPage.SubmitLoginExpectingFailure();
 
-            string actual = _driver.Title;
+            bool condition = loginPage.IsEmptyUsernameError();
 
-            Assert.AreEqual(_loginPageTitle, actual);
+            Assert.IsTrue(condition);
         }
 
         [Test]
-        public void SubmitPasswordExpectingFailure_EmptyPassword_ReturnNewLoginPage()
+        public void SubmitLogin_AccountNotExist_ReturnNewLoginPage()
         {
             LoginPage loginPage = CreateDefaultLoginPge();
-            loginPage.TypeUsername("test_username@mail.ru");
+            loginPage.TypeUsername("svggcs@mail.ru");
+            loginPage.SubmitLoginExpectingFailure();
+
+            bool condition = loginPage.IsAccountNotExistError();
+
+            Assert.IsTrue(condition);
+        }
+
+        [Test]
+        public void SubmitPassword_EmptyPassword_ReturnNewLoginPage()
+        {
+            LoginPage loginPage = CreateDefaultLoginPge();
+            loginPage.TypeUsername("mail_ru.test@mail.ru");
             loginPage.SubmitLogin();
             loginPage.TypePassword(string.Empty);
             loginPage.SubmitPasswordExpectingFailure();
 
-            string actual = _driver.Title;
+            bool condition = loginPage.IsEmptyPasswordError();
 
-            Assert.AreEqual(_loginPageTitle, actual);
+            Assert.IsTrue(condition);
         }
 
         [TearDown]
