@@ -32,6 +32,12 @@ namespace MailWebDriverTests
             Assert.AreEqual("Авторизация", actual);
         }
 
+        [TearDown]
+        public void DriverQuit()
+        {
+            _driver.Quit();
+        }
+
         private LoginPage CreateDefaultLoginPge()
         {
             return new LoginPage(_driver);
