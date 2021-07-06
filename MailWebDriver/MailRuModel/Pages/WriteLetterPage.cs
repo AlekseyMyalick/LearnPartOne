@@ -21,6 +21,14 @@ namespace MailRuModel.Pages
         /// <param name="driver"></param>
         public WriteLetterPage(IWebDriver driver) : base(driver)
         {
+            WaitPageLoading();
+        }
+
+        /// <summary>
+        /// Waiting for the write letter page to load.
+        /// </summary>
+        public override void WaitPageLoading()
+        {
             Waiter.WaitElementIsVisible(By.XPath(_writeLetterWindowXpath));
         }
 
