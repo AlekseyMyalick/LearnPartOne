@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using Waiters;
 
 namespace MailRuModel.Pages
@@ -24,6 +25,11 @@ namespace MailRuModel.Pages
         /// </summary>
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver)
+        {
+            WaitPageLoading();
+        }
+
+        public override void WaitPageLoading()
         {
             Waiter.WaitTitleContains(_driverTitle);
         }
