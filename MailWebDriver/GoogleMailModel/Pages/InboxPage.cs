@@ -7,7 +7,8 @@ namespace GoogleMailModel.Pages
     public class InboxPage : BasePage
     {
         private readonly string _lastIncomingLetter = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
-        private readonly string _lastLetterSender = "//span[@name]";
+        private readonly string _lastLetterSenderName = "//span[@name]";
+        private readonly string _lastLetterSenderEmail = "//span[@email]";
         private readonly string _fontWeightCssPropertyName = "font-weight";
         private readonly int _boldFontWeight = 700;
         private readonly string _driverTitle = "Входящие";
@@ -37,23 +38,38 @@ namespace GoogleMailModel.Pages
         {
             Waiter.WaitElementIsVisible(By.XPath(_lastIncomingLetter));
 
-            string fontWeight = Driver.FindElement(By.XPath(_lastIncomingLetter + _lastLetterSender))
+            string fontWeight = Driver.FindElement(By
+                .XPath(_lastIncomingLetter + _lastLetterSenderName))
                 .GetCssValue(_fontWeightCssPropertyName);
 
             return int.Parse(fontWeight) == _boldFontWeight;
         }
 
         /// <summary>
-        /// Opens the last email that arrived.
+        /// Opens the last letter that arrived.
         /// </summary>
-        /// <returns>Incoming letter page.</returns>
-        public IncomingLetterPage OpenLastIncomingLetter()
+        public void OpenLastIncomingLetter()
         {
             Waiter.WaitElementIsVisible(By.XPath(_lastIncomingLetter));
 
             Driver.FindElement(By.XPath(_lastIncomingLetter)).Click();
+        }
 
-            return new IncomingLetterPage(Driver);
+        /// <summary>
+        /// Checks if the current sender matches the expected one.
+        /// </summary>
+        /// <param name="expectedSender">Expected sender.</param>
+        /// <returns>True, if the expected sender matches the current one,
+        /// otherwise it is false.</returns>
+        public bool IsExpectedSender(string expectedSender)
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_lastIncomingLetter));
+
+            string actualSender = Driver.FindElement(By
+                .XPath(_lastIncomingLetter + _lastLetterSenderEmail))
+                .Text;
+
+            return expectedSender == actualSender;
         }
     }
 }
