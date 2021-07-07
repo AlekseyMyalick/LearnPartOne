@@ -24,5 +24,10 @@ namespace GoogleMailModel.Pages
             Waiter.Driver = Driver;
             Waiter.WaitTime = 10000;
         }
+
+        /// <summary>
+        /// Waiting for the page to load.
+        /// </summary>
+        public abstract void PageLoading();
     }
 }
