@@ -8,7 +8,8 @@ namespace GoogleMailModel.Pages
 {
     public class InboxPage : BasePage
     {
-        private readonly string _lettersXpath = "//table[@id=':23']//tbody/child::tr";
+        private readonly string _lettersXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr";
+        private readonly string _lastIncomingLetter = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
         private readonly string _driverTitle = "Входящие";
 
         /// <summary>
@@ -29,14 +30,16 @@ namespace GoogleMailModel.Pages
         }
 
         /// <summary>
-        /// Returns a collection of all incoming emails.
+        /// Opens the last email that arrived.
         /// </summary>
-        /// <returns>The IWebElement collection.</returns>
-        public List<IWebElement> GetLetters()
+        /// <returns>Incoming letter page.</returns>
+        public IncomingLetterPage OpenLastIncomingLetter()
         {
-            Waiter.WaitElementIsVisible(By.XPath(_lettersXpath));
+            Waiter.WaitElementIsVisible(By.XPath(_lastIncomingLetter));
 
-            return Driver.FindElements(By.XPath(_lettersXpath)).ToList();
+            Driver.FindElement(By.XPath(_lastIncomingLetter)).Click();
+
+            return new IncomingLetterPage(Driver);
         }
     }
 }
