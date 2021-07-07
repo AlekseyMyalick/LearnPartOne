@@ -7,6 +7,7 @@ namespace GoogleMailModel.Pages
     public class InboxPage : BasePage
     {
         private readonly string _lastIncomingLetter = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
+        private readonly string _replyButton = "//span[@role='link'][text()='Ответить']";
         private readonly string _lastLetterSenderName = "//span[@name]";
         private readonly string _lastLetterSenderEmail = "//span[@email]";
         private readonly string _fontWeightCssPropertyName = "font-weight";
@@ -48,11 +49,14 @@ namespace GoogleMailModel.Pages
         /// <summary>
         /// Opens the last letter that arrived.
         /// </summary>
-        public void OpenLastIncomingLetter()
+        /// <returns>Inbox page.</returns>
+        public InboxPage OpenLastIncomingLetter()
         {
             Waiter.WaitElementIsVisible(By.XPath(_lastIncomingLetter));
 
             Driver.FindElement(By.XPath(_lastIncomingLetter)).Click();
+
+            return this;
         }
 
         /// <summary>
@@ -70,6 +74,19 @@ namespace GoogleMailModel.Pages
                 .Text;
 
             return expectedSender == actualSender;
+        }
+
+        /// <summary>
+        /// Opens a page for responding to a letter.
+        /// </summary>
+        /// <returns>Inbox page.</returns>
+        public InboxPage OpenReplyWindow()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_replyButton));
+
+            Driver.FindElement(By.XPath(_replyButton)).Click();
+
+            return this;
         }
     }
 }
