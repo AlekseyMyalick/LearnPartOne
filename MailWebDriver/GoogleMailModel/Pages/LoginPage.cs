@@ -20,6 +20,14 @@ namespace GoogleMailModel.Pages
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
+            PageLoading();
+        }
+
+        /// <summary>
+        /// Waiting for the login page to load.
+        /// </summary>
+        public override void PageLoading()
+        {
             Waiter.WaitTitleContains(_driverTitle);
         }
 
