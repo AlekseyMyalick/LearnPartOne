@@ -7,6 +7,7 @@ namespace GoogleMailModel.Pages
     public class InboxPage : BasePage
     {
         private readonly string _lastIncomingLetter = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
+        private readonly string _showHiddenPartButton = "//div[@data-tooltip='Показать скрытую часть']";
         private readonly string _replyButton = "//span[@role='link'][text()='Ответить']";
         private readonly string _lastLetterSenderName = "//span[@name]";
         private readonly string _lastLetterSenderEmail = "//span[@email]";
@@ -85,6 +86,19 @@ namespace GoogleMailModel.Pages
             Waiter.WaitElementIsVisible(By.XPath(_replyButton));
 
             Driver.FindElement(By.XPath(_replyButton)).Click();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Opens a hidden part of the message reply window.
+        /// </summary>
+        /// <returns>Inbox page.</returns>
+        public InboxPage OpenHiddenPartReplyWindow()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_showHiddenPartButton));
+
+            Driver.FindElement(By.XPath(_showHiddenPartButton)).Click();
 
             return this;
         }
