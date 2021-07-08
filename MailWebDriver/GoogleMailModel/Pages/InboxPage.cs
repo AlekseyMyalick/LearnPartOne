@@ -8,7 +8,10 @@ namespace GoogleMailModel.Pages
     {
         private readonly string _lastIncomingLetterXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
         private readonly string _showHiddenPartButtonXpath = "//div[@data-tooltip='Показать скрытую часть']";
-        private readonly string _replyLetterBoxXpath = "//div[@aria-label='Тело письма']/div/br";
+        private readonly string _replyLetterBoxXpath = "//div[@aria-label='Тело письма']/div[2]";
+        //private readonly string _senderAliasXpath = "//blockquote//br/parent::div/text()[2]";
+        private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
+        //private readonly string _senderAliasXpath = "//div[@class='gmail_quote']//div[text()='--']";
         private readonly string _replyButtonXpath = "//span[@role='link'][text()='Ответить']";
         private readonly string _lastLetterSenderNameXpath = "//span[@name]";
         private readonly string _lastLetterSenderEmailXpath = "//span[@email]";
@@ -118,5 +121,40 @@ namespace GoogleMailModel.Pages
             return this;
         }
 
+        public InboxPage ChangeAlias(string newAlias)
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_senderAliasXpath));
+
+            RemoveOldAlias(_senderAliasXpath);
+
+            Driver.FindElement(By.XPath(_senderAliasXpath)).SendKeys(newAlias);
+
+            return this;
+        }
+
+        private void RemoveOldAlias(string senderAliasXpath)
+        {
+            IWebElement element = Driver.FindElement(By.XPath(senderAliasXpath));
+            element.Click();
+
+            string aliae = element.Text;
+
+            for (int i = 0; i < aliae.Length - 4; i++)
+            {
+                element.SendKeys(Keys.Backspace);
+            }
+        }
+
+        /// <summary>
+        /// Replies to the last received message.
+        /// </summary>
+        /// <param name="responseText">Text to reply to a letter.</param>
+        /// <param name="newAlias">The new sender's alias.</param>
+        public void ReplyToLastLetter(string responseText, string newAlias)
+        {
+            OpenLastIncomingLetter();
+            OpenReplyWindow();
+            EnterReply(responseText);
+        }
     }
 }
