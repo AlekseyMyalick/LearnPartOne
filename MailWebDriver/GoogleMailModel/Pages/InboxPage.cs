@@ -160,7 +160,7 @@ namespace GoogleMailModel.Pages
         /// Presses the button to send a response.
         /// </summary>
         /// <returns>Inbox page.</returns>
-        public InboxPage sendReplyButton()
+        public InboxPage SendReply()
         {
             Waiter.WaitElementIsVisible(By.XPath(_sendReplyButton));
 
@@ -169,6 +169,19 @@ namespace GoogleMailModel.Pages
             return this;
         }
 
+        /// <summary>
+        /// Replies to the last received message.
+        /// </summary>
+        /// <param name="responseText">Text to reply to a letter.</param>
+        /// <param name="newAlias">The new sender's alias.</param>
+        public InboxPage ReplyToLastLetter(string responseText, string newAlias)
+        {
+            OpenLastIncomingLetter();
+            OpenReplyWindow();
+            EnterReply(responseText);
+            ChangeAlias(newAlias);
 
+            return SendReply();
+        }
     }
 }
