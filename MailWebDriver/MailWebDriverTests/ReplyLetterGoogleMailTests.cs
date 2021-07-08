@@ -27,6 +27,22 @@ namespace MailWebDriverTests
             MailRuModel.Pages.HomePage homePage = loginPage.LoginAs(_emailMailRu, _passwordMailRu);
             MailRuModel.Pages.WriteLetterPage writeLetterPage = homePage.OpenWriteLetterPage();
             writeLetterPage.WriteLetter(_emailGoogle, _lettersText);
+            _driver.Quit();
+        }
+
+        [Test]
+        public void IsNotReadedLastIncomingLetter_CorrectLetter_ReturnTrue()
+        {
+            _driver = new ChromeDriver(_driverPath);
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl(_googleMailLoginPagePath);
+            GoogleMailModel.Pages.LoginPage loginPage = new GoogleMailModel.Pages.LoginPage(_driver);
+            GoogleMailModel.Pages.HomePage homePage = loginPage.LoginAs(_emailGoogle, _passwordGoogle);
+            GoogleMailModel.Pages.InboxPage inboxPage = homePage.OpenInboxPage();
+
+            bool condition = inboxPage.IsNotReadedLastIncomingLetter();
+
+            Assert.IsTrue(condition);
         }
 
         [TearDown]
