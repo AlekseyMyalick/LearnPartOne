@@ -9,9 +9,8 @@ namespace GoogleMailModel.Pages
         private readonly string _lastIncomingLetterXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
         private readonly string _showHiddenPartButtonXpath = "//div[@data-tooltip='Показать скрытую часть']";
         private readonly string _replyLetterBoxXpath = "//div[@aria-label='Тело письма']/div[2]";
-        //private readonly string _senderAliasXpath = "//blockquote//br/parent::div/text()[2]";
         private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
-        //private readonly string _senderAliasXpath = "//div[@class='gmail_quote']//div[text()='--']";
+        private readonly string _sendReplyButton = "//div[text()='Отправить']";
         private readonly string _replyButtonXpath = "//span[@role='link'][text()='Ответить']";
         private readonly string _lastLetterSenderNameXpath = "//span[@name]";
         private readonly string _lastLetterSenderEmailXpath = "//span[@email]";
@@ -121,6 +120,11 @@ namespace GoogleMailModel.Pages
             return this;
         }
 
+        /// <summary>
+        /// Changes the old alias to the new one.
+        /// </summary>
+        /// <param name="newAlias"></param>
+        /// <returns>inbox page.</returns>
         public InboxPage ChangeAlias(string newAlias)
         {
             Waiter.WaitElementIsVisible(By.XPath(_senderAliasXpath));
@@ -132,7 +136,12 @@ namespace GoogleMailModel.Pages
             return this;
         }
 
-        private void RemoveOldAlias(string senderAliasXpath)
+        /// <summary>
+        /// Removes the old alias.
+        /// </summary>
+        /// <param name="senderAliasXpath">The path to the old alias.</param>
+        /// <returns>Inbox page.</returns>
+        private InboxPage RemoveOldAlias(string senderAliasXpath)
         {
             IWebElement element = Driver.FindElement(By.XPath(senderAliasXpath));
             element.Click();
@@ -143,8 +152,23 @@ namespace GoogleMailModel.Pages
             {
                 element.SendKeys(Keys.Backspace);
             }
+
+            return this;
         }
 
-       
+        /// <summary>
+        /// Presses the button to send a response.
+        /// </summary>
+        /// <returns>Inbox page.</returns>
+        public InboxPage sendReplyButton()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_sendReplyButton));
+
+            Driver.FindElement(By.XPath(_sendReplyButton)).Click();
+
+            return this;
+        }
+
+
     }
 }
