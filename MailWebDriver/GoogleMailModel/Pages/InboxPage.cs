@@ -145,16 +145,6 @@ namespace GoogleMailModel.Pages
             }
         }
 
-        /// <summary>
-        /// Replies to the last received message.
-        /// </summary>
-        /// <param name="responseText">Text to reply to a letter.</param>
-        /// <param name="newAlias">The new sender's alias.</param>
-        public void ReplyToLastLetter(string responseText, string newAlias)
-        {
-            OpenLastIncomingLetter();
-            OpenReplyWindow();
-            EnterReply(responseText);
-        }
+       
     }
 }
