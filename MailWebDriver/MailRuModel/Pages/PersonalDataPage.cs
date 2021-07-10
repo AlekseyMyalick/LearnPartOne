@@ -7,6 +7,7 @@ namespace MailRuModel.Pages
     {
         private readonly string _nicknameFieldXpath = "//input[@id='nickname']";
         private readonly string _nicknameAttribut = "value";
+        private readonly string _saveButtonXpath= "//span[text()='Сохранить']";
         private readonly string _driverTitle = "Личные данные";
 
         /// <summary>
@@ -52,6 +53,19 @@ namespace MailRuModel.Pages
             IWebElement webElement = Driver.FindElement(By.XPath(_nicknameFieldXpath));
             webElement.Clear();
             webElement.SendKeys(nickname);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Presses the save button.
+        /// </summary>
+        /// <returns>Personal data page.</returns>
+        public PersonalDataPage SaveChanges()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_saveButtonXpath));
+
+            Driver.FindElement(By.XPath(_saveButtonXpath)).Click();
 
             return this;
         }
