@@ -68,5 +68,16 @@ namespace MailRuModel.Pages
 
             return new PersonalDataPage(Driver);
         }
+
+        /// <summary>
+        /// Opens a personal data page.
+        /// </summary>
+        /// <returns>Personal data page.</returns>
+        public PersonalDataPage OpenPersonalDataPage()
+        {
+            OpenSidebar();
+
+            return SelectPersonalDataSection();
+        }
     }
 }
