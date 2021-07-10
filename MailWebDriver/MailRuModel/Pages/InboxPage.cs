@@ -7,7 +7,9 @@ namespace MailRuModel.Pages
     {
         private readonly string _lastIncomingLetterXpath = "//a[contains(@class, 'letter-list')][1]";
         private readonly string _showHiddenPartButtonXpath = "//div[@class='letter__body']//span[contains(@class, 'wrapper')][1]";
+        private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
         private readonly string _driverTitle = "Входящие";
+        private readonly int _separatingCharactersNumber = 4; 
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -50,6 +52,20 @@ namespace MailRuModel.Pages
             Driver.FindElement(By.XPath(_showHiddenPartButtonXpath)).Click();
 
             return this;
+        }
+
+        /// <summary>
+        /// Returns the alias from the received response.
+        /// </summary>
+        /// <returns>Alias.</returns>
+        public string GetAliasFromReply()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_senderAliasXpath));
+
+            string alias = Driver.FindElement(By.XPath(_senderAliasXpath))
+                .Text;
+
+            return alias.Remove(0, _separatingCharactersNumber);
         }
     }
 }
