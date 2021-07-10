@@ -3,8 +3,10 @@ using Waiters;
 
 namespace MailRuModel.Pages
 {
-    class PersonalDataPage : BasePage
+    public class PersonalDataPage : BasePage
     {
+        private readonly string _nicknameFieldXpath = "//input[@id='nickname']";
+        private readonly string _nicknameAttribud = "value";
         private readonly string _driverTitle = "Личные данные";
 
         /// <summary>
@@ -22,6 +24,20 @@ namespace MailRuModel.Pages
         public override void PageLoading()
         {
             Waiter.WaitTitleContains(_driverTitle);
+        }
+
+        /// <summary>
+        /// Returns nickname.
+        /// </summary>
+        /// <returns>Nickname</returns>
+        public string GetNickname()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_nicknameFieldXpath));
+
+            string nickname = Driver.FindElement(By.XPath(_nicknameFieldXpath))
+                .GetAttribute(_nicknameAttribud);
+
+            return nickname;
         }
     }
 }
