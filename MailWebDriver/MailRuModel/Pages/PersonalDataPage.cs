@@ -69,5 +69,17 @@ namespace MailRuModel.Pages
 
             return this;
         }
+
+        /// <summary>
+        /// Changes the old nickname to a new one.
+        /// </summary>
+        /// <param name="nickname">New nickname.</param>
+        /// <returns>Personal data page.</returns>
+        public PersonalDataPage ChangeNickname(string nickname)
+        {
+            InputNickname(nickname);
+
+            return SaveChanges();
+        }
     }
 }
