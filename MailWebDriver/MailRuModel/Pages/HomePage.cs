@@ -9,6 +9,7 @@ namespace MailRuModel.Pages
     public class HomePage : BasePage
     {
         private readonly string _openSidebarButtonXpath = "//div[contains(@class, 'auth svelte')]//span[contains(@class, 'dropdown')]";
+        private readonly string _inboxButtonXpath = "//div[text()='Входящие']";
         private readonly string _personalDataSectionXpath = "//div[text()='Личные данные']/parent::a";
         private readonly string _writeLetterButton = "//span[text()='Написать письмо']";
         private readonly string _driverTitle = "Почта Mail.ru";
@@ -78,6 +79,19 @@ namespace MailRuModel.Pages
             OpenSidebar();
 
             return SelectPersonalDataSection();
+        }
+
+        /// <summary>
+        /// Opens an incoming mail window.
+        /// </summary>
+        /// <returns>Inbox page.</returns>
+        public InboxPage OpenInboxPahe()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_inboxButtonXpath));
+
+            Driver.FindElement(By.XPath(_inboxButtonXpath)).Click();
+
+            return new InboxPage(Driver);
         }
     }
 }
