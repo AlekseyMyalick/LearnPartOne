@@ -8,6 +8,7 @@ namespace MailRuModel.Pages
     /// </summary>
     public class HomePage : BasePage
     {
+        private readonly string _openSidebarButtonXpath = "//div[contains(@class, 'auth svelte')]//span[contains(@class, 'dropdown')]";
         private readonly string _writeLetterButton = "//span[text()='Написать письмо']";
         private readonly string _driverTitle = "Почта Mail.ru";
 
@@ -17,13 +18,13 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public HomePage(IWebDriver driver) : base(driver)
         {
-            WaitPageLoading();
+            PageLoading();
         }
 
         /// <summary>
         /// Waiting for the home page to load.
         /// </summary>
-        public override void WaitPageLoading()
+        public override void PageLoading()
         {
             Waiter.WaitTitleContains(_driverTitle);
         }
@@ -39,6 +40,19 @@ namespace MailRuModel.Pages
             Driver.FindElement(By.XPath(_writeLetterButton)).Click();
 
             return new WriteLetterPage(Driver);
+        }
+
+        /// <summary>
+        /// Opens the side panel.
+        /// </summary>
+        /// <returns>Home page.</returns>
+        public HomePage OpenSidebar()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_openSidebarButtonXpath));
+
+            Driver.FindElement(By.XPath(_openSidebarButtonXpath)).Click();
+
+            return this;
         }
     }
 }
