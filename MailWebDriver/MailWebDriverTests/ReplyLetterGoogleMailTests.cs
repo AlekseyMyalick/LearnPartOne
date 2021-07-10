@@ -60,6 +60,22 @@ namespace MailWebDriverTests
             Assert.IsTrue(condition);
         }
 
+        [Test]
+        public void IsExpectedLetterText_CorrectLetter_ReturnTrue()
+        {
+            _driver = new ChromeDriver(_driverPath);
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl(_googleMailLoginPagePath);
+            GoogleMailModel.Pages.LoginPage loginPage = new GoogleMailModel.Pages.LoginPage(_driver);
+            GoogleMailModel.Pages.HomePage homePage = loginPage.LoginAs(_emailGoogle, _passwordGoogle);
+            GoogleMailModel.Pages.InboxPage inboxPage = homePage.OpenInboxPage();
+
+            bool condition = inboxPage.IsExpectedLetterText(_lettersText);
+
+            Assert.IsTrue(condition);
+        }
+
+
         [TearDown]
         public void DriverQuit()
         {
