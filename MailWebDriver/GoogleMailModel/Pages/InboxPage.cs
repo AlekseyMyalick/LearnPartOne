@@ -7,6 +7,7 @@ namespace GoogleMailModel.Pages
     public class InboxPage : BasePage
     {
         private readonly string _lastIncomingLetterXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
+        private readonly string _letterTextXpath = "//div[@class='gs']//div[@id=':bf']/div[2]/div[1]";
         private readonly string _showHiddenPartButtonXpath = "//div[@data-tooltip='Показать скрытую часть']";
         private readonly string _replyLetterBoxXpath = "//div[@aria-label='Тело письма']/div[2]";
         private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
@@ -75,9 +76,25 @@ namespace GoogleMailModel.Pages
 
             string actualSender = Driver.FindElement(By
                 .XPath(_lastIncomingLetterXpath + _lastLetterSenderEmailXpath))
+                .GetAttribute("email");
+
+            return actualSender == expectedSender;
+        }
+
+        /// <summary>
+        /// Compares the text of the received email with the expected one.
+        /// </summary>
+        /// <param name="expectedLetterText">Expected letter text.</param>
+        /// <returns>True, if the text matches, otherwise it is false.</returns>
+        public bool IsExpectedLetterText(string expectedLetterText)
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_letterTextXpath));
+
+            string actualLetterText = Driver.FindElement(By
+                .XPath(_letterTextXpath))
                 .Text;
 
-            return expectedSender == actualSender;
+            return actualLetterText == expectedLetterText;
         }
 
         /// <summary>
@@ -178,6 +195,7 @@ namespace GoogleMailModel.Pages
         {
             OpenLastIncomingLetter();
             OpenReplyWindow();
+            OpenHiddenPartReplyWindow();
             EnterReply(responseText);
             ChangeAlias(newAlias);
 
