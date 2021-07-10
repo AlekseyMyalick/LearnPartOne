@@ -67,5 +67,17 @@ namespace MailRuModel.Pages
 
             return alias.Remove(0, _separatingCharactersNumber);
         }
+
+        /// <summary>
+        /// Returns the alias from the last email response.
+        /// </summary>
+        /// <returns>Alias.</returns>
+        public string GetAliasFromReplyLastLetter()
+        {
+            OpenLastIncomingLetter();
+            OpenHiddenPartReplyWindow();
+
+            return GetAliasFromReply();
+        }
     }
 }
