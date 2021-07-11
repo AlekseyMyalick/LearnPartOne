@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using Waiters;
 
 namespace MailRuModel.Pages
@@ -14,10 +13,6 @@ namespace MailRuModel.Pages
         private readonly string _passwordXpath = "//input[@name='password']";
         private readonly string _loginButtonXpath = "//span[text()='Войти']";
         private readonly string _errorMessageXpath = "//div[contains(@data-test-id,'error')]/small";
-        private readonly string _emptyUsernameErrorText = "Поле «Имя аккаунта» должно быть заполнено";
-        private readonly string _emptyPasswordErrorText = "Поле «Пароль» должно быть заполнено";
-        private readonly string _accountNotExistErrorText = "Такой аккаунт не зарегистрирован";
-        private readonly string _invalidPasswordErrorText = "Неверный пароль, попробуйте ещё раз";
         private readonly string _driverTitle = "Авторизация";
 
         /// <summary>
@@ -26,10 +21,13 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
-            WaitPageLoading();
+            PageLoading();
         }
 
-        public override void WaitPageLoading()
+        /// <summary>
+        /// Waiting for the login page to load.
+        /// </summary>
+        public override void PageLoading()
         {
             Waiter.WaitTitleContains(_driverTitle);
         }
@@ -75,85 +73,17 @@ namespace MailRuModel.Pages
         }
 
         /// <summary>
-        /// Checks the appearance of an element when
-        /// an invalid username or password is entered.
-        /// </summary>
-        /// <returns>True if the element is displayed, false otherwise.</returns>
-        private bool IsErrorMessageDisplayed()
-        {
-            Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
-
-            return Driver.FindElement(By.XPath(_errorMessageXpath)).Displayed;
-        }
-
-        /// <summary>
-        /// Returns the text of the error message.
+        /// Returns the error text.
         /// </summary>
         /// <returns>Error message text.</returns>
-        private string GetActualErrorMessageText()
+        public string GetErrorMessage()
         {
             Waiter.WaitElementIsVisible(By.XPath(_errorMessageXpath));
 
-            return Driver.FindElement(By.XPath(_errorMessageXpath)).Text;
-        }
+            string errorMessage = Driver.FindElement(By.XPath(_errorMessageXpath))
+                .Text;
 
-        /// <summary>
-        /// Compares the expected and actual error message text.
-        /// </summary>
-        /// <param name="expectedErrorMessageText">The expected text
-        /// of the error message.</param>
-        /// <returns>true if the expected value is equal 
-        /// to the actual value, otherwise false.</returns>
-        private bool IsExpectedErrorMessage(string expectedErrorMessageText)
-        {
-            return expectedErrorMessageText == GetActualErrorMessageText();
-        }
-
-        /// <summary>
-        /// Checks if an error is displayed when you enter an empty
-        /// username and if the error text is the same.
-        /// </summary>
-        /// <returns>true if the error message is displayed 
-        /// and the error text matches, otherwise false.</returns>
-        public bool IsEmptyUsernameError()
-        {
-            return IsErrorMessageDisplayed() 
-                || IsExpectedErrorMessage(_emptyUsernameErrorText);
-        }
-
-        /// <summary>
-        /// Checks if an error is displayed when you enter an empty
-        /// password and if the error text is the same.
-        /// </summary>
-        /// <returns>true if the error message is displayed 
-        /// and the error text matches, otherwise false.</returns>
-        public bool IsEmptyPasswordError()
-        {
-            return IsErrorMessageDisplayed()
-                || IsExpectedErrorMessage(_emptyPasswordErrorText);
-        }
-
-        /// <summary>
-        /// Checks if an error is displayed when you enter a
-        /// non-existent username and if the error text is the same.
-        /// </summary>
-        /// <returns>true if the error message is displayed 
-        /// and the error text matches, otherwise false.</returns>
-        public bool IsAccountNotExistError()
-        {
-            return IsErrorMessageDisplayed()
-                || IsExpectedErrorMessage(_accountNotExistErrorText);
-        }
-
-        /// <summary>
-        /// Checks if an error is displayed when you enter a
-        /// invalid password and if the error text is the same.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsInvalidPasswordError()
-        {
-            return IsErrorMessageDisplayed()
-                || IsExpectedErrorMessage(_invalidPasswordErrorText);
+            return errorMessage;
         }
 
         /// <summary>
