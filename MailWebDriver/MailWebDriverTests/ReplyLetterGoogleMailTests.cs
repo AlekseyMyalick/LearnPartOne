@@ -34,9 +34,9 @@ namespace MailWebDriverTests
         public void IsNotReadedLastIncomingLetter_CorrectLetter_ReturnTrue()
         {
             OpenPageByUrl(_googleMailLoginPagePath);
-            GoogleMailModel.Pages.LoginPage loginPage = new GoogleMailModel.Pages.LoginPage(_driver);
-            GoogleMailModel.Pages.HomePage homePage = loginPage.LoginAs(_emailGoogle, _passwordGoogle);
-            GoogleMailModel.Pages.InboxPage inboxPage = homePage.OpenInboxPage();
+
+            Google.InboxPage inboxPage =
+                CreateDefaultGoogleInboxPage(_driver, _emailGoogle, _passwordGoogle);
 
             bool condition = inboxPage.IsNotReadedLastIncomingLetter();
 
@@ -47,9 +47,9 @@ namespace MailWebDriverTests
         public void IsExpectedSender_CorrectLetter_ReturnTrue()
         {
             OpenPageByUrl(_googleMailLoginPagePath);
-            GoogleMailModel.Pages.LoginPage loginPage = new GoogleMailModel.Pages.LoginPage(_driver);
-            GoogleMailModel.Pages.HomePage homePage = loginPage.LoginAs(_emailGoogle, _passwordGoogle);
-            GoogleMailModel.Pages.InboxPage inboxPage = homePage.OpenInboxPage();
+
+            Google.InboxPage inboxPage =
+                CreateDefaultGoogleInboxPage(_driver, _emailGoogle, _passwordGoogle);
 
             string actualSender = inboxPage.GetSenderEmail();
 
@@ -60,10 +60,9 @@ namespace MailWebDriverTests
         public void IsExpectedLetterText_CorrectLetter_ReturnTrue()
         {
             OpenPageByUrl(_googleMailLoginPagePath);
-            GoogleMailModel.Pages.LoginPage loginPage = new GoogleMailModel.Pages.LoginPage(_driver);
-            GoogleMailModel.Pages.HomePage homePage = loginPage.LoginAs(_emailGoogle, _passwordGoogle);
-            GoogleMailModel.Pages.InboxPage inboxPage = homePage.OpenInboxPage();
-            inboxPage.OpenLastIncomingLetter();
+
+            Google.InboxPage inboxPage =
+                CreateDefaultGoogleInboxPage(_driver, _emailGoogle, _passwordGoogle);
 
             string actualSender = inboxPage.GetLetterText();
 
@@ -91,6 +90,9 @@ namespace MailWebDriverTests
         /// <summary>
         /// Opens a page for writing letters in the MailRu server.
         /// </summary>
+        /// <param name="driver">An instance of the web driver.</param>
+        /// <param name="email">Login to enter.</param>
+        /// <param name="password">Login password.</param>
         /// <returns>Write letter page.</returns>
         private MailRu.WriteLetterPage CreateDefaultMailRuWriteLetterPage
             (IWebDriver driver, string email, string password)
@@ -99,6 +101,22 @@ namespace MailWebDriverTests
             MailRu.HomePage homePage = loginPage.LoginAs(email, password);
 
             return homePage.OpenWriteLetterPage();
+        }
+
+        /// <summary>
+        /// Opens a page for reading emails in the Google service.
+        /// </summary>
+        /// <param name="driver">An instance of the web driver.</param>
+        /// <param name="email">Login to enter.</param>
+        /// <param name="password">Login password.</param>
+        /// <returns>Inbox page.</returns>
+        private Google.InboxPage CreateDefaultGoogleInboxPage
+            (IWebDriver driver, string email, string password)
+        {
+            Google.LoginPage loginPage = new Google.LoginPage(driver);
+            Google.HomePage homePage = loginPage.LoginAs(email, password);
+
+            return homePage.OpenInboxPage();
         }
     }
 }
