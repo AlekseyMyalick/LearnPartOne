@@ -1,13 +1,12 @@
 ﻿using OpenQA.Selenium;
 using Waiters;
 
-
 namespace GoogleMailModel.Pages
 {
     public class InboxPage : BasePage
     {
         private readonly string _lastIncomingLetterXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
-        private readonly string _letterTextXpath = "//div[@class='gs']//div[@id=':bf']/div[2]/div[1]";
+        private readonly string _letterTextXpath = "//div[@class='gs']//div[@class='a3s aiL ']/div[2]/div[1]";
         private readonly string _showHiddenPartButtonXpath = "//div[@data-tooltip='Показать скрытую часть']";
         private readonly string _replyLetterBoxXpath = "//div[@aria-label='Тело письма']/div[2]";
         private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
@@ -16,7 +15,9 @@ namespace GoogleMailModel.Pages
         private readonly string _lastLetterSenderNameXpath = "//span[@name]";
         private readonly string _lastLetterSenderEmailXpath = "//span[@email]";
         private readonly string _fontWeightCssPropertyNameXpath = "font-weight";
+        private readonly string _senderEmailAttribute = "email";
         private readonly int _boldFontWeight = 700;
+        private readonly int _separatingCharactersNumber = 4;
         private readonly string _driverTitle = "Входящие";
 
         /// <summary>
@@ -65,28 +66,25 @@ namespace GoogleMailModel.Pages
         }
 
         /// <summary>
-        /// Checks if the current sender matches the expected one.
+        /// Returns the email of the sender.
         /// </summary>
-        /// <param name="expectedSender">Expected sender.</param>
-        /// <returns>True, if the expected sender matches the current one,
-        /// otherwise it is false.</returns>
-        public bool IsExpectedSender(string expectedSender)
+        /// <returns>Email.</returns>
+        public string GetSenderEmail()
         {
             Waiter.WaitElementIsVisible(By.XPath(_lastIncomingLetterXpath));
 
             string actualSender = Driver.FindElement(By
                 .XPath(_lastIncomingLetterXpath + _lastLetterSenderEmailXpath))
-                .GetAttribute("email");
+                .GetAttribute(_senderEmailAttribute);
 
-            return actualSender == expectedSender;
+            return actualSender;
         }
 
         /// <summary>
-        /// Compares the text of the received email with the expected one.
+        /// Returns the text of the letter.
         /// </summary>
-        /// <param name="expectedLetterText">Expected letter text.</param>
-        /// <returns>True, if the text matches, otherwise it is false.</returns>
-        public bool IsExpectedLetterText(string expectedLetterText)
+        /// <returns>Text of the letter.</returns>
+        public string GetLetterText()
         {
             Waiter.WaitElementIsVisible(By.XPath(_letterTextXpath));
 
@@ -94,7 +92,7 @@ namespace GoogleMailModel.Pages
                 .XPath(_letterTextXpath))
                 .Text;
 
-            return actualLetterText == expectedLetterText;
+            return actualLetterText;
         }
 
         /// <summary>
@@ -165,7 +163,7 @@ namespace GoogleMailModel.Pages
 
             string aliae = element.Text;
 
-            for (int i = 0; i < aliae.Length - 4; i++)
+            for (int i = 0; i < aliae.Length - _separatingCharactersNumber; i++)
             {
                 element.SendKeys(Keys.Backspace);
             }
