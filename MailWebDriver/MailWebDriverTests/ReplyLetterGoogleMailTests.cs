@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
+using MailRu = MailRuModel.Pages;
+using Google = GoogleMailModel.Pages;
 
 namespace MailWebDriverTests
 {
@@ -14,17 +16,18 @@ namespace MailWebDriverTests
         private readonly string _lettersText = "Hello World!";
         private readonly string _mailRuLoginPagePath = "https://account.mail.ru/login";
         private readonly string _googleMailLoginPagePath = "https://accounts.google.com/ServiceLogin/identifier?passive=1209600&continue=https%3A%2F%2Faccounts.google.com%2Fb%2F0%2FAddMailService&followup=https%3A%2F%2Faccounts.google.com%2Fb%2F0%2FAddMailService&flowName=GlifWebSignIn&flowEntry=ServiceLogin";
+
         private IWebDriver _driver;
 
         [SetUp]
         public void SendLetterFromMailRu()
         {
             OpenPageByUrl(_mailRuLoginPagePath);
-            MailRuModel.Pages.LoginPage loginPage = new MailRuModel.Pages.LoginPage(_driver);
-            MailRuModel.Pages.HomePage homePage = loginPage.LoginAs(_emailMailRu, _passwordMailRu);
-            MailRuModel.Pages.WriteLetterPage writeLetterPage = homePage.OpenWriteLetterPage();
+
+            MailRu.WriteLetterPage writeLetterPage =
+                CreateDefaultMailRuWriteLetterPage(_driver, _emailMailRu, _passwordMailRu);
+
             writeLetterPage.WriteLetter(_emailGoogle, _lettersText);
-            _driver.Quit();
         }
 
         [Test]
@@ -83,6 +86,19 @@ namespace MailWebDriverTests
             _driver = new ChromeDriver();
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl(loginPageUrl);
+        }
+
+        /// <summary>
+        /// Opens a page for writing letters in the MailRu server.
+        /// </summary>
+        /// <returns>Write letter page.</returns>
+        private MailRu.WriteLetterPage CreateDefaultMailRuWriteLetterPage
+            (IWebDriver driver, string email, string password)
+        {
+            MailRu.LoginPage loginPage = new MailRu.LoginPage(_driver);
+            MailRu.HomePage homePage = loginPage.LoginAs(email, password);
+
+            return homePage.OpenWriteLetterPage();
         }
     }
 }
