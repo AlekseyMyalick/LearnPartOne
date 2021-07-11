@@ -14,7 +14,7 @@ namespace MailRuModel.Pages
         public IWebDriver Driver { get; set; }
 
         /// <summary>
-        /// Initializes the fields of the class 
+        /// Initializes the fields of the class.
         /// and sets the time to wait for events.
         /// </summary>
         /// <param name="driver">Driver.</param>
@@ -22,14 +22,12 @@ namespace MailRuModel.Pages
         {
             Driver = driver;
             Waiter.Driver = Driver;
-            Waiter.WaitTime = 10000;
+            Waiter.WaitTime = 20000;
         }
 
         /// <summary>
-        /// Checks if the current page matches the expected one.
+        /// Waiting for the page to load.
         /// </summary>
-        /// <returns>True if the open page is as expected,
-        /// false otherwise.</returns>
-        public abstract bool IsOpened();
+        public abstract void PageLoading();
     }
 }

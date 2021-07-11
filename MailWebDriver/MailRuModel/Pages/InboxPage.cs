@@ -3,13 +3,16 @@ using Waiters;
 
 namespace MailRuModel.Pages
 {
+    /// <summary>
+    /// It is a page describing the inbox page.
+    /// </summary>
     public class InboxPage : BasePage
     {
         private readonly string _lastIncomingLetterXpath = "//a[contains(@class, 'letter-list')][1]";
         private readonly string _showHiddenPartButtonXpath = "//div[@class='letter__body']//span[contains(@class, 'wrapper')][1]";
         private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
         private readonly string _driverTitle = "Входящие";
-        private readonly int _separatingCharactersNumber = 4; 
+        private readonly int _separatingCharactersNumber = 4;
 
         /// <summary>
         /// Initializes the fields of the class.

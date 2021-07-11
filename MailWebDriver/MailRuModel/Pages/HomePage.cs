@@ -85,7 +85,7 @@ namespace MailRuModel.Pages
         /// Opens an incoming mail window.
         /// </summary>
         /// <returns>Inbox page.</returns>
-        public InboxPage OpenInboxPahe()
+        public InboxPage OpenInboxPage()
         {
             Waiter.WaitElementIsVisible(By.XPath(_inboxButtonXpath));
 

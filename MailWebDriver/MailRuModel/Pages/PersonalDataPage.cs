@@ -3,6 +3,9 @@ using Waiters;
 
 namespace MailRuModel.Pages
 {
+    /// <summary>
+    /// Represents a page describing the personal data page.
+    /// </summary>
     public class PersonalDataPage : BasePage
     {
         private readonly string _nicknameFieldXpath = "//input[@id='nickname']";
