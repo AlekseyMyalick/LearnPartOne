@@ -8,75 +8,83 @@ namespace MailWebDriverTests
     [TestFixture]
     public class LoginMailRuTests
     {
-        private readonly string _driverPath = @"D:\ChromDriver";
-        private readonly string _loginPagePath = "https://account.mail.ru/login?page=https%3A%2F%2Fe.mail.ru%2Fmessages%2Finbox%3Futm_source%3Dportal%26utm_medium%3Dportal_navigation%26utm_campaign%3De.mail.ru&allow_external=1&from=octavius";
+        private readonly string _username = "robert.langdon.84@mail.ru";
+        private readonly string _password = "158274Up";
+        private readonly string _nonExistentUsername = "svggcs@mail.ru";
+        private readonly string _wrongPassword = "wrong password";
+        private readonly string _emptyUsernameErrorText = "Поле «Имя аккаунта» должно быть заполнено";
+        private readonly string _emptyPasswordErrorText = "Поле «Пароль» должно быть заполнено";
+        private readonly string _accountNotExistErrorText = "Такой аккаунт не зарегистрирован";
+        private readonly string _invalidPasswordErrorText = "Неверный пароль, попробуйте ещё раз";
+        private readonly string _loginPagePath = "https://account.mail.ru/login";
+
         private IWebDriver _driver;
 
         [SetUp]
         public void OpenLoginPage()
         {
-            _driver = new ChromeDriver(_driverPath);
+            _driver = new ChromeDriver();
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl(_loginPagePath);
         }
 
         [Test]
-        public void SubmitLogin_EmptyUsername_ReturnLoginPage()
+        public void SubmitLogin_EmptyUsername_ReturnTrue()
         {
-            LoginPage loginPage = CreateDefaultLoginPge();
+            LoginPage loginPage = CreateDefaultLoginPage(_driver);
             loginPage.TypeUsername(string.Empty);
             loginPage.SubmitLoginExpectingFailure();
 
-            bool condition = loginPage.IsEmptyUsernameError();
+            string actual = loginPage.GetErrorMessage();
 
-            Assert.IsTrue(condition);
+            Assert.AreEqual(_emptyUsernameErrorText, actual);
         }
 
         [Test]
-        public void SubmitLogin_AccountNotExist_ReturnLoginPage()
+        public void SubmitLogin_AccountNotExist_ReturnReturnTrue()
         {
-            LoginPage loginPage = CreateDefaultLoginPge();
-            loginPage.TypeUsername("svggcs@mail.ru");
+            LoginPage loginPage = CreateDefaultLoginPage(_driver);
+            loginPage.TypeUsername(_nonExistentUsername);
             loginPage.SubmitLoginExpectingFailure();
 
-            bool condition = loginPage.IsAccountNotExistError();
+            string actual = loginPage.GetErrorMessage();
 
-            Assert.IsTrue(condition);
+            Assert.AreEqual(_accountNotExistErrorText, actual);
         }
 
         [Test]
-        public void SubmitPassword_EmptyPassword_ReturnLoginPage()
+        public void SubmitPassword_EmptyPassword_ReturnTrue()
         {
-            LoginPage loginPage = CreateDefaultLoginPge();
-            loginPage.TypeUsername("mail_ru.test@mail.ru");
+            LoginPage loginPage = CreateDefaultLoginPage(_driver);
+            loginPage.TypeUsername(_username);
             loginPage.SubmitLogin();
             loginPage.TypePassword(string.Empty);
             loginPage.SubmitPasswordExpectingFailure();
 
-            bool condition = loginPage.IsEmptyPasswordError();
+            string actual = loginPage.GetErrorMessage();
 
-            Assert.IsTrue(condition);
+            Assert.AreEqual(_emptyPasswordErrorText, actual);
         }
 
         [Test]
-        public void SubmitPassword_InvalidPassword_ReturnLoginPage()
+        public void SubmitPassword_InvalidPassword_ReturnTrue()
         {
-            LoginPage loginPage = CreateDefaultLoginPge();
-            loginPage.TypeUsername("mail_ru.test@mail.ru");
+            LoginPage loginPage = CreateDefaultLoginPage(_driver);
+            loginPage.TypeUsername(_username);
             loginPage.SubmitLogin();
-            loginPage.TypePassword("invalid password");
+            loginPage.TypePassword(_wrongPassword);
             loginPage.SubmitPasswordExpectingFailure();
 
-            bool condition = loginPage.IsInvalidPasswordError();
+            string actual = loginPage.GetErrorMessage();
 
-            Assert.IsTrue(condition);
+            Assert.AreEqual(_invalidPasswordErrorText, actual);
         }
 
         [Test]
         public void LoginAs_ValidUsernameAndPassword_ReturnHomePage()
         {
-            LoginPage loginPage = CreateDefaultLoginPge();
-            BasePage basePage = loginPage.LoginAs("mail_ru.test@mail.ru", "158274Up");
+            LoginPage loginPage = CreateDefaultLoginPage(_driver);
+            BasePage basePage = loginPage.LoginAs(_username, _password);
 
             bool condition = basePage is HomePage;
 
@@ -89,9 +97,14 @@ namespace MailWebDriverTests
             _driver.Quit();
         }
 
-        private LoginPage CreateDefaultLoginPge()
+        /// <summary>
+        /// Creates an instance of the LoginPage class.
+        /// </summary>
+        /// <param name="driver">An instance of the web driver.</param>
+        /// <returns>Login page.</returns>
+        private LoginPage CreateDefaultLoginPage(IWebDriver driver)
         {
-            return new LoginPage(_driver);
+            return new LoginPage(driver);
         }
     }
 }

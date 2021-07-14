@@ -20,13 +20,13 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public InboxPage(IWebDriver driver) : base(driver)
         {
-            PageLoading();
+            WaitPageLoading();
         }
 
         /// <summary>
         /// Waiting for the inbox page to load.
         /// </summary>
-        public override void PageLoading()
+        public override void WaitPageLoading()
         {
             Waiter.WaitTitleContains(_driverTitle);
         }

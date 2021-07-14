@@ -20,14 +20,16 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public HomePage(IWebDriver driver) : base(driver)
         {
-            PageLoading();
+            WaitPageLoading();
         }
 
         /// <summary>
         /// Waiting for the home page to load.
         /// </summary>
-        public override void PageLoading()
+        public override void WaitPageLoading()
         {
+            Waiter.WaitPageLoading();
+
             Waiter.WaitTitleContains(_driverTitle);
         }
 
@@ -37,7 +39,8 @@ namespace MailRuModel.Pages
         /// <returns>Write letter page.</returns>
         public WriteLetterPage OpenWriteLetterPage()
         {
-            Waiter.WaitElementIsVisible(By.XPath(_writeLetterButton));
+            Waiter.WaitElementToBeClickable(By.XPath(_writeLetterButton));
+
 
             Driver.FindElement(By.XPath(_writeLetterButton)).Click();
 

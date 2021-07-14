@@ -19,14 +19,16 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public PersonalDataPage(IWebDriver driver) : base(driver)
         {
-            PageLoading();
+            WaitPageLoading();
         }
 
         /// <summary>
         /// Waiting for the persanal data page to load.
         /// </summary>
-        public override void PageLoading()
+        public override void WaitPageLoading()
         {
+            Waiter.WaitPageLoading();
+
             Waiter.WaitTitleContains(_driverTitle);
         }
 

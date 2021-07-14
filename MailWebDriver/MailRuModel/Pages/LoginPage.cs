@@ -21,14 +21,16 @@ namespace MailRuModel.Pages
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
-            PageLoading();
+            WaitPageLoading();
         }
 
         /// <summary>
         /// Waiting for the login page to load.
         /// </summary>
-        public override void PageLoading()
+        public override void WaitPageLoading()
         {
+            Waiter.WaitPageLoading();
+
             Waiter.WaitTitleContains(_driverTitle);
         }
 

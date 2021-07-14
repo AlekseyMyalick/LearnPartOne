@@ -17,14 +17,16 @@ namespace GoogleMailModel.Pages
         /// <param name="driver">Driver.</param>
         public HomePage(IWebDriver driver) : base(driver)
         {
-            PageLoading();
+            WaitPageLoading();
         }
 
         /// <summary>
         /// Waiting for the home page to load.
         /// </summary>
-        public override void PageLoading()
+        public override void WaitPageLoading()
         {
+            Waiter.WaitPageLoading();
+
             Waiter.WaitTitleContains(_driverTitle);
         }
 

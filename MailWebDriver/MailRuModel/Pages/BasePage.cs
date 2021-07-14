@@ -9,6 +9,11 @@ namespace MailRuModel.Pages
     abstract public class BasePage
     {
         /// <summary>
+        /// Wait time, measured in milliseconds.
+        /// </summary>
+        private readonly int _waitTime = 20000;
+
+        /// <summary>
         /// Get or Set driver.
         /// </summary>
         public IWebDriver Driver { get; set; }
@@ -22,12 +27,12 @@ namespace MailRuModel.Pages
         {
             Driver = driver;
             Waiter.Driver = Driver;
-            Waiter.WaitTime = 20000;
+            Waiter.WaitTime = _waitTime;
         }
 
         /// <summary>
         /// Waiting for the page to load.
         /// </summary>
-        public abstract void PageLoading();
+        public abstract void WaitPageLoading();
     }
 }
