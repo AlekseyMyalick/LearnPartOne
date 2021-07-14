@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace Waiters
 {
@@ -27,7 +28,7 @@ namespace Waiters
         public static void WaitElementIsVisible(By webElementLocator)
         {
             new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
-                Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(webElementLocator));
+                Until(ExpectedConditions.ElementIsVisible(webElementLocator));
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Waiters
         public static void WaitTitleContains(string title)
         {
             new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
-                Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TitleContains(title));
+                Until(ExpectedConditions.TitleContains(title));
         }
 
         /// <summary>
@@ -47,7 +48,27 @@ namespace Waiters
         public static void WaitElementToBeClickable(By webElementLocator)
         {
             new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
-                Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(webElementLocator));
+                Until(ExpectedConditions.ElementToBeClickable(webElementLocator));
+        }
+
+        /// <summary>
+        /// Waiting for full page load.
+        /// </summary>
+        public static void WaitPageLoading()
+        {
+            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
+                Until(IsPageLoaded);
+        }
+
+        /// <summary>
+        /// Returns the state of the page.
+        /// </summary>
+        /// <param name="driver">Web driver.</param>
+        /// <returns>True if the page is loaded, otherwise false.</returns>
+        private static bool IsPageLoaded(IWebDriver driver)
+        {
+            return (bool)(driver as IJavaScriptExecutor)
+                .ExecuteScript("return window.jQuery == undefined");
         }
     }
 }
