@@ -14,6 +14,7 @@ namespace GoogleMailModel.Pages
         private readonly string _replyButtonXpath = "//span[@role='link'][text()='Ответить']";
         private readonly string _lastLetterSenderNameXpath = "//span[@name]";
         private readonly string _lastLetterSenderEmailXpath = "//span[@email]";
+        private readonly string _popupEmailSent = "//span[text()='Письмо отправлено.']";
         private readonly string _fontWeightCssPropertyNameXpath = "font-weight";
         private readonly string _senderEmailAttribute = "email";
         private readonly int _boldFontWeight = 700;
@@ -182,6 +183,8 @@ namespace GoogleMailModel.Pages
             Waiter.WaitElementIsVisible(By.XPath(_sendReplyButton));
 
             Driver.FindElement(By.XPath(_sendReplyButton)).Click();
+
+            Waiter.WaitElementIsVisible(By.XPath(_popupEmailSent));
 
             return this;
         }

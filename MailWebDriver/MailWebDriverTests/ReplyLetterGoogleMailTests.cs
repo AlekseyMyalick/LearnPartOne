@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using MailRu = MailRuModel.Pages;
-using Google = GoogleMailModel.Pages;
+using Gmail = GoogleMailModel.Pages;
 
 namespace MailWebDriverTests
 {
@@ -22,53 +22,39 @@ namespace MailWebDriverTests
         [SetUp]
         public void SendLetterFromMailRu()
         {
-            OpenPageByUrl(_mailRuLoginPagePath);
+            _driver = new ChromeDriver();
+            _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl(_mailRuLoginPagePath);
 
-            MailRu.WriteLetterPage writeLetterPage =
-                CreateDefaultMailRuWriteLetterPage(_driver, _emailMailRu, _passwordMailRu);
+            MailRu.HomePage homePageMailRu =
+                CreateDefaultMailRuHomePage(_driver, _emailMailRu, _passwordMailRu);
+            MailRu.WriteLetterPage writeLetterPageMailRu = homePageMailRu.OpenWriteLetterPage();
 
-            writeLetterPage.WriteLetter(_emailGoogle, _lettersText);
+            writeLetterPageMailRu.WriteLetter(_emailGoogle, _lettersText);
         }
 
         [Test]
-        public void IsNotReadedLastIncomingLetter_CorrectLetter_ReturnTrue()
+        public void IsCorrectLetter_CoorectLetter_ReturnTrue()
         {
-            OpenPageByUrl(_googleMailLoginPagePath);
+            _driver.Navigate().GoToUrl(_googleMailLoginPagePath);
 
-            Google.InboxPage inboxPage =
-                CreateDefaultGoogleInboxPage(_driver, _emailGoogle, _passwordGoogle);
+            Gmail.HomePage homePageGmail =
+                CreateDefaultGoogleHomePage(_driver, _emailGoogle, _passwordGoogle);
+            Gmail.InboxPage inboxPageGmail = homePageGmail.OpenInboxPage();
 
-            bool condition = inboxPage.IsNotReadedLastIncomingLetter();
+            bool isNotReaded = inboxPageGmail.IsNotReadedLastIncomingLetter();
+            Assert.IsTrue(isNotReaded, "The letter is displayed as read.");
 
-            Assert.IsTrue(condition);
+            string actualSender = inboxPageGmail.GetSenderEmail();
+            Assert.AreEqual(_emailMailRu, actualSender,
+                $"Sender \"{actualSender}\" is not equal to expected sender \"{_emailMailRu}\".");
+
+            inboxPageGmail.OpenLastIncomingLetter();
+            string actualLettersText = inboxPageGmail.GetLetterText();
+            Assert.AreEqual(_lettersText, actualLettersText,
+                $"The text of the letter:\"{_lettersText}\", " +
+                $"does not match the expected:\"{actualLettersText}\".");
         }
-
-        [Test]
-        public void IsExpectedSender_CorrectLetter_ReturnTrue()
-        {
-            OpenPageByUrl(_googleMailLoginPagePath);
-
-            Google.InboxPage inboxPage =
-                CreateDefaultGoogleInboxPage(_driver, _emailGoogle, _passwordGoogle);
-
-            string actualSender = inboxPage.GetSenderEmail();
-
-            Assert.AreEqual(_emailMailRu, actualSender);
-        }
-
-        [Test]
-        public void IsExpectedLetterText_CorrectLetter_ReturnTrue()
-        {
-            OpenPageByUrl(_googleMailLoginPagePath);
-
-            Google.InboxPage inboxPage =
-                CreateDefaultGoogleInboxPage(_driver, _emailGoogle, _passwordGoogle);
-
-            string actualSender = inboxPage.GetLetterText();
-
-            Assert.AreEqual(_lettersText, actualSender);
-        }
-
 
         [TearDown]
         public void DriverQuit()
@@ -77,46 +63,33 @@ namespace MailWebDriverTests
         }
 
         /// <summary>
-        /// Opens the page with the specified Url.
-        /// </summary>
-        /// <param name="loginPageUrl">Url of the page to be opened.</param>
-        private void OpenPageByUrl(string loginPageUrl)
-        {
-            _driver = new ChromeDriver();
-            _driver.Manage().Window.Maximize();
-            _driver.Navigate().GoToUrl(loginPageUrl);
-        }
-
-        /// <summary>
-        /// Opens a page for writing letters in the MailRu server.
+        /// Opens a home page in the MailRu server.
         /// </summary>
         /// <param name="driver">An instance of the web driver.</param>
         /// <param name="email">Login to enter.</param>
         /// <param name="password">Login password.</param>
-        /// <returns>Write letter page.</returns>
-        private MailRu.WriteLetterPage CreateDefaultMailRuWriteLetterPage
+        /// <returns>Home page.</returns>
+        private MailRu.HomePage CreateDefaultMailRuHomePage
             (IWebDriver driver, string email, string password)
         {
-            MailRu.LoginPage loginPage = new MailRu.LoginPage(_driver);
-            MailRu.HomePage homePage = loginPage.LoginAs(email, password);
+            MailRu.LoginPage loginPage = new MailRu.LoginPage(driver);
 
-            return homePage.OpenWriteLetterPage();
+            return loginPage.LoginAs(email, password);
         }
 
         /// <summary>
-        /// Opens a page for reading emails in the Google service.
+        /// Opens a home page in the Google service.
         /// </summary>
         /// <param name="driver">An instance of the web driver.</param>
         /// <param name="email">Login to enter.</param>
         /// <param name="password">Login password.</param>
-        /// <returns>Inbox page.</returns>
-        private Google.InboxPage CreateDefaultGoogleInboxPage
+        /// <returns>Home page.</returns>
+        private Gmail.HomePage CreateDefaultGoogleHomePage
             (IWebDriver driver, string email, string password)
         {
-            Google.LoginPage loginPage = new Google.LoginPage(driver);
-            Google.HomePage homePage = loginPage.LoginAs(email, password);
+            Gmail.LoginPage loginPage = new Gmail.LoginPage(driver);
 
-            return homePage.OpenInboxPage();
+            return loginPage.LoginAs(email, password);
         }
     }
 }

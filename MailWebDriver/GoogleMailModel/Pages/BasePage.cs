@@ -28,10 +28,11 @@ namespace GoogleMailModel.Pages
             Driver = driver;
             Waiter.Driver = Driver;
             Waiter.WaitTime = _waitTime;
-
-            Waiter.WaitPageLoading();
         }
 
+        /// <summary>
+        /// Waiting for the page to load.
+        /// </summary>
         public abstract void WaitPageLoading();
     }
 }

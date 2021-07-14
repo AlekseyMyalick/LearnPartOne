@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GoogleMailModel\GoogleMailModel.csproj" />
     <ProjectReference Include="..\MailRuModel\MailRuModel.csproj" />
   </ItemGroup>
 

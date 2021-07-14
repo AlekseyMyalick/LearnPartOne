@@ -11,6 +11,7 @@ namespace MailRuModel.Pages
         private readonly string _nicknameFieldXpath = "//input[@id='nickname']";
         private readonly string _nicknameAttribut = "value";
         private readonly string _saveButtonXpath= "//span[text()='Сохранить']";
+        private readonly string _homePageButtonXpath = "//span[text()='Почта']/parent::a";
         private readonly string _driverTitle = "Личные данные";
 
         /// <summary>
@@ -85,6 +86,19 @@ namespace MailRuModel.Pages
             InputNickname(nickname);
 
             return SaveChanges();
+        }
+
+        /// <summary>
+        /// Opens the home page.
+        /// </summary>
+        /// <returns>home page.</returns>
+        public HomePage OpenHomePage()
+        {
+            Waiter.WaitElementIsVisible(By.XPath(_homePageButtonXpath));
+
+            Driver.FindElement(By.XPath(_homePageButtonXpath)).Click();
+
+            return new HomePage(Driver);
         }
     }
 }

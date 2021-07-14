@@ -37,7 +37,9 @@ namespace MailWebDriverTests
 
             string actual = loginPage.GetErrorMessage();
 
-            Assert.AreEqual(_emptyUsernameErrorText, actual);
+            Assert.AreEqual(_emptyUsernameErrorText, actual,
+                $"The error message text \"{actual}\" does not match " +
+                $"the expected \"{_emptyUsernameErrorText}\".");
         }
 
         [Test]
@@ -49,7 +51,9 @@ namespace MailWebDriverTests
 
             string actual = loginPage.GetErrorMessage();
 
-            Assert.AreEqual(_accountNotExistErrorText, actual);
+            Assert.AreEqual(_accountNotExistErrorText, actual,
+                $"The error message text \"{actual}\" does not match " +
+                $"the expected \"{_accountNotExistErrorText}\".");
         }
 
         [Test]
@@ -63,7 +67,9 @@ namespace MailWebDriverTests
 
             string actual = loginPage.GetErrorMessage();
 
-            Assert.AreEqual(_emptyPasswordErrorText, actual);
+            Assert.AreEqual(_emptyPasswordErrorText, actual,
+                $"The error message text \"{actual}\" does not match " +
+                $"the expected \"{_emptyPasswordErrorText}\".");
         }
 
         [Test]
@@ -77,7 +83,9 @@ namespace MailWebDriverTests
 
             string actual = loginPage.GetErrorMessage();
 
-            Assert.AreEqual(_invalidPasswordErrorText, actual);
+            Assert.AreEqual(_invalidPasswordErrorText, actual,
+                 $"The error message text \"{actual}\" does not match " +
+                 $"the expected \"{_invalidPasswordErrorText}\".");
         }
 
         [Test]
@@ -88,7 +96,7 @@ namespace MailWebDriverTests
 
             bool condition = basePage is HomePage;
 
-            Assert.IsTrue(condition);
+            Assert.IsTrue(condition, "The page is not HomePage.");
         }
 
         [TearDown]

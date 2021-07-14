@@ -67,29 +67,8 @@ namespace Waiters
         /// <returns>True if the page is loaded, otherwise false.</returns>
         private static bool IsPageLoading(IWebDriver driver)
         {
-            return IsUndefined(driver) || IsConnected(driver);
-        }
-
-        /// <summary>
-        /// Returns the state of uncertainty.
-        /// </summary>
-        /// <param name="driver">Web driver.</param>
-        /// <returns>True if undefined, otherwise false.</returns>
-        private static bool IsUndefined(IWebDriver driver)
-        {
-            return (bool)(driver as IJavaScriptExecutor)
-                .ExecuteScript("return window.jQuery == undefined");
-        }
-
-        /// <summary>
-        /// Checks the status of the connection.
-        /// </summary>
-        /// <param name="driver">Web driver.</param>
-        /// <returns>True if connected, otherwise false.</returns>
-        private static bool IsConnected(IWebDriver driver)
-        {
-            return (bool)(driver as IJavaScriptExecutor)
-                .ExecuteScript("return window.jQuery.active == 0");
+            return (driver as IJavaScriptExecutor)
+                .ExecuteScript("return document.readyState").Equals("complete");
         }
     }
 }
