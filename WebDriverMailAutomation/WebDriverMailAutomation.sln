@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailRu", "MailRu\MailRu.csproj", "{0141298D-06E0-4DD6-9CB7-2838298B1951}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mail", "MailRu\Mail.csproj", "{0141298D-06E0-4DD6-9CB7-2838298B1951}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waiter", "Waiter\Waiter.csproj", "{A69D4775-26AC-42D6-A2A1-113D5743A365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0141298D-06E0-4DD6-9CB7-2838298B1951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0141298D-06E0-4DD6-9CB7-2838298B1951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0141298D-06E0-4DD6-9CB7-2838298B1951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A69D4775-26AC-42D6-A2A1-113D5743A365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69D4775-26AC-42D6-A2A1-113D5743A365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69D4775-26AC-42D6-A2A1-113D5743A365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69D4775-26AC-42D6-A2A1-113D5743A365}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
