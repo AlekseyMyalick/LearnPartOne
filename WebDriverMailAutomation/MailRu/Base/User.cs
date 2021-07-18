@@ -1,4 +1,4 @@
-﻿namespace MailRu.Base
+﻿namespace Mail.Base
 {
     /// <summary>
     /// Represents a class whose fields describe the user.

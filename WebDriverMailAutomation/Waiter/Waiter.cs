@@ -73,6 +73,29 @@ namespace Waiter
         }
 
         /// <summary>
+        /// Waiting for a check that the element with the text
+        /// is either invisible or not present in the DOM.
+        /// </summary>
+        /// <param name="webElementLocator">Web element locator.</param>
+        public void WaitVisibilityOfAllElementsLocatedBy(By webElementLocator)
+        {
+            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
+                Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(webElementLocator));
+        }
+
+        /// <summary>
+        /// An expectation for checking that an element with text
+        /// is either invisible or not present on the DOM.
+        /// </summary>
+        /// <param name="webElementLocator">Web element locator.</param>
+        /// <param name="text">WebElement text.</param>
+        public void WaitInvisibilityOfElementWithText(By webElementLocator, string text)
+        {
+            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime)).
+                Until(ExpectedConditions.InvisibilityOfElementWithText(webElementLocator, text));
+        }
+
+        /// <summary>
         /// Returns the state of the page.
         /// </summary>
         /// <param name="driver">Web driver.</param>
