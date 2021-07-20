@@ -9,10 +9,15 @@ namespace Mail.MailRu.PersonalData
     /// </summary>
     public class PersonalDataPage : BasePage
     {
+        public IWebElement NicknameField => Driver.FindElement(By.XPath("//input[@id='nickname']"));
+
+        public IWebElement SaveButton => Driver.FindElement(By.XPath("//span[text()='Сохранить']"));
+
+        public IWebElement HomePageButton => Driver.FindElement(By.XPath("//span[text()='Почта']/parent::a"));
+
         private readonly string _nicknameFieldXpath = "//input[@id='nickname']";
-        private readonly string _nicknameAttribut = "value";
         private readonly string _saveButtonXpath = "//span[text()='Сохранить']";
-        private readonly string _homePageButtonXpath = "//span[text()='Почта']/parent::a";
+        private readonly string _nicknameAttribut = "value";
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -43,8 +48,7 @@ namespace Mail.MailRu.PersonalData
             new Waiter.Waiter(Driver, WaitTime)
                 .WaitElementIsVisible(By.XPath(_nicknameFieldXpath));
 
-            string nickname = Driver.FindElement(By.XPath(_nicknameFieldXpath))
-                .GetAttribute(_nicknameAttribut);
+            string nickname = NicknameField.GetAttribute(_nicknameAttribut);
 
             return nickname;
         }
@@ -56,12 +60,8 @@ namespace Mail.MailRu.PersonalData
         /// <returns>Personal data page.</returns>
         public PersonalDataPage InputNickname(string nickname)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_nicknameFieldXpath));
-
-            IWebElement webElement = Driver.FindElement(By.XPath(_nicknameFieldXpath));
-            webElement.Clear();
-            webElement.SendKeys(nickname);
+            NicknameField.Clear();
+            NicknameField.SendKeys(nickname);
 
             return this;
         }
@@ -72,10 +72,7 @@ namespace Mail.MailRu.PersonalData
         /// <returns>Personal data page.</returns>
         public PersonalDataPage SaveChanges()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_saveButtonXpath));
-
-            Driver.FindElement(By.XPath(_saveButtonXpath)).Click();
+            SaveButton.Click();
 
             return this;
         }
@@ -98,10 +95,7 @@ namespace Mail.MailRu.PersonalData
         /// <returns>home page.</returns>
         public HomePage OpenHomePage()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_homePageButtonXpath));
-
-            Driver.FindElement(By.XPath(_homePageButtonXpath)).Click();
+            HomePageButton.Click();
 
             return new HomePage(Driver);
         }

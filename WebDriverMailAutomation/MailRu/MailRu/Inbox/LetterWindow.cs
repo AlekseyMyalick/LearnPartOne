@@ -8,8 +8,11 @@ namespace Mail.MailRu.Inbox
     /// </summary>
     public class LetterWindow : BasePage
     {
+        public IWebElement ShowHiddenPartButton => Driver.FindElement(By.XPath("//div[@class='letter__body']//span[contains(@class, 'wrapper')][1]"));
+
+        public IWebElement SenderAlias => Driver.FindElement(By.XPath("//blockquote//br/parent::div"));
+
         private readonly string _showHiddenPartButtonXpath = "//div[@class='letter__body']//span[contains(@class, 'wrapper')][1]";
-        private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
         private readonly int _separatingCharactersNumber = 4;
 
         /// <summary>
@@ -38,10 +41,7 @@ namespace Mail.MailRu.Inbox
         /// <returns>Letter window.</returns>
         public LetterWindow OpenHiddenPartReplyWindow()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_showHiddenPartButtonXpath));
-
-            Driver.FindElement(By.XPath(_showHiddenPartButtonXpath)).Click();
+            ShowHiddenPartButton.Click();
 
             return this;
         }
@@ -52,11 +52,7 @@ namespace Mail.MailRu.Inbox
         /// <returns>Alias.</returns>
         public string GetAliasFromReply()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_senderAliasXpath));
-
-            string alias = Driver.FindElement(By.XPath(_senderAliasXpath))
-                .Text;
+            string alias = SenderAlias.Text;
 
             return alias.Remove(0, _separatingCharactersNumber);
         }

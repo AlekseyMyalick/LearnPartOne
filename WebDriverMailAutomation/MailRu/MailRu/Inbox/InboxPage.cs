@@ -8,6 +8,8 @@ namespace Mail.MailRu.Inbox
     /// </summary>
     public class InboxPage : BasePage
     {
+        public IWebElement LastIncomingLetter => Driver.FindElement(By.XPath("//a[contains(@class, 'letter-list')][1]"));
+
         private readonly string _lastIncomingLetterXpath = "//a[contains(@class, 'letter-list')][1]";
 
         /// <summary>
@@ -36,7 +38,7 @@ namespace Mail.MailRu.Inbox
             new Waiter.Waiter(Driver, WaitTime)
                 .WaitElementIsVisible(By.XPath(_lastIncomingLetterXpath));
 
-            Driver.FindElement(By.XPath(_lastIncomingLetterXpath)).Click();
+            LastIncomingLetter.Click();
 
             return new LetterWindow(Driver);
         }

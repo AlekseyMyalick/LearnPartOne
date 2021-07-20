@@ -8,7 +8,10 @@ namespace Mail.Gmail.Inbox
     /// </summary>
     public class LetterWindow : BasePage
     {
-        private readonly string _letterTextXpath = "//div[@class='gs']//div[@class='a3s aiL ']/div[2]/div[1]";
+        public IWebElement LetterText => Driver.FindElement(By.XPath("//div[@class='gs']//div[@class='a3s aiL ']/div[2]/div[1]"));
+
+        public IWebElement ReplyButton => Driver.FindElement(By.XPath("//span[@role='link'][text()='Ответить']"));
+
         private readonly string _replyButtonXpath = "//span[@role='link'][text()='Ответить']";
 
         /// <summary>
@@ -37,12 +40,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Text of the letter.</returns>
         public string GetLetterText()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_letterTextXpath));
-
-            string actualLetterText = Driver.FindElement(By
-                .XPath(_letterTextXpath))
-                .Text;
+            string actualLetterText = LetterText.Text;
 
             return actualLetterText;
         }
@@ -53,10 +51,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Reply window.</returns>
         public ReplyWindow OpenReplyWindow()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_replyButtonXpath));
-
-            Driver.FindElement(By.XPath(_replyButtonXpath)).Click();
+            ReplyButton.Click();
 
             return new ReplyWindow(Driver);
         }

@@ -8,11 +8,17 @@ namespace Mail.Gmail.Inbox
     /// </summary>
     class InboxLettersWindow : BasePage
     {
-        private readonly string _lastIncomingLetterXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]";
+        public IWebElement LastLetterSenderEmail =>
+            Driver.FindElement(By.XPath("//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]//span[@email]"));
+
+        public IWebElement LastLetterSenderName =>
+            Driver.FindElement(By.XPath("//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]//span[@name]"));
+
+        public IWebElement LastIncomingLetter =>
+            Driver.FindElement(By.XPath("//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]"));
+
         private readonly string _allLettersXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr";
-        private readonly string _fontWeightCssPropertyNameXpath = "font-weight";
-        private readonly string _lastLetterSenderEmailXpath = "//span[@email]";
-        private readonly string _lastLetterSenderNameXpath = "//span[@name]";
+        private readonly string _fontWeightCssPropertyName = "font-weight";
         private readonly string _senderEmailAttribute = "email";
         private readonly int _boldFontWeight = 700;
 
@@ -42,12 +48,8 @@ namespace Mail.Gmail.Inbox
         /// <returns>True, if the letter is not read, otherwise false.</returns>
         public bool IsNotReadedLastIncomingLetter()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_lastIncomingLetterXpath));
-
-            string fontWeight = Driver.FindElement(By
-                .XPath(_lastIncomingLetterXpath + _lastLetterSenderNameXpath))
-                .GetCssValue(_fontWeightCssPropertyNameXpath);
+            string fontWeight = LastLetterSenderName
+                .GetCssValue(_fontWeightCssPropertyName);
 
             return int.Parse(fontWeight) == _boldFontWeight;
         }
@@ -58,10 +60,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Letter window.</returns>
         public LetterWindow OpenLastIncomingLetter()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_lastIncomingLetterXpath));
-
-            Driver.FindElement(By.XPath(_lastIncomingLetterXpath)).Click();
+            LastIncomingLetter.Click();
 
             return new LetterWindow(Driver);
         }
@@ -72,11 +71,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Email.</returns>
         public string GetSenderEmail()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_lastIncomingLetterXpath));
-
-            string actualSender = Driver.FindElement(By
-                .XPath(_lastIncomingLetterXpath + _lastLetterSenderEmailXpath))
+            string actualSender = LastLetterSenderEmail
                 .GetAttribute(_senderEmailAttribute);
 
             return actualSender;

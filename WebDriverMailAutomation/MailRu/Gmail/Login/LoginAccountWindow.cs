@@ -8,8 +8,11 @@ namespace Mail.Gmail.Login
     /// </summary>
     public class LoginAccountWindow : BasePage
     {
+        public IWebElement UsernameInput => Driver.FindElement(By.XPath("//input[@type='email']"));
+
+        public IWebElement EnterPasswordButton => Driver.FindElement(By.XPath("//span[text()='Далее']"));
+
         private readonly string _usernameXpath = "//input[@type='email']";
-        private readonly string _enterPasswordButtonXpath = "//span[text()='Далее']";
         private readonly string _windowCapTitleXpath = "//h1/span[@jsslot]";
         private readonly string _windowCapTitleText = "Вход";
 
@@ -60,10 +63,7 @@ namespace Mail.Gmail.Login
         /// <returns>Login account window.</returns>
         public LoginAccountWindow TypeUsername(string username)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_usernameXpath));
-
-            Driver.FindElement(By.XPath(_usernameXpath)).SendKeys(username);
+            UsernameInput.SendKeys(username);
 
             return this;
         }
@@ -75,10 +75,7 @@ namespace Mail.Gmail.Login
         /// an invalid login was entered, otherwise enter password window.</returns>
         public BasePage SubmitLoginClick()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
-
-            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Click();
+            EnterPasswordButton.Click();
 
             if (IsWindowCapTitleVisible())
             {

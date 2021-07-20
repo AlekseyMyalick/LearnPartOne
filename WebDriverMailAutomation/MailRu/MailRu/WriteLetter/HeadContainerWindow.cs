@@ -9,7 +9,8 @@ namespace Mail.MailRu.WriteLetter
     /// </summary>
     public class HeadContainerWindow : BasePage
     {
-        private readonly string _receiverXpath = "//div[text()='Кому']/ancestor::div[contains(@class, 'head_container')]//input";
+        public IWebElement Receiver => Driver.FindElement(By.XPath("//div[text()='Кому']/ancestor::div[contains(@class, 'head_container')]//input"));
+
         private readonly string _closeLayerWindowButtonXpath = "//div[@class='layer__controls']/span";
 
         /// <summary>
@@ -25,10 +26,7 @@ namespace Mail.MailRu.WriteLetter
         /// <returns>Head container window.</returns>
         public HeadContainerWindow TypeReceiver(string receiver)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_receiverXpath));
-
-            Driver.FindElement(By.XPath(_receiverXpath)).SendKeys(receiver);
+            Receiver.SendKeys(receiver);
 
             return this;
         }

@@ -25,7 +25,6 @@ namespace Mail.Gmail.Login
         /// <returns>Login page.</returns>
         public LoginPage OpenLoginPage()
         {
-            Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_loginPagePath);
 
             return this;

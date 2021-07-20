@@ -8,8 +8,11 @@ namespace Mail.MailRu.Login
     /// </summary>
     public class LoginAccountWindow : BasePage
     {
+        public IWebElement UsernameInput => Driver.FindElement(By.XPath("//input[@name='username']"));
+
+        public IWebElement EnterPasswordButton => Driver.FindElement(By.XPath("//span[text()='Ввести пароль']"));
+
         private readonly string _usernameXpath = "//input[@name='username']";
-        private readonly string _enterPasswordButtonXpath = "//span[text()='Ввести пароль']";
         private readonly string _windowCapTitleXpath = "//*[@data-test-id='header-text']";
         private readonly string _windowCapTitleText = "Войти в аккаунт";
 
@@ -60,10 +63,7 @@ namespace Mail.MailRu.Login
         /// <returns>Login account window.</returns>
         public LoginAccountWindow TypeUsername(string username)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_usernameXpath));
-
-            Driver.FindElement(By.XPath(_usernameXpath)).SendKeys(username);
+            UsernameInput.SendKeys(username);
 
             return this;
         }
@@ -75,10 +75,7 @@ namespace Mail.MailRu.Login
         /// an invalid login was entered, otherwise enter password window.</returns>
         public BasePage SubmitLoginClick()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_enterPasswordButtonXpath));
-
-            Driver.FindElement(By.XPath(_enterPasswordButtonXpath)).Submit();
+            EnterPasswordButton.Click();
 
             if (IsWindowCapTitleVisible())
             {

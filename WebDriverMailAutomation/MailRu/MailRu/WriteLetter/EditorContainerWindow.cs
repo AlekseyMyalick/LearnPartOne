@@ -8,8 +8,9 @@ namespace Mail.MailRu.WriteLetter
     /// </summary>
     class EditorContainerWindow : BasePage
     {
-        private readonly string _sendLetterButton = "//span[text()='Отправить']";
-        private readonly string _letterXpath = "//br/parent::div";
+        public IWebElement SendLetterButton => Driver.FindElement(By.XPath("//span[text()='Отправить']"));
+
+        public IWebElement Letter => Driver.FindElement(By.XPath("//br/parent::div"));
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -26,9 +27,6 @@ namespace Mail.MailRu.WriteLetter
         public override void WaitPageLoading()
         {
             base.WaitPageLoading();
-
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_sendLetterButton));
         }
 
         /// <summary>
@@ -38,10 +36,7 @@ namespace Mail.MailRu.WriteLetter
         /// <returns>Editor container window.</returns>
         public EditorContainerWindow TypeLetter(string letterText)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_letterXpath));
-
-            Driver.FindElement(By.XPath(_letterXpath)).SendKeys(letterText);
+            Letter.SendKeys(letterText);
 
             return this;
         }
@@ -52,10 +47,7 @@ namespace Mail.MailRu.WriteLetter
         /// <returns>Editor container window.</returns>
         public EditorContainerWindow SubmitLetter()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementToBeClickable(By.XPath(_sendLetterButton));
-
-            Driver.FindElement(By.XPath(_sendLetterButton)).Click();
+            SendLetterButton.Click();
 
             return this;
         }

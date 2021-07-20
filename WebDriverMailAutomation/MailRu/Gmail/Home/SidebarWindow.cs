@@ -9,6 +9,8 @@ namespace Mail.Gmail.Home
     /// </summary>
     public class SidebarWindow : BasePage
     {
+        public IWebElement InboxButton => Driver.FindElement(By.XPath("//a[text()='Входящие']/parent::span"));
+
         private readonly string _inboxButtonXpath = "//a[text()='Входящие']/parent::span";
 
         /// <summary>
@@ -26,9 +28,6 @@ namespace Mail.Gmail.Home
         public override void WaitPageLoading()
         {
             base.WaitPageLoading();
-
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementToBeClickable(By.XPath(_inboxButtonXpath));
         }
 
         /// <summary>
@@ -40,7 +39,7 @@ namespace Mail.Gmail.Home
             new Waiter.Waiter(Driver, WaitTime)
                 .WaitElementIsVisible(By.XPath(_inboxButtonXpath));
 
-            Driver.FindElement(By.XPath(_inboxButtonXpath)).Click();
+            InboxButton.Click();
 
             return new InboxPage(Driver);
         }

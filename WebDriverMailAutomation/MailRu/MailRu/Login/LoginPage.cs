@@ -17,25 +17,30 @@ namespace Mail.MailRu.Login
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver) { }
 
-        public void OpenLoginPage()
+        public LoginPage OpenLoginPage()
         {
-            Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_loginPagePath);
+
+            return this;
         }
 
         /// <summary>
         /// Returns the error text.
         /// </summary>
         /// <returns>Error message text.</returns>
-        public string GetErrorMessage()
+        public bool IsErrorMessageVisible()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_errorMessageXpath));
+            try
+            {
+                new Waiter.Waiter(Driver, WaitTime)
+                    .WaitElementIsVisible(By.XPath(_errorMessageXpath));
 
-            string errorMessage = Driver.FindElement(By.XPath(_errorMessageXpath))
-                .Text;
-
-            return errorMessage;
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>

@@ -10,8 +10,9 @@ namespace Mail.MailRu.Home
     /// </summary>
     public class SidebarWindow : BasePage
     {
-        private readonly string _inboxButtonXpath = "//div[text()='Входящие']";
-        private readonly string _writeLetterButton = "//span[text()='Написать письмо']";
+        public IWebElement InboxButton => Driver.FindElement(By.XPath("//div[text()='Входящие']"));
+
+        public IWebElement WriteLetterButton => Driver.FindElement(By.XPath("//span[text()='Написать письмо']"));
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -28,9 +29,6 @@ namespace Mail.MailRu.Home
         public override void WaitPageLoading()
         {
             base.WaitPageLoading();
-
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_writeLetterButton));
         }
 
         /// <summary>
@@ -39,10 +37,7 @@ namespace Mail.MailRu.Home
         /// <returns>Write letter page.</returns>
         public WriteLetterPage OpenWriteLetterPage()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_writeLetterButton));
-
-            Driver.FindElement(By.XPath(_writeLetterButton)).Click();
+            WriteLetterButton.Click();
 
             return new WriteLetterPage(Driver);
         }
@@ -53,10 +48,7 @@ namespace Mail.MailRu.Home
         /// <returns>Inbox page.</returns>
         public InboxPage OpenInboxPage()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_inboxButtonXpath));
-
-            Driver.FindElement(By.XPath(_inboxButtonXpath)).Click();
+            InboxButton.Click();
 
             return new InboxPage(Driver);
         }

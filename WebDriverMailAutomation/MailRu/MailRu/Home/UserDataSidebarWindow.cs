@@ -9,8 +9,12 @@ namespace Mail.MailRu.Home
     /// </summary>
     public class UserDataSidebarWindow : BasePage
     {
-        private readonly string _personalDataSectionXpath = "//div[text()='Личные данные']/parent::a";
+        public IWebElement PersonalDataSection => Driver.FindElement(By.XPath("//div[text()='Личные данные']/parent::a"));
+
+        public IWebElement OpenSidebarButton => Driver.FindElement(By.XPath("//div[contains(@class, 'auth svelte')]//span[contains(@class, 'dropdown')]"));
+
         private readonly string _openSidebarButtonXpath = "//div[contains(@class, 'auth svelte')]//span[contains(@class, 'dropdown')]";
+        private readonly string _personalDataSectionXpath = "//div[text()='Личные данные']/parent::a";
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -41,7 +45,7 @@ namespace Mail.MailRu.Home
             new Waiter.Waiter(Driver, WaitTime)
                 .WaitElementIsVisible(By.XPath(_openSidebarButtonXpath));
 
-            Driver.FindElement(By.XPath(_openSidebarButtonXpath)).Click();
+            OpenSidebarButton.Click();
 
             return this;
         }
@@ -55,7 +59,7 @@ namespace Mail.MailRu.Home
             new Waiter.Waiter(Driver, WaitTime)
                 .WaitElementIsVisible(By.XPath(_personalDataSectionXpath));
 
-            Driver.FindElement(By.XPath(_personalDataSectionXpath)).Click();
+            PersonalDataSection.Click();
 
             return new PersonalDataPage(Driver);
         }

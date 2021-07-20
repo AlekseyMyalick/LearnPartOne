@@ -8,9 +8,14 @@ namespace Mail.Gmail.Inbox
     /// </summary>
     public class ReplyWindow : BasePage
     {
-        private readonly string _showHiddenPartButtonXpath = "//div[@data-tooltip='Показать скрытую часть']";
-        private readonly string _replyLetterBoxXpath = "//div[@aria-label='Тело письма']/div[2]";
-        private readonly string _senderAliasXpath = "//blockquote//br/parent::div";
+        public IWebElement ShowHiddenPartButton => Driver.FindElement(By.XPath("//div[@data-tooltip='Показать скрытую часть']"));
+
+        public IWebElement ReplyLetterBox => Driver.FindElement(By.XPath("//div[@aria-label='Тело письма']/div[2]"));
+
+        public IWebElement SenderAlias => Driver.FindElement(By.XPath("//blockquote//br/parent::div"));
+
+        public IWebElement SendReplyButton => Driver.FindElement(By.XPath("//div[text()='Отправить']"));
+
         private readonly string _sendReplyButton = "//div[text()='Отправить']";
         private readonly string _popupEmailSent = "//span[text()='Письмо отправлено.']";
         private readonly int _separatingCharactersNumber = 4;
@@ -41,10 +46,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Reply window.</returns>
         public ReplyWindow OpenHiddenPartReplyWindow()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_showHiddenPartButtonXpath));
-
-            Driver.FindElement(By.XPath(_showHiddenPartButtonXpath)).Click();
+            ShowHiddenPartButton.Click();
 
             return this;
         }
@@ -56,10 +58,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Reply window.</returns>
         public ReplyWindow EnterReply(string responseText)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_replyLetterBoxXpath));
-
-            Driver.FindElement(By.XPath(_replyLetterBoxXpath)).SendKeys(responseText);
+            ReplyLetterBox.SendKeys(responseText);
 
             return this;
         }
@@ -71,12 +70,8 @@ namespace Mail.Gmail.Inbox
         /// <returns>Reply window.</returns>
         public ReplyWindow ChangeAlias(string newAlias)
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_senderAliasXpath));
-
-            RemoveOldAlias(_senderAliasXpath);
-
-            Driver.FindElement(By.XPath(_senderAliasXpath)).SendKeys(newAlias);
+            RemoveOldAlias(SenderAlias);
+            SenderAlias.SendKeys(newAlias);
 
             return this;
         }
@@ -86,9 +81,8 @@ namespace Mail.Gmail.Inbox
         /// </summary>
         /// <param name="senderAliasXpath">The path to the old alias.</param>
         /// <returns>Reply window.</returns>
-        private ReplyWindow RemoveOldAlias(string senderAliasXpath)
+        private ReplyWindow RemoveOldAlias(IWebElement element)
         {
-            IWebElement element = Driver.FindElement(By.XPath(senderAliasXpath));
             element.Click();
 
             string aliae = element.Text;
@@ -107,10 +101,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Inbox page.</returns>
         public InboxPage SendReply()
         {
-            new Waiter.Waiter(Driver, WaitTime)
-                .WaitElementIsVisible(By.XPath(_sendReplyButton));
-
-            Driver.FindElement(By.XPath(_sendReplyButton)).Click();
+            SendReplyButton.Click();
 
             new Waiter.Waiter(Driver, WaitTime)
                 .WaitElementIsVisible(By.XPath(_popupEmailSent));
