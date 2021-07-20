@@ -1,0 +1,7 @@
+﻿<suite name="Smoke" verbose="1">
+  <test name="LoginMailRu">
+    <packages>
+      <package name="MailWebDriverTests.LoginMailRuTests"/>
+    </packages>
+  </test>
+</suite>
