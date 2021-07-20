@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using Mail.Base;
+using Mail.Driver;
 
 namespace MailWebDriverTests
 {
@@ -30,14 +31,13 @@ namespace MailWebDriverTests
         [SetUp]
         public void SetUp()
         {
-            _driver = new ChromeDriver();
-            _driver.Manage().Window.Maximize();
+            _driver = DriverSingleton.GetDriver();
         }
 
         [TearDown]
         public void DriverQuit()
         {
-            _driver.Quit();
+            DriverSingleton.CloseDriver();
         }
     }
 }
