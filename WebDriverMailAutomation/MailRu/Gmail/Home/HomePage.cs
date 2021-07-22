@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using NLog;
 using Mail.Base;
 using Mail.Gmail.Inbox;
 

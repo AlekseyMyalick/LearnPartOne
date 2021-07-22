@@ -82,9 +82,9 @@ namespace Mail.MailRu.PersonalData
         /// </summary>
         /// <param name="nickname">New nickname.</param>
         /// <returns>Personal data page.</returns>
-        public PersonalDataPage ChangeNickname(string nickname)
+        public PersonalDataPage ChangeNickname(Alias nickname)
         {
-            InputNickname(nickname);
+            InputNickname(nickname.Name);
 
             return SaveChanges();
         }

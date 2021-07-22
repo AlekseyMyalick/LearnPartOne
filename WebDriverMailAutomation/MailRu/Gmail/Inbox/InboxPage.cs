@@ -37,7 +37,7 @@ namespace Mail.Gmail.Inbox
                     .OpenReplyWindow()
                     .OpenHiddenPartReplyWindow()
                     .EnterReply(response.Text)
-                    .ChangeAlias(response.Alias)
+                    .ChangeAlias(response.AliasName)
                     .SendReply();
         }
 

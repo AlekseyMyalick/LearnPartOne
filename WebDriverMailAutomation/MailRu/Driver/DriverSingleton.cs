@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -26,7 +27,7 @@ namespace Mail.Driver
         {
             if(_driver == null)
             {
-                switch (System.Environment.GetEnvironmentVariable("browser"))
+                switch (TestContext.Parameters["browser"])
                 {
                     default:
                         new DriverManager().SetUpDriver(new ChromeConfig());

@@ -13,15 +13,15 @@
         /// <summary>
         /// Get or set new alias.
         /// </summary>
-        public string Alias { get; set; }
+        public Alias AliasName { get; set; }
 
         /// <summary>
         /// Initializes the fields of the class.
         /// </summary>
-        public Response(string text, string alias)
+        public Response(string text, Alias aliasName)
         {
             Text = text;
-            Alias = alias;
+            AliasName = aliasName;
         }
     }
 }

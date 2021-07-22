@@ -1,7 +1,0 @@
-﻿<suite name="All tests" verbose="1">
-  <test name="All tests">
-    <packages>
-      <package name="MailWebDriverTests"/>
-    </packages>
-  </test>
-</suite>

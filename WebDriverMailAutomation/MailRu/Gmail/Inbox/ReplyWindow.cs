@@ -68,10 +68,10 @@ namespace Mail.Gmail.Inbox
         /// </summary>
         /// <param name="newAlias"></param>
         /// <returns>Reply window.</returns>
-        public ReplyWindow ChangeAlias(string newAlias)
+        public ReplyWindow ChangeAlias(Alias newAlias)
         {
             RemoveOldAlias(SenderAlias);
-            SenderAlias.SendKeys(newAlias);
+            SenderAlias.SendKeys(newAlias.Name);
 
             return this;
         }
