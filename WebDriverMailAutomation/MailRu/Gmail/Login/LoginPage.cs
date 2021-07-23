@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using NLog;
 using Mail.Base;
 
 namespace Mail.Gmail.Login
@@ -8,6 +9,8 @@ namespace Mail.Gmail.Login
     /// </summary>
     public class LoginPage : BasePage
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly string _loginPagePath = "https://accounts.google.com/ServiceLogin/identifier?passive=1209600&continue=https%3A%2F%2Faccounts.google.com%2Fb%2F0%2FAddMailService&followup=https%3A%2F%2Faccounts.google.com%2Fb%2F0%2FAddMailService&flowName=GlifWebSignIn&flowEntry=ServiceLogin";
 
         /// <summary>
@@ -16,6 +19,8 @@ namespace Mail.Gmail.Login
         /// <param name="driver">Driver.</param>
         public LoginPage(IWebDriver driver) : base(driver)
         {
+            OpenLoginPage();
+
             WaitPageLoading();
         }
 
@@ -23,11 +28,11 @@ namespace Mail.Gmail.Login
         /// Opens the login page.
         /// </summary>
         /// <returns>Login page.</returns>
-        public LoginPage OpenLoginPage()
+        private void OpenLoginPage()
         {
             Driver.Navigate().GoToUrl(_loginPagePath);
 
-            return this;
+            _logger.Info("Gmail mail login page is open.");
         }
 
         /// <summary>
@@ -44,6 +49,8 @@ namespace Mail.Gmail.Login
 
             if (loginAccountWindow is LoginAccountWindow)
             {
+                _logger.Error($"An invalid username was entered: {user.Email}.");
+
                 return loginAccountWindow;
             }
 
@@ -52,8 +59,13 @@ namespace Mail.Gmail.Login
 
             if (enterPasswordWindow is EnterPasswordWindow)
             {
+                _logger.Error($"An invalid password was entered: {user.Password}.");
+
                 return enterPasswordWindow;
             }
+
+            _logger.Info($"The user logged in with" +
+                $" the login: {user.Email}, password: {user.Password}.");
 
             return enterPasswordWindow;
         }

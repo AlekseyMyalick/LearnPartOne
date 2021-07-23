@@ -85,9 +85,9 @@ namespace Mail.Gmail.Inbox
         {
             element.Click();
 
-            string aliae = element.Text;
+            string alias = element.Text;
 
-            for (int i = 0; i < aliae.Length - _separatingCharactersNumber; i++)
+            for (int i = 0; i < alias.Length - _separatingCharactersNumber; i++)
             {
                 element.SendKeys(Keys.Backspace);
             }

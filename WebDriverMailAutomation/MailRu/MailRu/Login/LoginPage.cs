@@ -1,4 +1,5 @@
 ﻿using Mail.Base;
+using NLog;
 using OpenQA.Selenium;
 
 namespace Mail.MailRu.Login
@@ -8,6 +9,8 @@ namespace Mail.MailRu.Login
     /// </summary>
     public class LoginPage : BasePage
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly string _errorMessageXpath = "//div[contains(@data-test-id,'error')]/small";
         private readonly string _loginPagePath = "https://account.mail.ru/login";
 
@@ -15,13 +18,16 @@ namespace Mail.MailRu.Login
         /// Initializes the fields of the class.
         /// </summary>
         /// <param name="driver">Driver.</param>
-        public LoginPage(IWebDriver driver) : base(driver) { }
+        public LoginPage(IWebDriver driver) : base(driver)
+        {
+            OpenLoginPage();
+        }
 
-        public LoginPage OpenLoginPage()
+        private void OpenLoginPage()
         {
             Driver.Navigate().GoToUrl(_loginPagePath);
 
-            return this;
+            _logger.Info("MailRu mail login page is open.");
         }
 
         /// <summary>
@@ -57,6 +63,8 @@ namespace Mail.MailRu.Login
 
             if (loginAccountWindow is LoginAccountWindow)
             {
+                _logger.Error($"An invalid username was entered: {user.Email}.");
+
                 return loginAccountWindow;
             }
 
@@ -65,8 +73,13 @@ namespace Mail.MailRu.Login
 
             if (enterPasswordWindow is EnterPasswordWindow)
             {
+                _logger.Error($"An invalid password was entered: {user.Password}.");
+
                 return enterPasswordWindow;
             }
+
+            _logger.Info($"The user logged in with" +
+                $" the login: {user.Email}, password: {user.Password}.");
 
             return enterPasswordWindow;
         }

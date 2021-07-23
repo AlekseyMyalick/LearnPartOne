@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using NLog;
 using Mail.Base;
 
 namespace Mail.Gmail.Inbox
@@ -16,6 +17,8 @@ namespace Mail.Gmail.Inbox
 
         public IWebElement LastIncomingLetter =>
             Driver.FindElement(By.XPath("//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr[1]"));
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly string _allLettersXpath = "//div[@class='Cp']/parent::div/child::div[last()]//tbody/child::tr";
         private readonly string _fontWeightCssPropertyName = "font-weight";
@@ -61,6 +64,8 @@ namespace Mail.Gmail.Inbox
         public LetterWindow OpenLastIncomingLetter()
         {
             LastIncomingLetter.Click();
+
+            _logger.Info("The last incoming letter is open.");
 
             return new LetterWindow(Driver);
         }

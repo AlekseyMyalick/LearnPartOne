@@ -1,5 +1,6 @@
 ﻿using Mail.MailRu.Home;
 using Mail.Base;
+using NLog;
 using OpenQA.Selenium;
 
 namespace Mail.MailRu.WriteLetter
@@ -9,6 +10,8 @@ namespace Mail.MailRu.WriteLetter
     /// </summary>
     public class WriteLetterPage : BasePage
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly string _writeLetterWindowXpath = "//div[contains(@class, 'compose-windows')]";
 
         /// <summary>
@@ -43,6 +46,8 @@ namespace Mail.MailRu.WriteLetter
 
             EditorContainerWindow editorContainerWindow = new EditorContainerWindow(Driver);
             editorContainerWindow.TypeLetter(letter.Text).SubmitLetter();
+
+            _logger.Info($"Write a letter to: {letter.Receiver}, text of the letter: {letter.Text}.");
 
             return headContainerWindow.CloseLayerWindow();
         }

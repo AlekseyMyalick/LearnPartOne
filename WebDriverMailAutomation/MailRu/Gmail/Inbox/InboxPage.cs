@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using NLog;
 using Mail.Base;
 
 namespace Mail.Gmail.Inbox
@@ -8,6 +9,8 @@ namespace Mail.Gmail.Inbox
     /// </summary>
     public class InboxPage : BasePage
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Initializes the fields of the class.
         /// </summary>
@@ -32,6 +35,9 @@ namespace Mail.Gmail.Inbox
         /// <returns>Inbox page.</returns>
         public InboxPage ReplyToLastLetter(Response response)
         {
+            _logger.Info($"Reply to the last email with" +
+                $" alias: {response.AliasName}, response text: {response.Text}.");
+
             return new InboxLettersWindow(Driver)
                     .OpenLastIncomingLetter()
                     .OpenReplyWindow()

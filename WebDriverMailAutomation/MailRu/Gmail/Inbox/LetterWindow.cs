@@ -40,9 +40,7 @@ namespace Mail.Gmail.Inbox
         /// <returns>Text of the letter.</returns>
         public string GetLetterText()
         {
-            string actualLetterText = LetterText.Text;
-
-            return actualLetterText;
+            return LetterText.Text;
         }
 
         /// <summary>

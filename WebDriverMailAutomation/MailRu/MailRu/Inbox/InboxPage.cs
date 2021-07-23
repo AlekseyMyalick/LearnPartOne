@@ -1,4 +1,5 @@
 ﻿using Mail.Base;
+using NLog;
 using OpenQA.Selenium;
 
 namespace Mail.MailRu.Inbox
@@ -9,6 +10,8 @@ namespace Mail.MailRu.Inbox
     public class InboxPage : BasePage
     {
         public IWebElement LastIncomingLetter => Driver.FindElement(By.XPath("//a[contains(@class, 'letter-list')][1]"));
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly string _lastIncomingLetterXpath = "//a[contains(@class, 'letter-list')][1]";
 
@@ -39,6 +42,8 @@ namespace Mail.MailRu.Inbox
                 .WaitElementIsVisible(By.XPath(_lastIncomingLetterXpath));
 
             LastIncomingLetter.Click();
+
+            _logger.Info("The last incoming letter is open.");
 
             return new LetterWindow(Driver);
         }

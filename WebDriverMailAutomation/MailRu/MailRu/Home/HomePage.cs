@@ -1,6 +1,7 @@
 ﻿using Mail.MailRu.WriteLetter;
 using Mail.MailRu.Inbox;
 using OpenQA.Selenium;
+using NLog;
 using Mail.MailRu.PersonalData;
 using Mail.Base;
 
@@ -11,6 +12,8 @@ namespace Mail.MailRu.Home
     /// </summary>
     public class HomePage : BasePage
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly string _sidebarXpath = "//div[contains(@class, 'full sidebar')]";
 
         /// <summary>
@@ -39,6 +42,8 @@ namespace Mail.MailRu.Home
         /// <returns>Write letter page.</returns>
         public WriteLetterPage OpenWriteLetterPage()
         {
+            _logger.Info("Open the write a letter page.");
+
             return new SidebarWindow(Driver).OpenWriteLetterPage();
         }
 
@@ -48,6 +53,8 @@ namespace Mail.MailRu.Home
         /// <returns>Personal data page.</returns>
         public PersonalDataPage OpenPersonalDataPage()
         {
+            _logger.Info("Open the personal data page.");
+
             return new UserDataSidebarWindow(Driver).OpenPersonalDataPage();
         }
 
@@ -57,6 +64,8 @@ namespace Mail.MailRu.Home
         /// <returns>Inbox page.</returns>
         public InboxPage OpenInboxPage()
         {
+            _logger.Info("Open the inbox page.");
+
             return new SidebarWindow(Driver).OpenInboxPage();
         }
     }

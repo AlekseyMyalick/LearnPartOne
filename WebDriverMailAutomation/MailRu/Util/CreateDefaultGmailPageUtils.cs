@@ -20,7 +20,6 @@ namespace Mail.Util
         public static LoginPage CreateLoginPage(IWebDriver driver)
         {
             LoginPage loginPage = new LoginPage(driver);
-            loginPage.OpenLoginPage();
 
             return loginPage;
         }

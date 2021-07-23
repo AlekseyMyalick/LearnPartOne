@@ -3,7 +3,7 @@ using MailRu.Service;
 
 namespace Mail.Service
 {
-    public class UserCreator
+    public static class UserCreator
     {
         public static readonly string TestDataUserNameMailRu = "testdata.mailru.user.name";
         public static readonly string TestDataUserPasswordMailRu = "testdata.mailru.user.password";

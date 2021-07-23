@@ -2,7 +2,7 @@
 
 namespace MailRu.Service
 {
-    public class AliasCreator
+    public static class AliasCreator
     {
         public static Alias OldAlias => new Alias("Robert Langdon");
 

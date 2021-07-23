@@ -1,4 +1,5 @@
 ﻿using Mail.Base;
+using NLog;
 using Mail.MailRu.Home;
 using OpenQA.Selenium;
 
@@ -14,6 +15,8 @@ namespace Mail.MailRu.PersonalData
         public IWebElement SaveButton => Driver.FindElement(By.XPath("//span[text()='Сохранить']"));
 
         public IWebElement HomePageButton => Driver.FindElement(By.XPath("//span[text()='Почта']/parent::a"));
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         private readonly string _nicknameFieldXpath = "//input[@id='nickname']";
         private readonly string _saveButtonXpath = "//span[text()='Сохранить']";
@@ -84,6 +87,8 @@ namespace Mail.MailRu.PersonalData
         /// <returns>Personal data page.</returns>
         public PersonalDataPage ChangeNickname(Alias nickname)
         {
+            _logger.Info($"Change nickname to {nickname.Name}");
+
             InputNickname(nickname.Name);
 
             return SaveChanges();
