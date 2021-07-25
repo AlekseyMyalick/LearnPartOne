@@ -19,6 +19,7 @@ namespace MailWebDriverTests
         }
 
         [Test]
+        [Category("All")]
         public void IsCorrectLetter_CoorectLetter_ReturnTrue()
         {
             GmailPages.Inbox.InboxPage inboxPage

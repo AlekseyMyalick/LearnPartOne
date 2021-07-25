@@ -20,6 +20,7 @@ namespace MailWebDriverTests
         }
 
         [Test]
+        [Category("All")]
         public void NicknameChange_CorrectChange_ReturnTrue()
         {
             GmailPages.Inbox.InboxPage inboxPage

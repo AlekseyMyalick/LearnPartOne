@@ -10,6 +10,7 @@ namespace MailWebDriverTests
     public class LoginMailRuTests : CommonConditions
     {
         [Test]
+        [Category("All")]
         public void SubmitLogin_EmptyUsername_ReturnTrue()
         {
             LoginPage loginPage
@@ -22,6 +23,7 @@ namespace MailWebDriverTests
         }
 
         [Test]
+        [Category("All")]
         public void SubmitLogin_AccountNotExist_ReturnReturnTrue()
         {
             LoginPage loginPage
@@ -34,6 +36,7 @@ namespace MailWebDriverTests
         }
 
         [Test]
+        [Category("All")]
         public void SubmitPassword_EmptyPassword_ReturnTrue()
         {
             LoginPage loginPage
@@ -46,6 +49,7 @@ namespace MailWebDriverTests
         }
 
         [Test]
+        [Category("All")]
         public void SubmitPassword_InvalidPassword_ReturnTrue()
         {
             LoginPage loginPage
@@ -58,6 +62,7 @@ namespace MailWebDriverTests
         }
 
         [Test]
+        [Category("All")]
         [Category("Smoke")]
         public void LoginAs_ValidUsernameAndPassword_ReturnHomePage()
         {

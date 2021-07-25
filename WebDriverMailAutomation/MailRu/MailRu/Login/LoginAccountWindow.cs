@@ -1,5 +1,8 @@
 ﻿using Mail.Base;
 using OpenQA.Selenium;
+using System.Runtime.Remoting.Proxies;
+//using OpenQA.Selenium.Support.PageObjects;
+using SeleniumExtras.PageObjects;
 
 namespace Mail.MailRu.Login
 {
@@ -8,9 +11,15 @@ namespace Mail.MailRu.Login
     /// </summary>
     public class LoginAccountWindow : BasePage
     {
-        public IWebElement UsernameInput => Driver.FindElement(By.XPath("//input[@name='username']"));
+        [FindsBy(How = How.XPath, Using = "//input[@name='username']")]
+        private IWebElement UsernameInput;
 
-        public IWebElement EnterPasswordButton => Driver.FindElement(By.XPath("//span[text()='Ввести пароль']"));
+        [FindsBy(How = How.XPath, Using = "//span[text()='Ввести пароль']")]
+        private IWebElement EnterPasswordButton;
+
+        //public IWebElement UsernameInput => Driver.FindElement(By.XPath("//input[@name='username']"));
+
+        //public IWebElement EnterPasswordButton => Driver.FindElement(By.XPath("//span[text()='Ввести пароль']"));
 
         private readonly string _usernameXpath = "//input[@name='username']";
         private readonly string _windowCapTitleXpath = "//*[@data-test-id='header-text']";
@@ -23,6 +32,7 @@ namespace Mail.MailRu.Login
         public LoginAccountWindow(IWebDriver driver) : base(driver)
         {
             WaitPageLoading();
+            PageFactory.InitElements(Driver, this);
         }
 
         /// <summary>
