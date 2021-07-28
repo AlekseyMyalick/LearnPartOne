@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mail", "Mail\Mail.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waiter", "Waiter\Waiter.csproj", "{B7275BBE-2B7F-4B33-A087-2F48728FFBE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailWebDriverTests", "MailWebDriverTests\MailWebDriverTests.csproj", "{FBB09EB7-F700-45F3-AB5E-32EDC128A72E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B7275BBE-2B7F-4B33-A087-2F48728FFBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7275BBE-2B7F-4B33-A087-2F48728FFBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7275BBE-2B7F-4B33-A087-2F48728FFBE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB09EB7-F700-45F3-AB5E-32EDC128A72E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB09EB7-F700-45F3-AB5E-32EDC128A72E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB09EB7-F700-45F3-AB5E-32EDC128A72E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB09EB7-F700-45F3-AB5E-32EDC128A72E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

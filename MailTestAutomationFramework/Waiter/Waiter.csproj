@@ -54,8 +54,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpectedConditionsWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeleniumHelper.cs" />
     <Compile Include="WaiterWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

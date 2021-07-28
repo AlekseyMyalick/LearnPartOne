@@ -1,21 +1,22 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
 using Mail.Base;
 using Waiter;
+using Mail.Util;
 
 namespace Mail.MailServices.MailRu.Login
 {
+    /// <summary>
+    /// Represents the Login account window of the login page.
+    /// </summary>
     public class LoginAccountWindow : BasePage
     {
-        [FindsBy(How = How.XPath, Using = "//input[@name='username']")]
-        public IWebElement UsernameInput;
+        public IWebElement UsernameInput =>
+            Driver.FindElement(By.XPath("//input[@name='username']"), WaitTime);
 
-        [FindsBy(How = How.XPath, Using = "//span[text()='Ввести пароль']")]
-        public IWebElement EnterPasswordButton;
+        public IWebElement EnterPasswordButton =>
+            Driver.FindElement(By.XPath("//span[text()='Ввести пароль']"), WaitTime);
 
-        [FindsBy(How = How.XPath, Using = "//*[@data-test-id='header-text']")]
-        public IWebElement WindowCapTitle;
-
+        private readonly string _windowCapTitleXpath = "//*[@data-test-id='header-text']";
         private readonly string _windowCapTitleText = "Войти в аккаунт";
 
         /// <summary>
@@ -25,7 +26,6 @@ namespace Mail.MailServices.MailRu.Login
         public LoginAccountWindow(IWebDriver driver) : base(driver)
         {
             base.WaitPageLoading();
-            PageFactory.InitElements(Driver, this);
         }
 
         /// <summary>
@@ -37,14 +37,10 @@ namespace Mail.MailServices.MailRu.Login
         {
             try
             {
-                new WaiterWrapper(Driver, WaitTime).WaitInvisibilityOfElementWithText(
-                    typeof(LoginAccountWindow),
-                    nameof(WindowCapTitle),
-                    _windowCapTitleText);
-
-                return false;
+                return !(new WaiterWrapper(Driver, WaitTime)
+                    .WaitInvisibilityOfElementWithText(By.XPath(_windowCapTitleXpath), _windowCapTitleText));
             }
-            catch (System.Exception)
+            catch (WebDriverTimeoutException)
             {
                 return true;
             }
@@ -57,10 +53,6 @@ namespace Mail.MailServices.MailRu.Login
         /// <returns>Login account window.</returns>
         public LoginAccountWindow TypeUsername(string username)
         {
-            new WaiterWrapper(Driver, WaitTime).WaitElementIsVisible(
-                typeof(LoginAccountWindow),
-                nameof(UsernameInput));
-
             UsernameInput.SendKeys(username);
 
             return this;
@@ -73,9 +65,8 @@ namespace Mail.MailServices.MailRu.Login
         /// an invalid login was entered, otherwise enter password window.</returns>
         public BasePage SubmitLoginClick()
         {
-            new WaiterWrapper(Driver, WaitTime).WaitElementToBeClickable(
-               typeof(LoginAccountWindow),
-               nameof(EnterPasswordButton));
+            new WaiterWrapper(Driver, WaitTime)
+                .WaitElementToBeClickable(EnterPasswordButton);
 
             EnterPasswordButton.Click();
 

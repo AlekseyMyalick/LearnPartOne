@@ -36,26 +36,42 @@ namespace Waiter
         /// Waits for the element to appear.
         /// </summary>
         /// <param name="webElementLocator">Web element locator.</param>
-        public void WaitElementIsVisible(Type page, string webElementFieldName)
+        public IWebElement WaitElementIsVisible(By webElementLocator)
         {
-            By by = SeleniumHelper.GetByXpath(page, webElementFieldName);
-
-            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-                .ElementIsVisible(by));
+                .ElementIsVisible(webElementLocator));
+        }
+
+        /// <summary>
+        /// Waits for the element to appear.
+        /// </summary>
+        /// <param name="webElement">Web element.</param>
+        public IWebElement WaitElementIsVisible(IWebElement webElement)
+        {
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+                .Until(ExpectedConditionsWrapper.ElementIsVisible(webElement));
         }
 
         /// <summary>
         /// Waits for an element to become clickable.
         /// </summary>
         /// <param name="webElementLocator">Web element locator.</param>
-        public void WaitElementToBeClickable(Type page, string webElementFieldName)
+        public IWebElement WaitElementToBeClickable(By webElementLocator)
         {
-            By by = SeleniumHelper.GetByXpath(page, webElementFieldName);
-
-            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-                .ElementToBeClickable(by));
+                .ElementToBeClickable(webElementLocator));
+        }
+
+        /// <summary>
+        /// Waits for an element to become clickable.
+        /// </summary>
+        /// <param name="webElement">Web element.</param>
+        public IWebElement WaitElementToBeClickable(IWebElement webElement)
+        {
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+                .Until(ExpectedConditionsWrapper.ElementToBeClickable(webElement));
         }
 
         /// <summary>
@@ -72,13 +88,11 @@ namespace Waiter
         /// is either invisible or not present in the DOM.
         /// </summary>
         /// <param name="webElementLocator">Web element locator.</param>
-        public void WaitVisibilityOfAllElementsLocatedBy(Type page, string webElementFieldName)
+        public void WaitVisibilityOfAllElementsLocatedBy(By webElementLocator)
         {
-            By by = SeleniumHelper.GetByXpath(page, webElementFieldName);
-
             new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-                .VisibilityOfAllElementsLocatedBy(by));
+                .VisibilityOfAllElementsLocatedBy(webElementLocator));
         }
 
         /// <summary>
@@ -87,13 +101,23 @@ namespace Waiter
         /// </summary>
         /// <param name="webElementLocator">Web element locator.</param>
         /// <param name="text">WebElement text.</param>
-        public void WaitInvisibilityOfElementWithText(Type page, string webElementFieldName, string text)
+        public bool WaitInvisibilityOfElementWithText(By webElementLocator, string text)
         {
-            By by = SeleniumHelper.GetByXpath(page, webElementFieldName);
-
-            new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
                 .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-                .InvisibilityOfElementWithText(by, text));
+                .InvisibilityOfElementWithText(webElementLocator, text));
+        }
+
+        /// <summary>
+        /// An expectation for checking that an element with text
+        /// is either invisible or not present on the DOM.
+        /// </summary>
+        /// <param name="webElementLocator">Web element locator.</param>
+        /// <param name="text">WebElement text.</param>
+        public bool WaitInvisibilityOfElementWithText(IWebElement webElement, string text)
+        {
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+                .Until(ExpectedConditionsWrapper.InvisibilityOfElementWithText(webElement, text));
         }
 
         /// <summary>

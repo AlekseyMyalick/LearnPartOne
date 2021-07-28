@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Mail.Base
 {
@@ -10,7 +11,7 @@ namespace Mail.Base
         /// <summary>
         /// Get the wait time, measured in milliseconds.
         /// </summary>
-        public int WaitTime => 20000;
+        public int WaitTime { get; set; }
 
         /// <summary>
         /// Get or Set driver.
@@ -24,6 +25,7 @@ namespace Mail.Base
         protected BasePage(IWebDriver driver)
         {
             Driver = driver;
+            WaitTime = int.Parse(TestContext.Parameters["waitTime"]);
         }
 
         /// <summary>

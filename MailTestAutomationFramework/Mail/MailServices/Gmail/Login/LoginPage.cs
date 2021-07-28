@@ -1,22 +1,17 @@
-﻿using OpenQA.Selenium;
-using Mail.Base;
+﻿using Mail.Base;
 using NLog;
-using Waiter;
-using Mail.Util;
+using OpenQA.Selenium;
 
-namespace Mail.MailServices.MailRu.Login
+namespace Mail.MailServices.Gmail.Login
 {
     /// <summary>
-    /// Represents a class describing a login page.
+    /// Represents a page describing the authorization page.
     /// </summary>
     public class LoginPage : BasePage
     {
-        public IWebElement ErrorMessage =>
-            Driver.FindElement(By.XPath("//div[contains(@data-test-id,'error')]/small"), WaitTime);
-
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        private readonly string _loginPagePath = "https://account.mail.ru/login";
+        private readonly string _loginPagePath = "https://accounts.google.com/ServiceLogin/identifier?passive=1209600&continue=https%3A%2F%2Faccounts.google.com%2Fb%2F0%2FAddMailService&followup=https%3A%2F%2Faccounts.google.com%2Fb%2F0%2FAddMailService&flowName=GlifWebSignIn&flowEntry=ServiceLogin";
 
         /// <summary>
         /// Initializes the fields of the class.
@@ -25,32 +20,19 @@ namespace Mail.MailServices.MailRu.Login
         public LoginPage(IWebDriver driver) : base(driver)
         {
             OpenLoginPage();
-        }
 
-        public void OpenLoginPage()
-        {
-            Driver.Navigate().GoToUrl(_loginPagePath);
-
-            _logger.Info("MailRu mail login page is open.");
+            base.WaitPageLoading();
         }
 
         /// <summary>
-        /// Returns the error text.
+        /// Opens the login page.
         /// </summary>
-        /// <returns>Error message text.</returns>
-        public bool IsErrorMessageVisible()
+        /// <returns>Login page.</returns>
+        private void OpenLoginPage()
         {
-            try
-            {
-                new WaiterWrapper(Driver, WaitTime)
-                    .WaitElementIsVisible(ErrorMessage);
+            Driver.Navigate().GoToUrl(_loginPagePath);
 
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
+            _logger.Info("Gmail mail login page is open.");
         }
 
         /// <summary>
@@ -83,7 +65,7 @@ namespace Mail.MailServices.MailRu.Login
             }
 
             _logger.Info($"The user logged in with" +
-               $" the login: {user.Email}, password: {user.Password}.");
+                $" the login: {user.Email}, password: {user.Password}.");
 
             return enterPasswordWindow;
         }

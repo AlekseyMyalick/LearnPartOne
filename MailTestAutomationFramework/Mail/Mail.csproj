@@ -43,30 +43,42 @@
     <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.10\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.13.2.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.13.2\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SeleniumExtras.PageObjects, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.3.11.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>
+    <Reference Include="SeleniumExtras.PageObjects, Version=3.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.Core.3.12.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,14 +99,48 @@
     <Compile Include="Base\Response.cs" />
     <Compile Include="Base\User.cs" />
     <Compile Include="Driver\DriverSingleton.cs" />
+    <Compile Include="MailServices\Gmail\Home\HomePage.cs" />
+    <Compile Include="MailServices\Gmail\Home\SidebarWindow.cs" />
+    <Compile Include="MailServices\Gmail\Inbox\InboxLettersWindow.cs" />
+    <Compile Include="MailServices\Gmail\Inbox\InboxPage.cs" />
+    <Compile Include="MailServices\Gmail\Inbox\LetterWindow.cs" />
+    <Compile Include="MailServices\Gmail\Inbox\ReplyWindow.cs" />
+    <Compile Include="MailServices\Gmail\Login\EnterPasswordWindow.cs" />
+    <Compile Include="MailServices\Gmail\Login\LoginAccountWindow.cs" />
+    <Compile Include="MailServices\Gmail\Login\LoginPage.cs" />
     <Compile Include="MailServices\MailRu\Home\HomePage.cs" />
+    <Compile Include="MailServices\MailRu\Home\SidebarWindow.cs" />
+    <Compile Include="MailServices\MailRu\Home\UserDataSidebarWindow.cs" />
+    <Compile Include="MailServices\MailRu\Inbox\InboxPage.cs" />
+    <Compile Include="MailServices\MailRu\Inbox\LetterWindow.cs" />
     <Compile Include="MailServices\MailRu\Login\EnterPasswordWindow.cs" />
     <Compile Include="MailServices\MailRu\Login\LoginAccountWindow.cs" />
     <Compile Include="MailServices\MailRu\Login\LoginPage.cs" />
+    <Compile Include="MailServices\MailRu\PersonalData\PersonalDataPage.cs" />
+    <Compile Include="MailServices\MailRu\WriteLetter\EditorContainerWindow.cs" />
+    <Compile Include="MailServices\MailRu\WriteLetter\HeadContainerWindow.cs" />
+    <Compile Include="MailServices\MailRu\WriteLetter\WriteLetterPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AliasCreator.cs" />
+    <Compile Include="Service\LetterCreator.cs" />
+    <Compile Include="Service\ResponseCreator.cs" />
+    <Compile Include="Service\TestDataReader.cs" />
+    <Compile Include="Service\UserCreator.cs" />
+    <Compile Include="Util\CreateDefaultGmailPageUtils.cs" />
+    <Compile Include="Util\CreateDefaultMailRuPageUtils.cs" />
+    <Compile Include="Util\Halper.cs" />
+    <Compile Include="Util\ScreenshotMaker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Resources\dev.json" />
+    <None Include="Resources\qa.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Waiter\Waiter.csproj">
@@ -102,9 +148,7 @@
       <Name>Waiter</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
