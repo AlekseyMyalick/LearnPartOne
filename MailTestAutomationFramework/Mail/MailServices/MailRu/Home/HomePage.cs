@@ -13,6 +13,7 @@ namespace Mail.MailServices.MailRu.Home
     public class HomePage : BasePage
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();
+        public static readonly string title = "Почта";
 
         /// <summary>
         /// Initializes the fields of the class.

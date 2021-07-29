@@ -30,7 +30,7 @@ namespace Mail.Driver
                 switch (TestContext.Parameters["browser"])
                 {
                     default:
-                        new DriverManager().SetUpDriver(new ChromeConfig());
+                        new DriverManager().SetUpDriver(new ChromeConfig(), "92.0.4515.107");
                         _driver = new ChromeDriver();
                         break;
                 }

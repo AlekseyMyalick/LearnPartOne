@@ -17,9 +17,6 @@ namespace Mail.MailServices.MailRu.Login
         public IWebElement LoginButton =>
             Driver.FindElement(By.XPath("//span[text()='Войти']"), WaitTime);
 
-        private readonly string _windowCapTitleXpath = "//*[@data-test-id='header-text']";
-        private readonly string _windowCapTitleText = "Введите пароль";
-
         /// <summary>
         /// Initializes the fields of the class.
         /// </summary>
@@ -38,12 +35,12 @@ namespace Mail.MailServices.MailRu.Login
         {
             try
             {
-                return !(new WaiterWrapper(Driver, WaitTime)
-                    .WaitInvisibilityOfElementWithText(By.XPath(_windowCapTitleXpath), _windowCapTitleText));
+                return new WaiterWrapper(Driver, WaitTime)
+                    .WaitTitleContains(HomePage.title);
             }
             catch (WebDriverTimeoutException)
             {
-                return true;
+                return false;
             }
         }
 
@@ -71,7 +68,7 @@ namespace Mail.MailServices.MailRu.Login
 
             LoginButton.Click();
 
-            if (IsWindowCapTitleVisible())
+            if (!IsWindowCapTitleVisible())
             {
                 return new EnterPasswordWindow(Driver);
             }

@@ -75,6 +75,18 @@ namespace Waiter
         }
 
         /// <summary>
+        /// Waits for a substring to appear in the title.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <returns>true when the title matches, otherwise, false.</returns>
+        public bool WaitTitleContains(string title)
+        {
+            return new WebDriverWait(Driver, new TimeSpan(0, 0, 0, 0, WaitTime))
+                .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .TitleContains(title));
+        }
+
+        /// <summary>
         /// Waiting for full page load.
         /// </summary>
         public void WaitPageLoading()
